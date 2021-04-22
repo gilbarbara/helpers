@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`cors [] should return properly 1`] = `
+Object {
+  "body": "[]",
+  "headers": Object {
+    "Access-Control-Allow-Credentials": true,
+    "Access-Control-Allow-Headers": "Accept-Version,Accept,Authorization,Content-Length,Content-MD5,Content-Type,Date,x-amz-date,x-amz-security-token,X-Api-Version,X-CSRF-Token,X-Requested-With,x-test",
+    "Access-Control-Allow-Methods": "POST,OPTIONS",
+    "Access-Control-Allow-Origin": "https://example.com",
+  },
+  "statusCode": 201,
+}
+`;
+
+exports[`cors {} should return properly 1`] = `
+Object {
+  "body": "{}",
+  "headers": Object {
+    "Access-Control-Allow-Credentials": true,
+    "Access-Control-Allow-Headers": "Accept-Version,Accept,Authorization,Content-Length,Content-MD5,Content-Type,Date,x-amz-date,x-amz-security-token,X-Api-Version,X-CSRF-Token,X-Requested-With",
+    "Access-Control-Allow-Methods": "GET,OPTIONS",
+    "Access-Control-Allow-Origin": "*",
+  },
+  "statusCode": 200,
+}
+`;
+
+exports[`request should handle options 1`] = `
+Object {
+  "body": "bar",
+  "id": 101,
+  "title": "foo",
+  "userId": 1,
+}
+`;
+
+exports[`request should handle success 1`] = `
+Object {
+  "body": "quia et suscipit recusandae consequuntur expedita et cum reprehenderit molestiae ut ut quas totam nostrum rerum est autem sunt rem eveniet architecto",
+  "id": 1,
+  "title": "Sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+  "userId": 1,
+}
+`;
