@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`sortObjectKeys should return properly 1`] = `
+Object {
+  "arg": "tar",
+  "foo": "bar",
+  "tar": "foo",
+  "zar": "raz",
+}
+`;

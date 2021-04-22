@@ -64,7 +64,7 @@
     "test:coverage": "jest --coverage --bail",
     "test:watch": "jest --watchAll --verbose",
     "lint": "eslint --ext .ts,.tsx src test",
-    "format": "prettier \"**/*.{js,jsx,json,yml,yaml,css,less,scss,ts,tsx,md,graphql,mdx}\" --write",
+    "format": "prettier \"**/*.{css,graphql,js,json,jsx,less,md,mdx,scss,ts,tsx,yaml,yml}\" --write",
     "validate": "npm run lint && npm run test:coverage && npm run build && npm run size",
     "size": "size-limit",
     "prepublishOnly": "npm run validate"
