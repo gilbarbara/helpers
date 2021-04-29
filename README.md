@@ -44,6 +44,16 @@ interface CorsOptions {
 }
 ```
 
+**poll(condition: () => boolean, options?: PollOptions)**  
+Awaits for the condition to be true based on the options.
+
+```tsx
+interface PollOptions {
+  delay?: number; // 1 (seconds)
+  maxRetries?: number; // 5 (seconds)
+}
+```
+
 **request(url: string, options?: RequestOptions)**  
 Perform an async request.
 

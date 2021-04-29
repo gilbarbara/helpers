@@ -1,6 +1,4 @@
-import { cors, request, sleep } from '../src';
-
-// jest.useFakeTimers();
+import { cors, poll, request, sleep } from '../src';
 
 describe('cors', () => {
   it.each([
@@ -8,6 +6,32 @@ describe('cors', () => {
     [[], 201, { methods: ['POST' as const], origin: 'https://example.com', headers: ['x-test'] }],
   ])('%p should return properly', (data, statusCode, options) => {
     expect(cors(data, statusCode, options)).toMatchSnapshot();
+  });
+});
+
+describe('poll', () => {
+  it('should resolve before the timeout', () => {
+    let isReady = false;
+
+    setTimeout(() => {
+      isReady = true;
+    }, 300);
+
+    return poll(() => isReady).then(d => {
+      expect(d).toBe(undefined);
+    });
+  });
+
+  it('should reject after max retries', () => {
+    let isReady = false;
+
+    setTimeout(() => {
+      isReady = true;
+    }, 500);
+
+    return poll(() => isReady, { delay: 0.1 }).catch(e => {
+      expect(e.message).toBe('Timeout');
+    });
   });
 });
 
@@ -74,7 +98,7 @@ describe('sleep', () => {
   const setTimeoutSpy = jest.spyOn(global, 'setTimeout');
 
   afterAll(() => {
-    setTimeoutSpy.mockRestore();
+    jest.restoreAllMocks();
   });
 
   it('should halt the execution', async () => {

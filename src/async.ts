@@ -1,6 +1,6 @@
 import 'isomorphic-fetch';
 
-import { CorsOptions, RequestError, RequestOptions } from './types';
+import { CorsOptions, PollOptions, RequestError, RequestOptions } from './types';
 
 /**
  * Format a CORS response
@@ -36,6 +36,26 @@ export function cors(data: any, statusCode = 200, options?: CorsOptions) {
     },
     statusCode,
   };
+}
+
+/**
+ *
+ * @param condition
+ * @param options
+ */
+export async function poll(condition: () => boolean, options: PollOptions = {}): Promise<void> {
+  const { delay = 1, maxRetries = 5 } = options;
+  let retries = 0;
+
+  while (!condition() && retries <= maxRetries) {
+    // eslint-disable-next-line no-await-in-loop
+    await sleep(delay);
+    retries++;
+  }
+
+  if (retries >= maxRetries) {
+    throw new Error('Timeout');
+  }
 }
 
 /**

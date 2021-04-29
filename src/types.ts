@@ -13,6 +13,11 @@ export type InvertKeyValue<T extends Record<keyof T, keyof any>> = {} & {
   [K in T[keyof T]]: { [P in keyof T]: T[P] extends K ? P : never }[keyof T];
 };
 
+export interface PollOptions {
+  delay?: number;
+  maxRetries?: number;
+}
+
 export interface RequestOptions {
   body?: any;
   headers?: PlainObject<string>;
