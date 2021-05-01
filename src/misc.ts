@@ -1,18 +1,5 @@
 import { pad } from './numbers';
-
-interface LoggerOptions {
-  collapsed?: boolean;
-  hideTimestamp?: boolean;
-  skip?: boolean;
-  typeColor?: string;
-}
-
-interface UniqueOptions {
-  includeLowercase?: boolean;
-  includeNumbers?: boolean;
-  includeSymbols?: boolean;
-  includeUppercase?: boolean;
-}
+import { LoggerOptions, UniqueOptions } from './types';
 
 /**
  * Log grouped messages to the console
