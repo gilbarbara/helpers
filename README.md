@@ -122,6 +122,21 @@ Get the timestamp for a date
 
 ### Misc
 
+**isRequired(input?: string = 'parameter', type: Constructable = TypeError)**  
+Throws an error of the Constructable type
+
+<details>
+  <summary>Example</summary>
+
+  ```typescript
+function exec(input: string = isRequired('input')) {}
+exec() // Throws an TypeError with '"input" is required'
+
+function evaluate(input: string = isRequired('input', SyntaxError)) {}
+exec() // Throws an SyntaxError with '"input" is required'
+  ```
+</details>
+
 **logger(type: string, title: string, data: any, options?: LoggerOptions)**  
 Log grouped messages to the console.
 
@@ -136,9 +151,6 @@ interface LoggerOptions {
 
 **noop()**   
 An empty function that does nothing.
-
-**required(param?: string = 'param')**  
-Throw an error if the parameter isn't provided.
 
 **unique(length?: number = 8,  options?: UniqueOptions)**  
 Returns a random string.
