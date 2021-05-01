@@ -33,3 +33,23 @@ export interface SortFunction<T = string> {
   (left: PlainObject, right: PlainObject): number;
   (left: T, right: T): number;
 }
+
+export interface TimeSinceOptions {
+  day?: string;
+  days?: string;
+  hour?: string;
+  hours?: string;
+  minute?: string;
+  minutes?: string;
+  month?: string;
+  months?: string;
+  prefix?: string;
+  second?: string;
+  seconds?: string;
+  skipWeeks?: boolean;
+  suffix?: string;
+  week?: string;
+  weeks?: string;
+  year?: string;
+  years?: string;
+}
