@@ -1,7 +1,27 @@
 /* eslint-disable no-console */
 import { advanceTo } from 'jest-date-mock';
 
-import { logger, noop, required, unique, uuid } from '../src';
+import { isRequired, logger, noop, unique, uuid } from '../src';
+
+describe('isRequired', () => {
+  it('should throw an Error without input', () => {
+    expect(() => isRequired())
+      .toThrow(Error)
+      .toThrow(`"parameter" is required`);
+  });
+
+  it.each([
+    [TypeError, 'value'],
+    [SyntaxError, 'input'],
+    [RangeError, 'input'],
+    [ReferenceError, 'input'],
+    [URIError, 'input'],
+  ])('should throw a %p with %p', (type, name) => {
+    expect(() => isRequired(name, type))
+      .toThrow(type || Error)
+      .toThrow(`"${name}" is required`);
+  });
+});
 
 describe('logger', () => {
   const log = jest.spyOn(console, 'log').mockImplementation(noop);
@@ -72,12 +92,6 @@ describe('logger', () => {
 describe('noop', () => {
   it('should return undefined', () => {
     expect(noop()).toBeUndefined();
-  });
-});
-
-describe('required', () => {
-  it('should throw', () => {
-    expect(() => required('X')).toThrow('"X" is required');
   });
 });
 

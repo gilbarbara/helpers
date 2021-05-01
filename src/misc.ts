@@ -2,6 +2,13 @@ import { pad } from './numbers';
 import { LoggerOptions, UniqueOptions } from './types';
 
 /**
+ * Throw an error if the parameter isn't provided
+ */
+export function isRequired(input = 'parameter', Constructable = TypeError) {
+  throw new Constructable(`"${input}" is required`);
+}
+
+/**
  * Log grouped messages to the console
  */
 export function logger(type: string, title: string, data: any, options: LoggerOptions = {}) {
@@ -41,14 +48,6 @@ export function logger(type: string, title: string, data: any, options: LoggerOp
  */
 export function noop() {
   return undefined;
-}
-
-/**
- * Throw an error if the parameter isn't provided
- * @param param
- */
-export function required(param = 'param') {
-  throw new Error(`"${param}" is required`);
 }
 
 /**
