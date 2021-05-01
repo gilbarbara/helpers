@@ -2,6 +2,7 @@ import {
   capitalize,
   cleanupHTML,
   cleanupURI,
+  pluralize,
   removeAccents,
   removeEmojis,
   removeEmptyTags,
@@ -30,6 +31,17 @@ describe('cleanupHTML', () => {
 describe('cleanupURI', () => {
   it('should return a clean string', () => {
     expect(cleanupURI('a;b,c/d?e:f@g&h=i+j$k')).toBe('abcdefghijk');
+  });
+});
+
+describe('pluralize', () => {
+  it.each([
+    ['day', undefined, 1, 'day'],
+    ['day', undefined, 4, 'days'],
+    ['Tag', 'Tage', 1, 'Tag'],
+    ['Tag', 'Tage', 4, 'Tage'],
+  ])('%s/%s with %p should return %p', (singular, plural, quantity, expected) => {
+    expect(pluralize(singular, plural, quantity)).toBe(expected);
   });
 });
 

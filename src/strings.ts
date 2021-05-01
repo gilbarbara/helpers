@@ -21,6 +21,14 @@ export function cleanupURI(input: string) {
   return input.replace(/[;,/?:@&=+$]/g, '');
 }
 
+export function pluralize(singular: string, plural: string | undefined, quantity: number) {
+  if (quantity === 1) {
+    return singular;
+  }
+
+  return plural || `${singular}s`;
+}
+
 /**
  * Remove accents
  */

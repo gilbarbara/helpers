@@ -160,6 +160,10 @@ Cleanup HTML content.
 **cleanupURI(input: string)**  
 Cleanup URI characters.
 
+**pluralize(singular: string, plural: string | undefined, quantity: number)**  
+Returns the singular oor plural based on the quantity.  
+*If the plural forms just adds an `s` to the end, you don't need to pass it. It will add it automatically.*
+
 **removeAccents(input: string)**  
 Remove accents.
 
