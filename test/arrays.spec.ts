@@ -1,4 +1,21 @@
-import { sortByLocaleCompare, sortByPrimitive } from '../src';
+import { quickSort, sortByLocaleCompare, sortByPrimitive, sortComparator } from '../src';
+
+describe('quickSort', () => {
+  it('should sort numbers properly', () => {
+    expect(quickSort([32, 16, 2, 24, 8, 48, 4, 2])).toEqual([2, 2, 4, 8, 16, 24, 32, 48]);
+  });
+
+  it('should sort strings properly', () => {
+    expect(quickSort(['xy', 'zy', 'ab', 'cd', 'ab', 'tz'])).toEqual([
+      'ab',
+      'ab',
+      'cd',
+      'tz',
+      'xy',
+      'zy',
+    ]);
+  });
+});
 
 describe('sortByLocaleCompare', () => {
   it.each([
@@ -9,6 +26,7 @@ describe('sortByLocaleCompare', () => {
       ['port', 'Mars', 'Car', 'cart', 'Payment', 'asylum', 'Asian'],
       { descending: true },
     ],
+    ['numeric', ['32', '16', '24', '2', '8', '48', '4', '2'], { numeric: true }],
   ])('should sort an array in %s', (_, input, options) => {
     expect(input.sort(sortByLocaleCompare(undefined, options))).toMatchSnapshot();
   });
@@ -55,5 +73,22 @@ describe('sortByPrimitive', () => {
     ],
   ])('should sort an array by %s', (_, key, input, descending) => {
     expect(input.sort(sortByPrimitive(key, descending))).toMatchSnapshot();
+  });
+});
+
+describe('sortComparator', () => {
+  it('should sort numbers properly', () => {
+    expect([32, 16, 24, 2, 8, 48, 4, 2].sort(sortComparator)).toEqual([2, 2, 4, 8, 16, 24, 32, 48]);
+  });
+
+  it('should sort strings properly', () => {
+    expect(['xy', 'zy', 'ab', 'cd', 'ab', 'tz'].sort(sortComparator)).toEqual([
+      'ab',
+      'ab',
+      'cd',
+      'tz',
+      'xy',
+      'zy',
+    ]);
   });
 });

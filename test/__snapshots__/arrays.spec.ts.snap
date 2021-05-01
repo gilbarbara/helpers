@@ -23,6 +23,19 @@ Array [
 ]
 `;
 
+exports[`sortByLocaleCompare should sort an array in numeric 1`] = `
+Array [
+  "2",
+  "2",
+  "4",
+  "8",
+  "16",
+  "24",
+  "32",
+  "48",
+]
+`;
+
 exports[`sortByLocaleCompare should sort an array in portuguese 1`] = `
 Array [
   "amô",
