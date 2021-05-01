@@ -10,8 +10,6 @@ Collection of useful functions
 npm i @gilbarbara/helpers
 ```
 
-
-
 ```typescript
 import { unique } from '@gilbarbara/helpers';
 
@@ -23,11 +21,70 @@ console.log(password); // g9HBfQeeOgrP.V1?JhETxn9P
 
 ### Arrays
 
-**sortByLocaleCompare(key?: string, options?: Intl.CollatorOptions & { descending?: boolean })**  
+**quickSort<T extends string | number>(input: T[]): T[]**  
+Sort an array of numbers using a quick sort algorithm.
+
+**sortByLocaleCompare(key?: string, options?: Intl.CollatorOptions & { descending?: boolean }): SortFunction**  
 Returns a sort function with localeCompare comparison.
 
-**sortByPrimitive<T extends number | boolean>(key?: string, descending?: boolean = false)**   
+<details>
+  <summary>Type Definition</summary>
+
+  ```typescript
+interface SortFunction<T = string> {
+    (left: PlainObject, right: PlainObject): number;
+    (left: T, right: T): number;
+}
+  ```
+</details>
+
+<details>
+  <summary>Example</summary>
+
+  ```typescript
+// with an array of strings
+const strings = ['Mãe', 'limão', 'cachê', 'tião', 'amô', 'côncavo'];
+strings.sort(sortByLocaleCompare());
+// [ 'amô', 'cachê', 'côncavo', 'limão', 'Mãe', 'tião' ]
+
+// with an array of objects
+const objects = [{ key: 'réservé' }, { key: 'Premier' }, { key: 'Cliché' }, { key: 'communiqué' }, { key: 'café' }, { key: 'Adieu' }];
+objects.sort(sortByLocaleCompare('key', { descending: true }));
+/*
+[
+  { key: 'réservé' },
+  { key: 'Premier' },
+  { key: 'communiqué' },
+  { key: 'Cliché' },
+  { key: 'café' },
+  { key: 'Adieu' }
+]
+*/
+  ```
+</details>
+
+**sortByPrimitive<T extends number | boolean>(key?: string, descending?: boolean = false): SortFunction**   
 Returns a sort function with primitive values comparison.
+
+<details>
+  <summary>Example</summary>
+
+  ```typescript
+const objects = [{ cycle: 3, status: true }, { cycle: 1, status: false }, { cycle: 3, status: true }, { cycle: 4, status: false }];
+objects.sort(sortByPrimitive('status', true));
+/*
+[
+  { cycle: 3, status: true },
+  { cycle: 3, status: true },
+  { cycle: 1, status: false },
+  { cycle: 4, status: false }
+]
+*/
+  ```
+</details>
+
+**sortComparator(left: string | number, right: string | number)**  
+Basic sort comparator.
 
 ### Async
 
