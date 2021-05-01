@@ -13,9 +13,22 @@ export type InvertKeyValue<T extends Record<keyof T, keyof any>> = {} & {
   [K in T[keyof T]]: { [P in keyof T]: T[P] extends K ? P : never }[keyof T];
 };
 
+export interface LoggerOptions {
+  collapsed?: boolean;
+  hideTimestamp?: boolean;
+  skip?: boolean;
+  typeColor?: string;
+}
+
 export interface PollOptions {
   delay?: number;
   maxRetries?: number;
+}
+
+export interface QueryStringFormatOptions {
+  addPrefix?: boolean;
+  encodeValuesOnly?: boolean;
+  encoder?: (uri: string) => string;
 }
 
 export interface RequestOptions {
@@ -52,4 +65,11 @@ export interface TimeSinceOptions {
   weeks?: string;
   year?: string;
   years?: string;
+}
+
+export interface UniqueOptions {
+  includeLowercase?: boolean;
+  includeNumbers?: boolean;
+  includeSymbols?: boolean;
+  includeUppercase?: boolean;
 }

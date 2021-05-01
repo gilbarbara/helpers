@@ -1,12 +1,6 @@
 import is from 'is-lite';
 
-import { InvertKeyValue, PlainObject } from './types';
-
-interface QueryStringFormatOptions {
-  addPrefix?: boolean;
-  encodeValuesOnly?: boolean;
-  encoder?: (uri: string) => string;
-}
+import { InvertKeyValue, PlainObject, QueryStringFormatOptions } from './types';
 
 /**
  * Remove properties from an object
