@@ -70,6 +70,56 @@ interface RequestOptions {
 **sleep(seconds?: number = 1)**  
 Block async execution for X seconds.
 
+### Date
+
+**now()**  
+Returns a unix timestamp (seconds since 1970-01-01 00:00 UTC).
+
+**timeSince(input: Date | string | number, options?: TimeSinceOptions)**  
+Returns how much time has passed since the input date.  
+You can change the locale with the options.  
+*If the plural forms just adds an `s` to the end, you don't need to pass it. It will add it automatically.*
+
+<details>
+  <summary>Type Definition</summary>
+
+  ```typescript
+interface TimeSinceOptions {
+    day?: string; // day
+    days?: string;
+    hour?: string; // hour
+    hours?: string;
+    minute?: string; // minute
+    minutes?: string;
+    month?: string; // month
+    months?: string;
+    prefix?: string;
+    second?: string; // second
+    seconds?: string;
+    skipWeeks?: boolean; // true
+    suffix?: string; // ago
+    week?: string; // week
+    weeks?: string;
+    year?: string; // year
+    years?: string;
+}
+  ```
+</details>
+
+<details>
+  <summary>Examples</summary>
+
+  ```typescript
+timeSince(twoDaysAgo) // 2 days ago
+timeSince(twoWeeksAgo, { skipWeeks: true }) // 14 days ago
+timeSince(twoDaysAgo, { day: 'Tag', days: 'Tage', prefix: 'Vor', suffix:'' }) // Vor 2 Tage
+timeSince(twoWeeeksAgo, { suffix: 'atrás', week: 'semana' }) // 2 semanas atrás
+  ```
+</details>
+
+**timestamp(input?: Date | string)**  
+Get the timestamp for a date
+
 ### Misc
 
 **logger(type: string, title: string, data: any, options?: LoggerOptions)**  
