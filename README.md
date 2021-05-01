@@ -32,7 +32,7 @@ Returns a sort function with localeCompare comparison.
 
   ```typescript
 interface SortFunction<T = string> {
-    (left: PlainObject, right: PlainObject): number;
+    (left: Record<string, any>, right: Record<string, any>): number;
     (left: T, right: T): number;
 }
   ```
@@ -67,6 +67,17 @@ objects.sort(sortByLocaleCompare('key', { descending: true }));
 Returns a sort function with primitive values comparison.
 
 <details>
+  <summary>Type Definition</summary>
+
+  ```typescript
+interface SortFunction<T = string> {
+    (left: Record<string, any>, right: Record<string, any>): number;
+    (left: T, right: T): number;
+}
+  ```
+</details>
+
+<details>
   <summary>Example</summary>
 
   ```typescript
@@ -83,56 +94,75 @@ objects.sort(sortByPrimitive('status', true));
   ```
 </details>
 
-**sortComparator(left: string | number, right: string | number)**  
+**sortComparator(left: string | number, right: string | number): number**  
 Basic sort comparator.
 
 ### Async
 
-**cors(data: any, statusCode = 200, options?: CorsOptions**)
+**cors(data: any, statusCode = 200, options?: CorsOptions): CorsOuput**  
 Returns a CORSresponse.
 
-```typescript
+<details>
+  <summary>Type Definition</summary>
+
+  ```typescript
 type HttpMethods = 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE';
 
 interface CorsOptions {
-  headers?: string[];
-  methods?: HttpMethods[];
-  origin?: string;
+    headers?: string[];
+    methods?: HttpMethods[];
+    origin?: string;
 }
-```
 
-**poll(condition: () => boolean, options?: PollOptions)**  
+interface CorsOuput {
+    body: string;
+    headers: Record<string, string>;
+    statusCode: number;
+}
+  ```
+
+</details>
+
+**poll(condition: () => boolean, options?: PollOptions): Promise\<void>**  
 Awaits for the condition to be true based on the options.
 
-```typescript
-interface PollOptions {
-  delay?: number; // 1 (seconds)
-  maxRetries?: number; // 5 (seconds)
-}
-```
+<details>
+  <summary>Type Definition</summary>
 
-**request(url: string, options?: RequestOptions)**  
+  ```typescript
+interface PollOptions {
+    delay?: number; // 1 (seconds)
+    maxRetries?: number; // 5 (seconds)
+}
+  ```
+</details>
+
+**request(url: string, options?: RequestOptions): Promise\<any>**  
 Perform an async request.
 
-```typescript
+<details>
+  <summary>Type Definition</summary>
+
+  ```typescript
 type HttpMethods = 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE';
 
 interface RequestOptions {
-  body?: any;
-  headers?: PlainObject<string>;
-  method?: HttpMethods;
+    body?: any;
+    headers?: Record<string, any>;
+    method?: HttpMethods;
 }
-```
+  ```
+</details>
 
-**sleep(seconds?: number = 1)**  
+**sleep(seconds?: number = 1): Promise\<void>**  
 Block async execution for X seconds.
 
 ### Date
 
-**now()**  
+**now(): number**  
 Returns a unix timestamp (seconds since 1970-01-01 00:00 UTC).
 
-**timeSince(input: Date | string | number, options?: TimeSinceOptions)**  
+**timeSince(input: Date | string | number, options?: TimeSinceOptions): string**  
 Returns how much time has passed since the input date.  
 You can change the locale with the options.  
 *If the plural forms just adds an `s` to the end, you don't need to pass it. It will add it automatically.*
@@ -164,7 +194,7 @@ interface TimeSinceOptions {
 </details>
 
 <details>
-  <summary>Examples</summary>
+  <summary>Example</summary>
 
   ```typescript
 timeSince(twoDaysAgo) // 2 days ago
@@ -174,12 +204,12 @@ timeSince(twoWeeeksAgo, { suffix: 'atrás', week: 'semana' }) // 2 semanas atrá
   ```
 </details>
 
-**timestamp(input?: Date | string)**  
+**timestamp(input?: Date | string): number**  
 Get the timestamp for a date
 
 ### Misc
 
-**isRequired(input?: string = 'parameter', type: Constructable = TypeError)**  
+**isRequired(input?: string = 'parameter', type: Constructable = TypeError): void**  
 Throws an error of the Constructable type
 
 <details>
@@ -194,112 +224,126 @@ exec() // Throws an SyntaxError with '"input" is required'
   ```
 </details>
 
-**logger(type: string, title: string, data: any, options?: LoggerOptions)**  
+**logger(type: string, title: string, data: any, options?: LoggerOptions): void**  
 Log grouped messages to the console.
 
-```typescript
-interface LoggerOptions {
-  collapsed?: boolean; // true
-  hideTimestamp?: boolean; // false
-  skip?: boolean; // false
-  typeColor?: string; // 'gray'
-}
-```
+<details>
+  <summary>Type Definition</summary>
 
-**noop()**   
+  ```typescript
+interface LoggerOptions {
+    collapsed?: boolean; // true
+    hideTimestamp?: boolean; // false
+    skip?: boolean; // false
+    typeColor?: string; // 'gray'
+}
+  ```
+</details>
+
+**noop(): void**   
 An empty function that does nothing.
 
-**unique(length?: number = 8,  options?: UniqueOptions)**  
+**unique(length?: number = 8,  options?: UniqueOptions): string**  
 Returns a random string.
 
-```typescript
-interface UniqueOptions {
-  includeLowercase?: boolean; // true
-  includeNumbers?: boolean; // true
-  includeSymbols?: boolean; // false
-  includeUppercase?: boolean; // true
-}
-```
+<details>
+  <summary>Type Definition</summary>
 
-**uuid()**  
+  ```typescript
+interface UniqueOptions {
+    includeLowercase?: boolean; // true
+    includeNumbers?: boolean; // true
+    includeSymbols?: boolean; // false
+    includeUppercase?: boolean; // true
+}
+  ```
+
+</details>
+
+**uuid(): string**  
 Returns an UUID v4 string.
 
 ### Numbers
 
-**ceil(input: number, digits?: number = 2)**  
+**ceil(input: number, digits?: number = 2): number**  
 Ceil decimal numbers.
 
-**floor(input: number, digits?: number = 2)**  
+**floor(input: number, digits?: number = 2): number**  
 Floor decimal numbers.
 
-**pad(input: number, digits?: number = 2)**  
+**pad(input: number, digits?: number = 2): string**  
 Pad a number with zeros.
 
-**randomInt(min?: number = 0, max?: number = 10)**  
+**randomInt(min?: number = 0, max?: number = 10): number**  
 Returns a random integer.
 
-**round(input: number, digits?: number = 2)**
+**round(input: number, digits?: number = 2): number**  
 Round decimal numbers.
 
 ### Objects
 
-**blacklist(input: PlainObject, ...filter)**  
+**blacklist(input: Record<string, any>, ...filter)**  
 Remove properties from an object.
 
-**invertKeys(input: PlainObject)**  
+**invertKeys(input: Record<string, any>)**  
 Invert object key and value
 
-**keyMirror(input: PlainObject)**  
+**keyMirror(input: Record<string, any>)**  
 Set the key as the value
 
-**queryStringFormat(input: PlainObject, options?: QueryStringFormatOptions)**  
+**queryStringFormat(input: Record<string, any>, options?: QueryStringFormatOptions)**  
 Stringify a shallow object into a query string.
 
-```typescript
+<details>
+  <summary>Type Definition</summary>
+
+  ```typescript
 interface QueryStringFormatOptions {
-  addPrefix?: boolean;
-  encodeValuesOnly?: boolean;
-  encoder?: (uri: string) => string;
+    addPrefix?: boolean;
+    encodeValuesOnly?: boolean;
+    encoder?: (uri: string) => string;
 }
-```
+  ```
+</details>
+
 **queryStringParse(input: string)**  
 Parse a query string.
 
-**sortObjectKeys(input: PlainObject)**   
+**sortObjectKeys(input: Record<string, any>)**   
 Sort object keys
 
 ### Strings
 
-**capitalize(input: string)**  
+**capitalize(input: string): string**  
 Capitalize the first letter.
 
-**cleanupHTML(input: string)**  
+**cleanupHTML(input: string): string**  
 Cleanup HTML content.
 
-**cleanupURI(input: string)**  
+**cleanupURI(input: string): string**  
 Cleanup URI characters.
 
 **pluralize(singular: string, plural: string | undefined, quantity: number)**  
 Returns the singular oor plural based on the quantity.  
 *If the plural forms just adds an `s` to the end, you don't need to pass it. It will add it automatically.*
 
-**removeAccents(input: string)**  
+**removeAccents(input: string): string**  
 Remove accents.
 
-**removeEmojis(input: string)**  
+**removeEmojis(input: string): string**  
 Remove emojis.
 
-**removeEmptyTags(input: string)**  
+**removeEmptyTags(input: string): string**  
 Remove empty HTML Tags (including whitespace).
 
-**removeNonPrintableCharacters(input: string)**  
+**removeNonPrintableCharacters(input: string): string**  
 Remove non-printable ASCII characters.
 
-**removeTags(input: string)**  
+**removeTags(input: string): string**  
 Remove HTML tags.
 
-**removeWhitespace(input: string)**  
+**removeWhitespace(input: string): string**  
 Remove whitespace.
 
-**slugify(input: string)**  
+**slugify(input: string): string**  
 Format string to slug.
