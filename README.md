@@ -12,7 +12,7 @@ npm i @gilbarbara/helpers
 
 
 
-```tsx
+```typescript
 import { unique } from '@gilbarbara/helpers';
 
 const password = unique(24, { includeSymbols: true });
@@ -34,7 +34,7 @@ Returns a sort function with primitive values comparison.
 **cors(data: any, statusCode = 200, options?: CorsOptions**)
 Returns a CORSresponse.
 
-```tsx
+```typescript
 type HttpMethods = 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE';
 
 interface CorsOptions {
@@ -47,7 +47,7 @@ interface CorsOptions {
 **poll(condition: () => boolean, options?: PollOptions)**  
 Awaits for the condition to be true based on the options.
 
-```tsx
+```typescript
 interface PollOptions {
   delay?: number; // 1 (seconds)
   maxRetries?: number; // 5 (seconds)
@@ -57,7 +57,7 @@ interface PollOptions {
 **request(url: string, options?: RequestOptions)**  
 Perform an async request.
 
-```tsx
+```typescript
 type HttpMethods = 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE';
 
 interface RequestOptions {
@@ -75,7 +75,7 @@ Block async execution for X seconds.
 **logger(type: string, title: string, data: any, options?: LoggerOptions)**  
 Log grouped messages to the console.
 
-```tsx
+```typescript
 interface LoggerOptions {
   collapsed?: boolean; // true
   hideTimestamp?: boolean; // false
@@ -93,7 +93,7 @@ Throw an error if the parameter isn't provided.
 **unique(length?: number = 8,  options?: UniqueOptions)**  
 Returns a random string.
 
-```tsx
+```typescript
 interface UniqueOptions {
   includeLowercase?: boolean; // true
   includeNumbers?: boolean; // true
@@ -136,7 +136,7 @@ Set the key as the value
 **queryStringFormat(input: PlainObject, options?: QueryStringFormatOptions)**  
 Stringify a shallow object into a query string.
 
-```tsx
+```typescript
 interface QueryStringFormatOptions {
   addPrefix?: boolean;
   encodeValuesOnly?: boolean;
