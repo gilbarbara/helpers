@@ -2,6 +2,32 @@ import { pad } from './numbers';
 import { LoggerOptions, UniqueOptions } from './types';
 
 /**
+ * Copy a string to the clipboard
+ */
+export async function copyToClipboard(input: string) {
+  try {
+    await navigator.clipboard.writeText(input);
+  } catch {
+    return false;
+  }
+
+  return true;
+}
+
+/**
+ * Check if a string is a valid JSON
+ */
+export function isJSON(input: string) {
+  try {
+    JSON.parse(input);
+  } catch (e) {
+    return false;
+  }
+
+  return true;
+}
+
+/**
  * Throw an error if the parameter isn't provided
  */
 export function isRequired(input = 'parameter', Constructable = TypeError) {
@@ -52,8 +78,6 @@ export function noop() {
 
 /**
  * Return a unique string
- * @param length
- * @param options
  */
 export function unique(length = 8, options: UniqueOptions = {}): string {
   const {
