@@ -209,8 +209,14 @@ Get the timestamp for a date
 
 ### Misc
 
+**copyToClipboard(input: string): Promise\<boolean>**  
+Copy a string to the clipboard.
+
 **isRequired(input?: string = 'parameter', type: Constructable = TypeError): void**  
-Throws an error of the Constructable type
+Throws an error of the Constructable type.
+
+**isJSON(input: string): boolean**  
+Check if a string is a valid JSON.
 
 <details>
   <summary>Example</summary>

@@ -1,7 +1,42 @@
 /* eslint-disable no-console */
 import { advanceTo } from 'jest-date-mock';
 
-import { isRequired, logger, noop, unique, uuid } from '../src';
+import { copyToClipboard, isRequired, logger, noop, unique, uuid } from '../src';
+
+describe('copyToClipboard', () => {
+  let mockWriteText: any = jest.fn();
+
+  beforeAll(() => {
+    Object.assign(navigator, {
+      clipboard: {
+        writeText: (input: string) => mockWriteText(input),
+      },
+    });
+  });
+
+  afterAll(() => {
+    Object.assign(navigator, {
+      clipboard: undefined,
+    });
+  });
+
+  it('should copy to clipboard', async () => {
+    const result = await copyToClipboard('Hello');
+
+    expect(result).toBe(true);
+    expect(mockWriteText).toHaveBeenCalledWith('Hello');
+  });
+
+  it('should handle errors', async () => {
+    mockWriteText = () => {
+      throw new Error();
+    };
+
+    const result = await copyToClipboard('Hello');
+
+    expect(result).toBe(false);
+  });
+});
 
 describe('isRequired', () => {
   it('should throw an Error without input', () => {
