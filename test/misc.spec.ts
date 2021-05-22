@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { advanceTo } from 'jest-date-mock';
 
-import { copyToClipboard, isRequired, logger, noop, unique, uuid } from '../src';
+import { copyToClipboard, isJSON, isRequired, logger, noop, unique, uuid } from '../src';
 
 describe('copyToClipboard', () => {
   let mockWriteText: any = jest.fn();
@@ -35,6 +35,14 @@ describe('copyToClipboard', () => {
     const result = await copyToClipboard('Hello');
 
     expect(result).toBe(false);
+  });
+});
+
+describe('isJSON', () => {
+  it('should identify properly', () => {
+    expect(isJSON('["a"]')).toBeTrue();
+    expect(isJSON('{ "a": 1 }')).toBeTrue();
+    expect(isJSON('Simple text')).toBeFalse();
   });
 });
 
@@ -136,8 +144,15 @@ describe('unique', () => {
   it('should return a unique string', () => {
     expect(unique()).toEqual(expect.stringMatching(regex)).toHaveLength(8);
     expect(unique(24)).toEqual(expect.stringMatching(regex)).toHaveLength(24);
-    expect(unique(12, { includeSymbols: true }))
-      .toEqual(expect.stringMatching(/^[a-zA-Z0-9!?@#$%^&*+_\-=:.~]+$/))
+    expect(
+      unique(12, {
+        includeLowercase: false,
+        includeUppercase: false,
+        includeNumbers: false,
+        includeSymbols: true,
+      }),
+    )
+      .toEqual(expect.stringMatching(/^[!?@#$%^&*+_\-=:.~]+$/))
       .toHaveLength(12);
   });
 });
