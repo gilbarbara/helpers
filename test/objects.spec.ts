@@ -1,7 +1,9 @@
 import {
   blacklist,
+  getNestedProperty,
   invertKeys,
   keyMirror,
+  objectToArray,
   queryStringFormat,
   queryStringParse,
   sortObjectKeys,
@@ -22,6 +24,37 @@ describe('blacklist', () => {
 
   it('should throw for bad inputs', () => {
     expect(() => blacklist([])).toThrow('Expected an object');
+  });
+});
+
+describe('getNestedProperty', () => {
+  it('should return the proper value if it exists', () => {
+    expect(
+      getNestedProperty({ children: { letters: ['a', 'b', 'c'] } }, 'children.letters'),
+    ).toEqual(['a', 'b', 'c']);
+    expect(
+      getNestedProperty({ children: { letters: ['a', 'b', 'c'] } }, 'children.letters.1'),
+    ).toBe('b');
+    expect(getNestedProperty([{ children: ['a', 'b', 'c'] }], '0.children.1')).toBe('b');
+    expect(
+      getNestedProperty({ children: { letters: ['a', 'b', 'c'] } }, 'children.letters.5'),
+    ).toBeUndefined();
+    expect(getNestedProperty([{ a: 5 }, { a: 7 }, { a: 10 }], '0.a')).toBe(5);
+    expect(getNestedProperty([{ a: 5 }, { a: 7 }, { a: 10 }], '+.a')).toEqual([5, 7, 10]);
+    expect(
+      getNestedProperty({ children: [{ a: 5 }, { a: 7 }, { a: 10 }] }, 'children.+.a'),
+    ).toEqual([5, 7, 10]);
+    expect(getNestedProperty([5, 10], '0')).toBe(5);
+    expect(getNestedProperty([0, 1], 'children')).toBeUndefined();
+  });
+
+  it('should return the original value', () => {
+    // @ts-ignore
+    expect(getNestedProperty('0,2', 0)).toBe('0,2');
+    // @ts-ignore
+    expect(getNestedProperty(null, 0)).toBeNull();
+    // @ts-ignore
+    expect(getNestedProperty(undefined, 0)).toBeUndefined();
   });
 });
 
@@ -46,6 +79,25 @@ describe('keyMirror', () => {
     expect(() => keyMirror([])).toThrow('Expected an object');
     // @ts-ignore
     expect(() => keyMirror('a')).toThrow('Expected an object');
+  });
+});
+
+describe('objectToArray', () => {
+  it('should throw with bad input', () => {
+    expect(() => objectToArray(['a'])).toThrow('Expected an object');
+    // @ts-ignore
+    expect(() => objectToArray('a')).toThrow('Expected an object');
+  });
+
+  it('should convert an object into an array', () => {
+    expect(objectToArray({ foo: 'foo', bar: 'bar' })).toEqual([{ foo: 'foo' }, { bar: 'bar' }]);
+  });
+
+  it('should convert an object into an array using filter', () => {
+    const fn = () => undefined;
+
+    expect(objectToArray({ foo: 'bar', dig: 2 }, 'string')).toEqual([{ foo: 'bar' }]);
+    expect(objectToArray({ foo: 'bar', bar: fn }, 'string')).toEqual([{ foo: 'bar' }]);
   });
 });
 

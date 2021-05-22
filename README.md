@@ -294,11 +294,39 @@ Round decimal numbers.
 **blacklist(input: Record<string, any>, ...filter)**  
 Remove properties from an object.
 
+**getNestedProperty(input: PlainObject, path: string)**  
+Get a nested property inside an object or array.
+
+<details>
+  <summary>Example</summary>
+
+  ```typescript
+getNestedProperty({ children: { letters: ['a', 'b', 'c'] } }, 'children.letters');
+// returns ['a', 'b', 'c']
+getNestedProperty({ children: { letters: ['a', 'b', 'c'] } }, 'children.letters.1');
+// returns 'b'
+getNestedProperty([{ a: 5 }, { a: 7 }, { a: 10 }], '0.a');
+// returns 5
+  ```
+
+You may also use a wildcard (+) to get multiple array values: 
+
+  ```typescript
+getNestedProperty([{ a: 5 }, { a: 7 }, { a: 10 }], '+.a');
+// returns [5, 7, 10]
+getNestedProperty({ children: [{ a: 5 }, { a: 7 }, { a: 10 }] }, 'children.+.a');
+// returns [5, 7, 10]
+  ```
+</details>
+
 **invertKeys(input: Record<string, any>)**  
-Invert object key and value
+Invert object key and value.
 
 **keyMirror(input: Record<string, any>)**  
-Set the key as the value
+Set the key as the value.
+
+**objectToArray\<T extends PlainObject>(input: T, includeOnly?: string): PlainObject[]**  
+Convert an object to an array of objects.
 
 **queryStringFormat(input: Record<string, any>, options?: QueryStringFormatOptions)**  
 Stringify a shallow object into a query string.
