@@ -26,6 +26,36 @@ export function blacklist<T extends PlainObject, K extends keyof T>(input: T, ..
 }
 
 /**
+ * Get a nested property inside an object or array
+ */
+export function getNestedProperty(input: PlainObject, path: string): any {
+  if ((!is.plainObject(input) && !is.array(input)) || !path) {
+    return input;
+  }
+
+  const segments = path.split('.');
+  const { length } = segments;
+  let output = input;
+
+  for (let idx = 0; idx < length; idx++) {
+    const currentSegment = segments[idx];
+    const remainingSegments = segments.slice(idx + 1);
+
+    if (currentSegment === '+' && is.array(output) && remainingSegments.length === 1) {
+      return output.map(d => d[remainingSegments.join('.')]);
+    }
+
+    try {
+      output = output[currentSegment] as any;
+    } catch {
+      // skip
+    }
+  }
+
+  return output;
+}
+
+/**
  * Invert object key and value
  */
 export function invertKeys<T extends PlainObject>(input: T): InvertKeyValue<T> {
@@ -62,6 +92,19 @@ export function keyMirror<T extends PlainObject>(input: T): { [K in keyof T]: K 
   }
 
   return output;
+}
+
+/**
+ * Convert an object to an array of objects
+ */
+export function objectToArray<T extends PlainObject>(input: T, includeOnly?: string) {
+  if (!is.plainObject(input)) {
+    throw new TypeError('Expected an object');
+  }
+
+  return Object.entries(input)
+    .filter(([, value]) => (includeOnly ? typeof value === `${includeOnly}` : true)) // eslint-disable-line valid-typeof
+    .map(([key, value]) => ({ [key]: value }));
 }
 
 /**
