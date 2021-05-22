@@ -249,6 +249,9 @@ interface LoggerOptions {
 **noop(): void**   
 An empty function that does nothing.
 
+**nullify\<T>(value: T): T | null**  
+Returns the value or null.
+
 **unique(length?: number = 8,  options?: UniqueOptions): string**  
 Returns a random string.
 
