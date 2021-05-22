@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { advanceTo } from 'jest-date-mock';
 
-import { copyToClipboard, isJSON, isRequired, logger, noop, unique, uuid } from '../src';
+import { copyToClipboard, isJSON, isRequired, logger, noop, nullify, unique, uuid } from '../src';
 
 describe('copyToClipboard', () => {
   let mockWriteText: any = jest.fn();
@@ -135,6 +135,19 @@ describe('logger', () => {
 describe('noop', () => {
   it('should return undefined', () => {
     expect(noop()).toBeUndefined();
+  });
+});
+
+describe('nullify', () => {
+  it.each([
+    [{}, {}],
+    [[], []],
+    ['text', 'text'],
+    [0, 0],
+    [false, false],
+    [undefined, null],
+  ])('should receive %p and return %p', (value, expected) => {
+    expect(nullify(value)).toEqual(expected);
   });
 });
 

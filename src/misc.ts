@@ -77,6 +77,13 @@ export function noop() {
 }
 
 /**
+ * Returns the value or null
+ */
+export function nullify<T>(value: T) {
+  return value ?? null;
+}
+
+/**
  * Return a unique string
  */
 export function unique(length = 8, options: UniqueOptions = {}): string {
