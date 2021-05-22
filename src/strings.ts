@@ -143,35 +143,35 @@ export function removeEmojis(input: string) {
 /**
  * Remove empty HTML Tags (including whitespace)
  */
-export function removeEmptyTags(input = '') {
+export function removeEmptyTags(input: string) {
   return input.replace(/<[^/>][^>]*>\s*<\/[^>]+>/gi, '');
 }
 
 /**
  * Remove non-printable ASCII characters
  */
-export function removeNonPrintableCharacters(input = '') {
+export function removeNonPrintableCharacters(input: string) {
   return is.string(input) ? input.replace(/[^\u00C0-\u00FF\x20-\x7E´˜ˆ]+/g, '') : input;
 }
 
 /**
  * Remove HTML tags
  */
-export function removeTags(input = '') {
+export function removeTags(input: string) {
   return input.replace(/(<([^>]+)>)/gi, '');
 }
 
 /**
  * Remove whitespace
  */
-export function removeWhitespace(input = '') {
+export function removeWhitespace(input: string) {
   return input.replace(/\r\n|\r|\n|\t/g, '').replace(/[ ]+/g, ' ');
 }
 
 /**
  * Format string to slug
  */
-export function slugify(input = '') {
+export function slugify(input: string) {
   return removeAccents(input)
     .replace(/[\u0300-\u036f]/g, '')
     .replace(/[()]/g, '')
