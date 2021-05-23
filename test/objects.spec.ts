@@ -23,7 +23,8 @@ describe('blacklist', () => {
   });
 
   it('should throw for bad inputs', () => {
-    expect(() => blacklist([])).toThrow('Expected an object');
+    // @ts-ignore
+    expect(() => blacklist(['a'])).toThrow('Expected an object');
   });
 });
 
@@ -64,6 +65,7 @@ describe('invertKeys', () => {
   });
 
   it('should throw for bad inputs', () => {
+    // @ts-ignore
     expect(() => invertKeys([])).toThrow('Expected an object');
     // @ts-ignore
     expect(() => invertKeys('a')).toThrow('Expected an object');
@@ -76,6 +78,7 @@ describe('keyMirror', () => {
   });
 
   it('should throw for bad inputs', () => {
+    // @ts-ignore
     expect(() => keyMirror([])).toThrow('Expected an object');
     // @ts-ignore
     expect(() => keyMirror('a')).toThrow('Expected an object');
@@ -84,6 +87,7 @@ describe('keyMirror', () => {
 
 describe('objectToArray', () => {
   it('should throw with bad input', () => {
+    // @ts-ignore
     expect(() => objectToArray(['a'])).toThrow('Expected an object');
     // @ts-ignore
     expect(() => objectToArray('a')).toThrow('Expected an object');

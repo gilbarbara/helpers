@@ -1,4 +1,4 @@
-import { PlainObject, SortFunction } from './types';
+import { AnyObject, NarrowPlainObject, SortFunction } from './types';
 
 /**
  * Sort an array of numbers using a quick sort algorithm
@@ -66,11 +66,14 @@ export function sortByLocaleCompare(
 
   if (key) {
     if (descending) {
-      return <T extends PlainObject>(left: T, right: T) =>
+      return <T extends AnyObject>(
+        left: T & NarrowPlainObject<T>,
+        right: T & NarrowPlainObject<T>,
+      ) =>
         right[key].toLowerCase().localeCompare(left[key].toLowerCase(), undefined, compareOptions);
     }
 
-    return <T extends PlainObject>(left: T, right: T) =>
+    return <T extends AnyObject>(left: T & NarrowPlainObject<T>, right: T & NarrowPlainObject<T>) =>
       left[key].toLowerCase().localeCompare(right[key].toLowerCase(), undefined, compareOptions);
   }
 
@@ -89,12 +92,15 @@ export function sortByLocaleCompare(
 export function sortByPrimitive<T extends number | boolean>(
   key?: string,
   descending = false,
-): SortFunction<T> {
+): SortFunction {
   const firstComparator = descending ? 1 : -1;
   const secondComparator = descending ? -1 : 1;
 
   if (key) {
-    return <P extends PlainObject>(left: P, right: P) => {
+    return <P extends AnyObject>(
+      left: P & NarrowPlainObject<P>,
+      right: P & NarrowPlainObject<P>,
+    ) => {
       if (left[key] === right[key]) {
         return 0;
       }
