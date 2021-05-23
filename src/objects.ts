@@ -1,11 +1,14 @@
 import is from 'is-lite';
 
-import { InvertKeyValue, PlainObject, QueryStringFormatOptions } from './types';
+import { AnyObject, InvertKeyValue, NarrowPlainObject, QueryStringFormatOptions } from './types';
 
 /**
  * Remove properties from an object
  */
-export function blacklist<T extends PlainObject, K extends keyof T>(input: T, ...filter: K[]) {
+export function blacklist<T extends AnyObject, K extends keyof T>(
+  input: T & NarrowPlainObject<T>,
+  ...filter: K[]
+) {
   if (!is.plainObject(input)) {
     throw new TypeError('Expected an object');
   }
@@ -28,7 +31,7 @@ export function blacklist<T extends PlainObject, K extends keyof T>(input: T, ..
 /**
  * Get a nested property inside an object or array
  */
-export function getNestedProperty(input: PlainObject, path: string): any {
+export function getNestedProperty<T extends AnyObject>(input: T, path: string): any {
   if ((!is.plainObject(input) && !is.array(input)) || !path) {
     return input;
   }
@@ -58,7 +61,9 @@ export function getNestedProperty(input: PlainObject, path: string): any {
 /**
  * Invert object key and value
  */
-export function invertKeys<T extends PlainObject>(input: T): InvertKeyValue<T> {
+export function invertKeys<T extends AnyObject>(
+  input: T & NarrowPlainObject<T>,
+): InvertKeyValue<T> {
   if (!is.plainObject(input)) {
     throw new TypeError('Expected an object');
   }
@@ -76,7 +81,9 @@ export function invertKeys<T extends PlainObject>(input: T): InvertKeyValue<T> {
 /**
  * Set the key as the value
  */
-export function keyMirror<T extends PlainObject>(input: T): { [K in keyof T]: K } {
+export function keyMirror<T extends AnyObject>(
+  input: T & NarrowPlainObject<T>,
+): { [K in keyof T]: K } {
   if (!is.plainObject(input)) {
     throw new TypeError('Expected an object');
   }
@@ -97,7 +104,10 @@ export function keyMirror<T extends PlainObject>(input: T): { [K in keyof T]: K 
 /**
  * Convert an object to an array of objects
  */
-export function objectToArray<T extends PlainObject>(input: T, includeOnly?: string) {
+export function objectToArray<T extends AnyObject>(
+  input: T & NarrowPlainObject<T>,
+  includeOnly?: string,
+) {
   if (!is.plainObject(input)) {
     throw new TypeError('Expected an object');
   }
@@ -110,7 +120,10 @@ export function objectToArray<T extends PlainObject>(input: T, includeOnly?: str
 /**
  * Stringify a shallow object into a query string
  */
-export function queryStringFormat(input: PlainObject, options: QueryStringFormatOptions = {}) {
+export function queryStringFormat<T extends AnyObject>(
+  input: T & NarrowPlainObject<T>,
+  options: QueryStringFormatOptions = {},
+) {
   const { addPrefix = false, encodeValuesOnly = true, encoder = encodeURIComponent } = options;
 
   if (!is.plainObject(input)) {
@@ -144,14 +157,14 @@ export function queryStringFormat(input: PlainObject, options: QueryStringFormat
 /**
  * Parse a query string
  */
-export function queryStringParse(input: string): PlainObject<string> {
+export function queryStringParse(input: string): AnyObject<string> {
   let search = input;
 
   if (input.slice(0, 1) === '?') {
     search = input.slice(1);
   }
 
-  return search.split('&').reduce<PlainObject<string>>((acc, d) => {
+  return search.split('&').reduce<AnyObject<string>>((acc, d) => {
     const [key, value] = d.split('=');
 
     acc[decodeURIComponent(key)] = decodeURIComponent(value);
@@ -163,12 +176,12 @@ export function queryStringParse(input: string): PlainObject<string> {
 /**
  * Sort object keys
  */
-export function sortObjectKeys(input: PlainObject) {
+export function sortObjectKeys<T extends AnyObject>(input: T & NarrowPlainObject<T>) {
   return Object.keys(input)
     .sort()
     .reduce((acc, key) => {
       acc[key] = input[key];
 
       return acc;
-    }, {} as PlainObject);
+    }, {} as AnyObject);
 }

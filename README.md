@@ -32,7 +32,7 @@ Returns a sort function with localeCompare comparison.
 
   ```typescript
 interface SortFunction<T = string> {
-    (left: Record<string, any>, right: Record<string, any>): number;
+    (left: PlainObject, right: PlainObject): number;
     (left: T, right: T): number;
 }
   ```
@@ -71,7 +71,7 @@ Returns a sort function with primitive values comparison.
 
   ```typescript
 interface SortFunction<T = string> {
-    (left: Record<string, any>, right: Record<string, any>): number;
+    (left: PlainObject, right: PlainObject): number;
     (left: T, right: T): number;
 }
   ```
@@ -116,7 +116,7 @@ interface CorsOptions {
 
 interface CorsOuput {
     body: string;
-    headers: Record<string, string>;
+    headers: PlainObject;
     statusCode: number;
 }
   ```
@@ -148,7 +148,7 @@ type HttpMethods = 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE';
 
 interface RequestOptions {
     body?: any;
-    headers?: Record<string, any>;
+    headers?: PlainObject;
     method?: HttpMethods;
 }
   ```
@@ -291,10 +291,10 @@ Round decimal numbers.
 
 ### Objects
 
-**blacklist(input: Record<string, any>, ...filter)**  
+**blacklist\<T extends PlainObject, K extends keyof T>(input: T, ...filter: K[])**  
 Remove properties from an object.
 
-**getNestedProperty(input: PlainObject, path: string)**  
+**getNestedProperty(input: PlainObject | any[], path: string)**  
 Get a nested property inside an object or array.
 
 <details>
@@ -319,16 +319,16 @@ getNestedProperty({ children: [{ a: 5 }, { a: 7 }, { a: 10 }] }, 'children.+.a')
   ```
 </details>
 
-**invertKeys(input: Record<string, any>)**  
+**invertKeys(input: PlainObject)**  
 Invert object key and value.
 
-**keyMirror(input: Record<string, any>)**  
+**keyMirror(input: PlainObject)**  
 Set the key as the value.
 
-**objectToArray\<T extends PlainObject>(input: T, includeOnly?: string): PlainObject[]**  
+**objectToArray(input: PlainObject, includeOnly?: string): PlainObject[]**  
 Convert an object to an array of objects.
 
-**queryStringFormat(input: Record<string, any>, options?: QueryStringFormatOptions)**  
+**queryStringFormat(input: PlainObject, options?: QueryStringFormatOptions)**  
 Stringify a shallow object into a query string.
 
 <details>
@@ -346,7 +346,7 @@ interface QueryStringFormatOptions {
 **queryStringParse(input: string)**  
 Parse a query string.
 
-**sortObjectKeys(input: Record<string, any>)**   
+**sortObjectKeys(input: PlainObject)**   
 Sort object keys
 
 ### Strings

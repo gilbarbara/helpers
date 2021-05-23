@@ -1,6 +1,8 @@
-export type PlainObject<T = any> = Record<string, T>;
+export type AnyObject<T = any> = Record<string, T>;
+export type NarrowPlainObject<T> = Exclude<T, any[] | ((...args: any[]) => any)>;
 
 export type HttpMethods = 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE';
+export type Primitive = bigint | boolean | null | number | string | symbol | undefined;
 
 export interface CorsOptions {
   headers?: string[];
@@ -33,7 +35,7 @@ export interface QueryStringFormatOptions {
 
 export interface RequestOptions {
   body?: any;
-  headers?: PlainObject<string>;
+  headers?: AnyObject<string>;
   method?: HttpMethods;
 }
 
@@ -42,9 +44,9 @@ export interface RequestError extends Error {
   status: number;
 }
 
-export interface SortFunction<T = string> {
-  (left: PlainObject, right: PlainObject): number;
-  (left: T, right: T): number;
+export interface SortFunction {
+  <T = AnyObject>(left: T & NarrowPlainObject<T>, right: T & NarrowPlainObject<T>): number;
+  <T = string>(left: T, right: T): number;
 }
 
 export interface TimeSinceOptions {
