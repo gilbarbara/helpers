@@ -50,22 +50,70 @@ export interface SortFunction {
 }
 
 export interface TimeSinceOptions {
+  /**
+   * @default "day"
+   */
   day?: string;
+  /**
+   * @default "days"
+   */
   days?: string;
+  /**
+   * @default "hour"
+   */
   hour?: string;
+  /**
+   * @default "hours"
+   */
   hours?: string;
+  /**
+   * @default "minute"
+   */
   minute?: string;
+  /**
+   * @default "minutes"
+   */
   minutes?: string;
+  /**
+   * @default "month"
+   */
   month?: string;
+  /**
+   * @default "months"
+   */
   months?: string;
   prefix?: string;
+  /**
+   * @default "second"
+   */
   second?: string;
+  /**
+   * @default "seconds"
+   */
   seconds?: string;
+  /**
+   * @default false
+   */
   skipWeeks?: boolean;
+  /**
+   * @default "ago"
+   */
   suffix?: string;
+  /**
+   * @default "week"
+   */
   week?: string;
+  /**
+   * @default "weeks"
+   */
   weeks?: string;
+  /**
+   * @default "year"
+   */
   year?: string;
+  /**
+   * @default "years"
+   */
   years?: string;
 }
 

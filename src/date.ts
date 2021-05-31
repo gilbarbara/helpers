@@ -37,47 +37,48 @@ export function timeSince(input: Date | string | number, options?: TimeSinceOpti
   } = options || {};
   const date = typeof input === 'number' ? input : timestamp(input);
   const diff = now() - date;
-  let interval = Math.floor(diff / YEAR);
+  let quantity = Math.floor(diff / YEAR);
+
   const output = (value: number, caption: string) =>
     `${prefix ? `${prefix} ` : ''}${value} ${caption}${suffix ? ` ${suffix}` : ''}`;
 
-  if (interval >= 1) {
-    return output(interval, pluralize(year, years, interval));
+  if (quantity >= 1) {
+    return output(quantity, pluralize(quantity, year, years));
   }
 
-  interval = Math.floor(diff / MONTH);
+  quantity = Math.floor(diff / MONTH);
 
-  if (interval > 1) {
-    return output(interval, pluralize(month, months, interval));
+  if (quantity > 1) {
+    return output(quantity, pluralize(quantity, month, months));
   }
 
   if (!skipWeeks) {
-    interval = Math.floor(diff / WEEK);
+    quantity = Math.floor(diff / WEEK);
 
-    if (interval > 1) {
-      return output(interval, pluralize(week, weeks, interval));
+    if (quantity > 1) {
+      return output(quantity, pluralize(quantity, week, weeks));
     }
   }
 
-  interval = Math.floor(diff / DAY);
+  quantity = Math.floor(diff / DAY);
 
-  if (interval >= 1) {
-    return output(interval, pluralize(day, days, interval));
+  if (quantity >= 1) {
+    return output(quantity, pluralize(quantity, day, days));
   }
 
-  interval = Math.floor(diff / HOUR);
+  quantity = Math.floor(diff / HOUR);
 
-  if (interval >= 1) {
-    return output(interval, pluralize(hour, hours, interval));
+  if (quantity >= 1) {
+    return output(quantity, pluralize(quantity, hour, hours));
   }
 
-  interval = Math.floor(diff / MINUTE);
+  quantity = Math.floor(diff / MINUTE);
 
-  if (interval > 1) {
-    return output(interval, pluralize(minute, minutes, interval));
+  if (quantity > 1) {
+    return output(quantity, pluralize(quantity, minute, minutes));
   }
 
-  return output(Math.floor(diff), pluralize(second, seconds, diff));
+  return output(Math.floor(diff), pluralize(diff, second, seconds));
 }
 
 /**
