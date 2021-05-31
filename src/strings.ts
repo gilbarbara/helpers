@@ -21,7 +21,12 @@ export function cleanupURI(input: string) {
   return input.replace(/[;,/?:@&=+$]/g, '');
 }
 
-export function pluralize(singular: string, plural: string | undefined, quantity: number) {
+/**
+ * Pluralize strings.
+ *
+ * If the plural form just adds an `s` to the end, you don't need to pass it.
+ */
+export function pluralize(quantity: number, singular: string, plural?: string) {
   if (quantity === 1) {
     return singular;
   }

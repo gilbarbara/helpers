@@ -36,12 +36,13 @@ describe('cleanupURI', () => {
 
 describe('pluralize', () => {
   it.each([
-    ['day', undefined, 1, 'day'],
-    ['day', undefined, 4, 'days'],
-    ['Tag', 'Tage', 1, 'Tag'],
-    ['Tag', 'Tage', 4, 'Tage'],
-  ])('%s/%s with %p should return %p', (singular, plural, quantity, expected) => {
-    expect(pluralize(singular, plural, quantity)).toBe(expected);
+    [0, 'day', undefined, 'days'],
+    [1, 'day', undefined, 'day'],
+    [4, 'day', undefined, 'days'],
+    [1, 'Tag', 'Tage', 'Tag'],
+    [4, 'Tag', 'Tage', 'Tage'],
+  ])('%s/%s with %p should return %p', (quantity, singular, plural, expected) => {
+    expect(pluralize(quantity, singular, plural)).toBe(expected);
   });
 });
 

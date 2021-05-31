@@ -165,7 +165,7 @@ Returns a unix timestamp (seconds since 1970-01-01 00:00 UTC).
 **timeSince(input: Date | string | number, options?: TimeSinceOptions): string**  
 Returns how much time has passed since the input date.  
 You can change the locale with the options.  
-*If the plural forms just adds an `s` to the end, you don't need to pass it. It will add it automatically.*
+> If the plural form just adds an `s` to the end, you don't need to pass it. It will add it automatically.
 
 <details>
   <summary>Type Definition</summary>
@@ -361,8 +361,9 @@ Cleanup HTML content.
 Cleanup URI characters.
 
 **pluralize(singular: string, plural: string | undefined, quantity: number)**  
-Returns the singular oor plural based on the quantity.  
-*If the plural forms just adds an `s` to the end, you don't need to pass it. It will add it automatically.*
+Returns the singular or plural based on the quantity.  
+
+> If the plural form just adds an `s` to the end, you don't need to pass it. It will add it automatically. 
 
 **removeAccents(input: string): string**  
 Remove accents.
