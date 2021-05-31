@@ -32,8 +32,8 @@ Returns a sort function with localeCompare comparison.
 
   ```typescript
 interface SortFunction<T = string> {
-    (left: PlainObject, right: PlainObject): number;
-    (left: T, right: T): number;
+  (left: PlainObject, right: PlainObject): number;
+  (left: T, right: T): number;
 }
   ```
 </details>
@@ -71,8 +71,8 @@ Returns a sort function with primitive values comparison.
 
   ```typescript
 interface SortFunction<T = string> {
-    (left: PlainObject, right: PlainObject): number;
-    (left: T, right: T): number;
+  (left: PlainObject, right: PlainObject): number;
+  (left: T, right: T): number;
 }
   ```
 </details>
@@ -109,15 +109,15 @@ Returns a CORSresponse.
 type HttpMethods = 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE';
 
 interface CorsOptions {
-    headers?: string[];
-    methods?: HttpMethods[];
-    origin?: string;
+  headers?: string[];
+  methods?: HttpMethods[];
+  origin?: string;
 }
 
 interface CorsOuput {
-    body: string;
-    headers: PlainObject;
-    statusCode: number;
+  body: string;
+  headers: PlainObject;
+  statusCode: number;
 }
   ```
 
@@ -131,8 +131,8 @@ Awaits for the condition to be true based on the options.
 
   ```typescript
 interface PollOptions {
-    delay?: number; // 1 (seconds)
-    maxRetries?: number; // 5 (seconds)
+  delay?: number; // 1 (seconds)
+  maxRetries?: number; // 5 (seconds)
 }
   ```
 </details>
@@ -147,9 +147,9 @@ Perform an async request.
 type HttpMethods = 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE';
 
 interface RequestOptions {
-    body?: any;
-    headers?: PlainObject;
-    method?: HttpMethods;
+  body?: any;
+  headers?: PlainObject;
+  method?: HttpMethods;
 }
   ```
 </details>
@@ -172,23 +172,23 @@ You can change the locale with the options.
 
   ```typescript
 interface TimeSinceOptions {
-    day?: string; // day
-    days?: string;
-    hour?: string; // hour
-    hours?: string;
-    minute?: string; // minute
-    minutes?: string;
-    month?: string; // month
-    months?: string;
-    prefix?: string;
-    second?: string; // second
-    seconds?: string;
-    skipWeeks?: boolean; // true
-    suffix?: string; // ago
-    week?: string; // week
-    weeks?: string;
-    year?: string; // year
-    years?: string;
+  day?: string; // day
+  days?: string;
+  hour?: string; // hour
+  hours?: string;
+  minute?: string; // minute
+  minutes?: string;
+  month?: string; // month
+  months?: string;
+  prefix?: string;
+  second?: string; // second
+  seconds?: string;
+  skipWeeks?: boolean; // true
+  suffix?: string; // ago
+  week?: string; // week
+  weeks?: string;
+  year?: string; // year
+  years?: string;
 }
   ```
 </details>
@@ -238,10 +238,10 @@ Log grouped messages to the console.
 
   ```typescript
 interface LoggerOptions {
-    collapsed?: boolean; // true
-    hideTimestamp?: boolean; // false
-    skip?: boolean; // false
-    typeColor?: string; // 'gray'
+  collapsed?: boolean; // true
+  hideTimestamp?: boolean; // false
+  skip?: boolean; // false
+  typeColor?: string; // 'gray'
 }
   ```
 </details>
@@ -260,10 +260,10 @@ Returns a random string.
 
   ```typescript
 interface UniqueOptions {
-    includeLowercase?: boolean; // true
-    includeNumbers?: boolean; // true
-    includeSymbols?: boolean; // false
-    includeUppercase?: boolean; // true
+  includeLowercase?: boolean; // true
+  includeNumbers?: boolean; // true
+  includeSymbols?: boolean; // false
+  includeUppercase?: boolean; // true
 }
   ```
 
@@ -336,9 +336,9 @@ Stringify a shallow object into a query string.
 
   ```typescript
 interface QueryStringFormatOptions {
-    addPrefix?: boolean;
-    encodeValuesOnly?: boolean;
-    encoder?: (uri: string) => string;
+  addPrefix?: boolean;
+  encodeValuesOnly?: boolean;
+  encoder?: (uri: string) => string;
 }
   ```
 </details>
