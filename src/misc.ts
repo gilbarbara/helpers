@@ -83,6 +83,56 @@ export function nullify<T>(value: T) {
   return value ?? null;
 }
 
+export function popupCenter(url: string, title: string, width: number, height: number) {
+  const { screen } = window;
+  let { screenLeft } = window;
+  let { screenTop } = window;
+  let screenWidth = window.innerWidth;
+  let screenHeight = window.innerHeight;
+
+  /* istanbul ignore next */
+  if (typeof screenLeft === 'undefined') {
+    // @ts-ignore
+    screenLeft = screen.left;
+  }
+
+  /* istanbul ignore next */
+  if (typeof screenTop === 'undefined') {
+    // @ts-ignore
+    screenTop = screen.top;
+  }
+
+  /* istanbul ignore next */
+  if (!screenWidth) {
+    screenWidth = document.documentElement.clientWidth
+      ? document.documentElement.clientWidth
+      : screen.width;
+  }
+
+  /* istanbul ignore next */
+  if (!screenHeight) {
+    screenHeight = document.documentElement.clientHeight
+      ? document.documentElement.clientHeight
+      : screen.height;
+  }
+
+  const left = screenWidth / 2 - width / 2 + screenLeft;
+  const top = screenHeight / 2 - height / 2 + screenTop;
+
+  const popup = window.open(
+    url,
+    title,
+    `menubar=no,location=no,resizable=no,scrollbars=yees,status=no,width=${width},height=${height},top=${top}, left=${left}`,
+  );
+
+  /* istanbul ignore else */
+  if (popup) {
+    popup.focus();
+  }
+
+  return popup;
+}
+
 /**
  * Return a unique string
  */
