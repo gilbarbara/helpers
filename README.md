@@ -255,6 +255,9 @@ An empty function that does nothing.
 **nullify\<T>(value: T): T | null**  
 Returns the value or null.
 
+**popupCenter(url: string, title: string, width: number, height: number): Window | null**  
+Open a centered popup window and returns it.
+
 **unique(length?: number = 8,  options?: UniqueOptions): string**  
 Returns a random string.
 

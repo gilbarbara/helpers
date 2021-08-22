@@ -1,7 +1,17 @@
 /* eslint-disable no-console */
 import { advanceTo } from 'jest-date-mock';
 
-import { copyToClipboard, isJSON, isRequired, logger, noop, nullify, unique, uuid } from '../src';
+import {
+  copyToClipboard,
+  isJSON,
+  isRequired,
+  logger,
+  noop,
+  nullify,
+  popupCenter,
+  unique,
+  uuid,
+} from '../src';
 
 describe('copyToClipboard', () => {
   let mockWriteText: any = jest.fn();
@@ -148,6 +158,27 @@ describe('nullify', () => {
     [undefined, null],
   ])('should receive %p and return %p', (value, expected) => {
     expect(nullify(value)).toEqual(expected);
+  });
+});
+
+describe('popupCenter', () => {
+  const { focus, open } = window;
+
+  beforeAll(() => {
+    window = Object.create(window);
+    window.focus = jest.fn(() => true);
+    window.open = jest.fn(() => window);
+  });
+
+  afterAll(() => {
+    window.focus = focus;
+    window.open = open;
+  });
+
+  it('should "create" a popup window', () => {
+    const popup = popupCenter('https://example.com', 'PopUp', 400, 400);
+
+    expect(popup).toEqual(window);
   });
 });
 
