@@ -8,6 +8,14 @@ export const WEEK = DAY * 7;
 export const MONTH = DAY * 30;
 export const YEAR = 365 * DAY;
 
+export function isoDate(input?: string | number) {
+  if (typeof input !== 'undefined') {
+    return new Date(input).toISOString();
+  }
+
+  return new Date().toISOString();
+}
+
 export function now() {
   return Math.floor(Date.now() / 1000);
 }

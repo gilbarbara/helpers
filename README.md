@@ -159,6 +159,9 @@ Block async execution for X seconds.
 
 ### Date
 
+**isoDate(input?: string | number): string**  
+Returns an ISO date.
+
 **now(): number**  
 Returns a unix timestamp (seconds since 1970-01-01 00:00 UTC).
 

@@ -1,6 +1,6 @@
 import { advanceTo, clear } from 'jest-date-mock';
 
-import { DAY, HOUR, MINUTE, MONTH, now, timeSince, timestamp, WEEK, YEAR } from '../src';
+import { DAY, HOUR, isoDate, MINUTE, MONTH, now, timeSince, timestamp, WEEK, YEAR } from '../src';
 
 describe('constants', () => {
   it.each([
@@ -22,6 +22,14 @@ describe('date', () => {
 
   afterAll(() => {
     clear();
+  });
+
+  describe('isoDate', () => {
+    it('should return properly', () => {
+      expect(isoDate('2000-01-01')).toBe('2000-01-01T00:00:00.000Z');
+      expect(isoDate(1518986400000)).toBe('2018-02-18T20:40:00.000Z');
+      expect(isoDate()).toBe('2019-02-01T02:00:00.000Z');
+    });
   });
 
   describe('now', () => {
