@@ -20,7 +20,7 @@ export async function copyToClipboard(input: string) {
 export function isJSON(input: string) {
   try {
     JSON.parse(input);
-  } catch (e) {
+  } catch {
     return false;
   }
 
@@ -169,7 +169,7 @@ export function unique(length = 8, options: UniqueOptions = {}): string {
 
   let result = '';
 
-  for (let i = length; i > 0; --i) {
+  for (let index = length; index > 0; --index) {
     result += characters[Math.round(Math.random() * (characters.length - 1))];
   }
 

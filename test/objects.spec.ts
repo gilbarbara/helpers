@@ -98,6 +98,7 @@ describe('objectToArray', () => {
   });
 
   it('should convert an object into an array using filter', () => {
+    // eslint-disable-next-line unicorn/consistent-function-scoping
     const fn = () => undefined;
 
     expect(objectToArray({ foo: 'bar', dig: 2 }, 'string')).toEqual([{ foo: 'bar' }]);

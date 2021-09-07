@@ -19,7 +19,7 @@ export function blacklist<T extends AnyObject, K extends keyof T>(
   for (const key in input) {
     /* istanbul ignore else */
     if ({}.hasOwnProperty.call(input, key)) {
-      if (!filter.includes((key as unknown) as K)) {
+      if (!filter.includes(key as unknown as K)) {
         output[key] = input[key];
       }
     }
@@ -40,9 +40,9 @@ export function getNestedProperty<T extends AnyObject>(input: T, path: string): 
   const { length } = segments;
   let output = input;
 
-  for (let idx = 0; idx < length; idx++) {
-    const currentSegment = segments[idx];
-    const remainingSegments = segments.slice(idx + 1);
+  for (let index = 0; index < length; index++) {
+    const currentSegment = segments[index];
+    const remainingSegments = segments.slice(index + 1);
 
     if (currentSegment === '+' && is.array(output) && remainingSegments.length === 1) {
       return output.map(d => d[remainingSegments.join('.')]);
