@@ -18,7 +18,7 @@ describe('poll', () => {
     }, 300);
 
     return poll(() => isReady).then(d => {
-      expect(d).toBe(undefined);
+      expect(d).toBeUndefined();
     });
   });
 
@@ -29,8 +29,9 @@ describe('poll', () => {
       isReady = true;
     }, 500);
 
-    return poll(() => isReady, { delay: 0.1 }).catch(e => {
-      expect(e.message).toBe('Timeout');
+    return poll(() => isReady, { delay: 0.1 }).catch(error => {
+      // eslint-disable-next-line jest/no-conditional-expect
+      expect(error.message).toBe('Timeout');
     });
   });
 });
@@ -60,8 +61,7 @@ describe('request', () => {
     // @ts-ignore
     fetch.mockResponseOnce(
       JSON.stringify({
-        body:
-          'quia et suscipit recusandae consequuntur expedita et cum reprehenderit molestiae ut ut quas totam nostrum rerum est autem sunt rem eveniet architecto',
+        body: 'quia et suscipit recusandae consequuntur expedita et cum reprehenderit molestiae ut ut quas totam nostrum rerum est autem sunt rem eveniet architecto',
         id: 1,
         title: 'Sunt aut facere repellat provident occaecati excepturi optio reprehenderit',
         userId: 1,
@@ -102,6 +102,7 @@ describe('sleep', () => {
   });
 
   it('should halt the execution', async () => {
+    // eslint-disable-next-line unicorn/consistent-function-scoping
     const fn = async () => {
       await sleep(0.1);
 

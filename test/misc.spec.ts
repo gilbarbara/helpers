@@ -183,7 +183,7 @@ describe('popupCenter', () => {
 });
 
 describe('unique', () => {
-  const regex = /^[a-zA-Z0-9]+$/;
+  const regex = /^[\dA-Za-z]+$/;
 
   it('should return a unique string', () => {
     expect(unique()).toEqual(expect.stringMatching(regex)).toHaveLength(8);
@@ -196,13 +196,13 @@ describe('unique', () => {
         includeSymbols: true,
       }),
     )
-      .toEqual(expect.stringMatching(/^[!?@#$%^&*+_\-=:.~]+$/))
+      .toEqual(expect.stringMatching(/^[!#$%&*+.:=?@^_~-]+$/))
       .toHaveLength(12);
   });
 });
 
 describe('uuid', () => {
   it('should return an uuid', () => {
-    expect(uuid()).toEqual(expect.stringMatching(/^[a-z0-9-]+$/));
+    expect(uuid()).toEqual(expect.stringMatching(/^[\da-z-]+$/));
   });
 });

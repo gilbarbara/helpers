@@ -20,6 +20,7 @@ module.exports = {
   setupFiles: ['<rootDir>/test/__setup__/setupFiles.ts'],
   setupFilesAfterEnv: ['<rootDir>/test/__setup__/setupTests.ts'],
   snapshotSerializers: ['jest-serializer-html'],
+  testEnvironment: 'jsdom',
   testMatch: null,
   testRegex: '/test/.*?\\.(test|spec)\\.tsx?$',
   testURL: 'http://localhost:1337/',

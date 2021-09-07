@@ -8,8 +8,8 @@ import { CorsOptions, PollOptions, RequestError, RequestOptions } from './types'
 export function cors(data: any, statusCode = 200, options?: CorsOptions) {
   const { methods = ['GET'], origin = '*', headers = [] } = options || {};
   const allowMethods = [...methods, 'OPTIONS'];
-  const allowHeaders = Array.from(
-    new Set([
+  const allowHeaders = [
+    ...new Set([
       'Accept-Version',
       'Accept',
       'Authorization',
@@ -24,7 +24,7 @@ export function cors(data: any, statusCode = 200, options?: CorsOptions) {
       'X-Requested-With',
       ...headers,
     ]),
-  );
+  ];
 
   return {
     body: JSON.stringify(data),

@@ -18,7 +18,7 @@ export function cleanupHTML(input: string) {
  * Cleanup URI characters
  */
 export function cleanupURI(input: string) {
-  return input.replace(/[;,/?:@&=+$]/g, '');
+  return input.replace(/[$&+,/:;=?@]/g, '');
 }
 
 /**
@@ -56,90 +56,90 @@ export function pluralize(quantity: number, singular: string, plural?: string) {
  */
 export function removeAccents(input: string) {
   const removalMap = {
-    A: /[AⒶＡÀÁÂẦẤẪẨÃĀĂẰẮẴẲȦǠÄǞẢÅǺǍȀȂẠẬẶḀĄ]/g,
-    AA: /[Ꜳ]/g,
-    AE: /[ÆǼǢ]/g,
-    AO: /[Ꜵ]/g,
-    AU: /[Ꜷ]/g,
+    A: /[AÀÁÂÃÄÅĀĂĄǍǞǠǺȀȂȦḀẠẢẤẦẨẪẬẮẰẲẴẶⒶＡ]/g,
+    AA: /Ꜳ/g,
+    AE: /[ÆǢǼ]/g,
+    AO: /Ꜵ/g,
+    AU: /Ꜷ/g,
     AV: /[ꜸꜺ]/g,
-    AY: /[Ꜽ]/g,
-    B: /[BⒷＢḂḄḆɃƂƁ]/g,
-    C: /[CⒸＣĆĈĊČÇḈƇȻꜾ]/g,
-    D: /[DⒹＤḊĎḌḐḒḎĐƋƊƉꝹ]/g,
-    DZ: /[ǱǄ]/g,
-    Dz: /[ǲǅ]/g,
-    E: /[EⒺＥÈÉÊỀẾỄỂẼĒḔḖĔĖËẺĚȄȆẸỆȨḜĘḘḚƐƎ]/g,
-    F: /[FⒻＦḞƑꝻ]/g,
-    G: /[GⒼＧǴĜḠĞĠǦĢǤƓꞠꝽꝾ]/g,
-    H: /[HⒽＨĤḢḦȞḤḨḪĦⱧⱵꞍ]/g,
-    I: /[IⒾＩÌÍÎĨĪĬİÏḮỈǏȈȊỊĮḬƗ]/g,
-    J: /[JⒿＪĴɈ]/g,
-    K: /[KⓀＫḰǨḲĶḴƘⱩꝀꝂꝄꞢ]/g,
-    L: /[LⓁＬĿĹĽḶḸĻḼḺŁȽⱢⱠꝈꝆꞀ]/g,
-    LJ: /[Ǉ]/g,
-    Lj: /[ǈ]/g,
-    M: /[MⓂＭḾṀṂⱮƜ]/g,
-    N: /[NⓃＮǸŃÑṄŇṆŅṊṈȠƝꞐꞤ]/g,
-    NJ: /[Ǌ]/g,
-    Nj: /[ǋ]/g,
-    O: /[OⓄＯÒÓÔỒỐỖỔÕṌȬṎŌṐṒŎȮȰÖȪỎŐǑȌȎƠỜỚỠỞỢỌỘǪǬØǾƆƟꝊꝌ]/g,
-    OI: /[Ƣ]/g,
-    OO: /[Ꝏ]/g,
-    OU: /[Ȣ]/g,
-    P: /[PⓅＰṔṖƤⱣꝐꝒꝔ]/g,
-    Q: /[QⓆＱꝖꝘɊ]/g,
-    R: /[RⓇＲŔṘŘȐȒṚṜŖṞɌⱤꝚꞦꞂ]/g,
-    S: /[SⓈＳẞŚṤŜṠŠṦṢṨȘŞⱾꞨꞄ]/g,
-    T: /[TⓉＴṪŤṬȚŢṰṮŦƬƮȾꞆ]/g,
-    TZ: /[Ꜩ]/g,
-    U: /[UⓊＵÙÚÛŨṸŪṺŬÜǛǗǕǙỦŮŰǓȔȖƯỪỨỮỬỰỤṲŲṶṴɄ]/g,
-    V: /[VⓋＶṼṾƲꝞɅ]/g,
-    VY: /[Ꝡ]/g,
-    W: /[WⓌＷẀẂŴẆẄẈⱲ]/g,
-    X: /[XⓍＸẊẌ]/g,
-    Y: /[YⓎＹỲÝŶỸȲẎŸỶỴƳɎỾ]/g,
-    Z: /[ZⓏＺŹẐŻŽẒẔƵȤⱿⱫꝢ]/g,
-    a: /[aⓐａẚàáâầấẫẩãāăằắẵẳȧǡäǟảåǻǎȁȃạậặḁąⱥɐ]/g,
-    aa: /[ꜳ]/g,
-    ae: /[æǽǣ]/g,
-    ao: /[ꜵ]/g,
-    au: /[ꜷ]/g,
+    AY: /Ꜽ/g,
+    B: /[BƁƂɃḂḄḆⒷＢ]/g,
+    C: /[CÇĆĈĊČƇȻḈⒸꜾＣ]/g,
+    D: /[DĎĐƉƊƋḊḌḎḐḒⒹꝹＤ]/g,
+    DZ: /[ǄǱ]/g,
+    Dz: /[ǅǲ]/g,
+    E: /[EÈÉÊËĒĔĖĘĚƎƐȄȆȨḔḖḘḚḜẸẺẼẾỀỂỄỆⒺＥ]/g,
+    F: /[FƑḞⒻꝻＦ]/g,
+    G: /[GĜĞĠĢƓǤǦǴḠⒼꝽꝾꞠＧ]/g,
+    H: /[HĤĦȞḢḤḦḨḪⒽⱧⱵꞍＨ]/g,
+    I: /[IÌÍÎÏĨĪĬĮİƗǏȈȊḬḮỈỊⒾＩ]/g,
+    J: /[JĴɈⒿＪ]/g,
+    K: /[KĶƘǨḰḲḴⓀⱩꝀꝂꝄꞢＫ]/g,
+    L: /[LĹĻĽĿŁȽḶḸḺḼⓁⱠⱢꝆꝈꞀＬ]/g,
+    LJ: /Ǉ/g,
+    Lj: /ǈ/g,
+    M: /[MƜḾṀṂⓂⱮＭ]/g,
+    N: /[NÑŃŅŇƝǸȠṄṆṈṊⓃꞐꞤＮ]/g,
+    NJ: /Ǌ/g,
+    Nj: /ǋ/g,
+    O: /[OÒÓÔÕÖØŌŎŐƆƟƠǑǪǬǾȌȎȪȬȮȰṌṎṐṒỌỎỐỒỔỖỘỚỜỞỠỢⓄꝊꝌＯ]/g,
+    OI: /Ƣ/g,
+    OO: /Ꝏ/g,
+    OU: /Ȣ/g,
+    P: /[PƤṔṖⓅⱣꝐꝒꝔＰ]/g,
+    Q: /[QɊⓆꝖꝘＱ]/g,
+    R: /[RŔŖŘȐȒɌṘṚṜṞⓇⱤꝚꞂꞦＲ]/g,
+    S: /[SŚŜŞŠȘṠṢṤṦṨẞⓈⱾꞄꞨＳ]/g,
+    T: /[TŢŤŦƬƮȚȾṪṬṮṰⓉꞆＴ]/g,
+    TZ: /Ꜩ/g,
+    U: /[UÙÚÛÜŨŪŬŮŰŲƯǓǕǗǙǛȔȖɄṲṴṶṸṺỤỦỨỪỬỮỰⓊＵ]/g,
+    V: /[VƲɅṼṾⓋꝞＶ]/g,
+    VY: /Ꝡ/g,
+    W: /[WŴẀẂẄẆẈⓌⱲＷ]/g,
+    X: /[XẊẌⓍＸ]/g,
+    Y: /[YÝŶŸƳȲɎẎỲỴỶỸỾⓎＹ]/g,
+    Z: /[ZŹŻŽƵȤẐẒẔⓏⱫⱿꝢＺ]/g,
+    a: /[aàáâãäåāăąǎǟǡǻȁȃȧɐḁẚạảấầẩẫậắằẳẵặⓐⱥａ]/g,
+    aa: /ꜳ/g,
+    ae: /[æǣǽ]/g,
+    ao: /ꜵ/g,
+    au: /ꜷ/g,
     av: /[ꜹꜻ]/g,
-    ay: /[ꜽ]/g,
-    b: /[bⓑｂḃḅḇƀƃɓ]/g,
-    c: /[cⓒｃćĉċčçḉƈȼꜿↄ]/g,
-    d: /[dⓓｄḋďḍḑḓḏđƌɖɗꝺ]/g,
-    dz: /[ǳǆ]/g,
-    e: /[eⓔｅèéêềếễểẽēḕḗĕėëẻěȅȇẹệȩḝęḙḛɇɛǝ]/g,
-    f: /[fⓕｆḟƒꝼ]/g,
-    g: /[gⓖｇǵĝḡğġǧģǥɠꞡᵹꝿ]/g,
-    h: /[hⓗｈĥḣḧȟḥḩḫẖħⱨⱶɥ]/g,
-    hv: /[ƕ]/g,
-    i: /[iⓘｉìíîĩīĭïḯỉǐȉȋịįḭɨı]/g,
-    j: /[jⓙｊĵǰɉ]/g,
-    k: /[kⓚｋḱǩḳķḵƙⱪꝁꝃꝅꞣ]/g,
-    l: /[lⓛｌŀĺľḷḹļḽḻſłƚɫⱡꝉꞁꝇ]/g,
-    lj: /[ǉ]/g,
-    m: /[mⓜｍḿṁṃɱɯ]/g,
-    n: /[nⓝｎǹńñṅňṇņṋṉƞɲŉꞑꞥ]/g,
-    nj: /[ǌ]/g,
-    o: /[oⓞｏòóôồốỗổõṍȭṏōṑṓŏȯȱöȫỏőǒȍȏơờớỡởợọộǫǭøǿɔꝋꝍɵ]/g,
-    oi: /[ƣ]/g,
-    ou: /[ȣ]/g,
-    oo: /[ꝏ]/g,
-    p: /[pⓟｐṕṗƥᵽꝑꝓꝕ]/g,
-    q: /[qⓠｑɋꝗꝙ]/g,
-    r: /[rⓡｒŕṙřȑȓṛṝŗṟɍɽꝛꞧꞃ]/g,
-    s: /[sⓢｓßśṥŝṡšṧṣṩșşȿꞩꞅẛ]/g,
-    t: /[tⓣｔṫẗťṭțţṱṯŧƭʈⱦꞇ]/g,
-    tz: /[ꜩ]/g,
-    u: /[uⓤｕùúûũṹūṻŭüǜǘǖǚủůűǔȕȗưừứữửựụṳųṷṵʉ]/g,
-    v: /[vⓥｖṽṿʋꝟʌ]/g,
-    vy: /[ꝡ]/g,
-    w: /[wⓦｗẁẃŵẇẅẘẉⱳ]/g,
-    x: /[xⓧｘẋẍ]/g,
-    y: /[yⓨｙỳýŷỹȳẏÿỷẙỵƴɏỿ]/g,
-    z: /[zⓩｚźẑżžẓẕƶȥɀⱬꝣ]/g,
+    ay: /ꜽ/g,
+    b: /[bƀƃɓḃḅḇⓑｂ]/g,
+    c: /[cçćĉċčƈȼḉↄⓒꜿｃ]/g,
+    d: /[dďđƌɖɗḋḍḏḑḓⓓꝺｄ]/g,
+    dz: /[ǆǳ]/g,
+    e: /[eèéêëēĕėęěǝȅȇȩɇɛḕḗḙḛḝẹẻẽếềểễệⓔｅ]/g,
+    f: /[fƒḟⓕꝼｆ]/g,
+    g: /[gĝğġģǥǧǵɠᵹḡⓖꝿꞡｇ]/g,
+    h: /[hĥħȟɥḣḥḧḩḫẖⓗⱨⱶｈ]/g,
+    hv: /ƕ/g,
+    i: /[iìíîïĩīĭįıǐȉȋɨḭḯỉịⓘｉ]/g,
+    j: /[jĵǰɉⓙｊ]/g,
+    k: /[kķƙǩḱḳḵⓚⱪꝁꝃꝅꞣｋ]/g,
+    l: /[lĺļľŀłſƚɫḷḹḻḽⓛⱡꝇꝉꞁｌ]/g,
+    lj: /ǉ/g,
+    m: /[mɯɱḿṁṃⓜｍ]/g,
+    n: /[nñńņňŉƞǹɲṅṇṉṋⓝꞑꞥｎ]/g,
+    nj: /ǌ/g,
+    o: /[oòóôõöøōŏőơǒǫǭǿȍȏȫȭȯȱɔɵṍṏṑṓọỏốồổỗộớờởỡợⓞꝋꝍｏ]/g,
+    oi: /ƣ/g,
+    ou: /ȣ/g,
+    oo: /ꝏ/g,
+    p: /[pƥᵽṕṗⓟꝑꝓꝕｐ]/g,
+    q: /[qɋⓠꝗꝙｑ]/g,
+    r: /[rŕŗřȑȓɍɽṙṛṝṟⓡꝛꞃꞧｒ]/g,
+    s: /[sßśŝşšșȿṡṣṥṧṩẛⓢꞅꞩｓ]/g,
+    t: /[tţťŧƭțʈṫṭṯṱẗⓣⱦꞇｔ]/g,
+    tz: /ꜩ/g,
+    u: /[uùúûüũūŭůűųưǔǖǘǚǜȕȗʉṳṵṷṹṻụủứừửữựⓤｕ]/g,
+    v: /[vʋʌṽṿⓥꝟｖ]/g,
+    vy: /ꝡ/g,
+    w: /[wŵẁẃẅẇẉẘⓦⱳｗ]/g,
+    x: /[xẋẍⓧｘ]/g,
+    y: /[yýÿŷƴȳɏẏẙỳỵỷỹỿⓨｙ]/g,
+    z: /[zźżžƶȥɀẑẓẕⓩⱬꝣｚ]/g,
   };
   let parsedString = input;
 
@@ -156,7 +156,7 @@ export function removeAccents(input: string) {
 export function removeEmojis(input: string) {
   return input
     .replace(
-      /(?:[\u2700-\u27bf]|(?:\ud83c[\udde6-\uddff]){2}|[\ud800-\udbff][\udc00-\udfff])[\ufe0e\ufe0f]?(?:[\u0300-\u036f\ufe20-\ufe23\u20d0-\u20f0]|\ud83c[\udffb-\udfff])?(?:\u200d(?:[^\ud800-\udfff]|(?:\ud83c[\udde6-\uddff]){2}|[\ud800-\udbff][\udc00-\udfff])[\ufe0e\ufe0f]?(?:[\u0300-\u036f\ufe20-\ufe23\u20d0-\u20f0]|\ud83c[\udffb-\udfff])?)*/g,
+      /(?:[\u2700-\u27bf]|(?:\ud83c[\udde6-\uddff]){2}|[\ud800-\udbff][\udc00-\udfff])[\ufe0e\ufe0f]?(?:[\u0300-\u036f\u20d0-\u20f0\ufe20-\ufe23]|\ud83c[\udffb-\udfff])?(?:\u200d(?:[^\ud800-\udfff]|(?:\ud83c[\udde6-\uddff]){2}|[\ud800-\udbff][\udc00-\udfff])[\ufe0e\ufe0f]?(?:[\u0300-\u036f\u20d0-\u20f0\ufe20-\ufe23]|\ud83c[\udffb-\udfff])?)*/g,
       '',
     )
     .trim();
@@ -173,7 +173,7 @@ export function removeEmptyTags(input: string) {
  * Remove non-printable ASCII characters
  */
 export function removeNonPrintableCharacters(input: string) {
-  return is.string(input) ? input.replace(/[^\u00C0-\u00FF\x20-\x7E´˜ˆ]+/g, '') : input;
+  return is.string(input) ? input.replace(/[^\x20-\x7E´\u00C0-\u00FFˆ˜]+/g, '') : input;
 }
 
 /**
@@ -187,7 +187,7 @@ export function removeTags(input: string) {
  * Remove whitespace
  */
 export function removeWhitespace(input: string) {
-  return input.replace(/\r\n|\r|\n|\t/g, '').replace(/[ ]+/g, ' ');
+  return input.replace(/\r\n|\r|\n|\t/g, '').replace(/ +/g, ' ');
 }
 
 /**
@@ -198,6 +198,6 @@ export function slugify(input: string) {
     .replace(/[\u0300-\u036f]/g, '')
     .replace(/[()]/g, '')
     .replace(/ /g, '-')
-    .replace(/[|^{}%"<>\\`]/g, '')
+    .replace(/["%<>\\^`{|}]/g, '')
     .toLowerCase();
 }
