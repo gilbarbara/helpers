@@ -369,6 +369,9 @@ Cleanup HTML content.
 **cleanupURI(input: string): string**  
 Cleanup URI characters.
 
+**getInitials(input: string): string**  
+Get initials from name
+
 **pluralize(singular: string, plural: string | undefined, quantity: number)**  
 Returns the singular or plural based on the quantity.  
 

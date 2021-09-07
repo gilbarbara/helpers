@@ -2,6 +2,7 @@ import {
   capitalize,
   cleanupHTML,
   cleanupURI,
+  getInitials,
   pluralize,
   removeAccents,
   removeEmojis,
@@ -31,6 +32,16 @@ describe('cleanupHTML', () => {
 describe('cleanupURI', () => {
   it('should return a clean string', () => {
     expect(cleanupURI('a;b,c/d?e:f@g&h=i+j$k')).toBe('abcdefghijk');
+  });
+});
+
+describe('getInitials', () => {
+  it.each([
+    ['Test User', 'TU'],
+    ['John Doe Smith', 'JS'],
+    ['Willian', 'W'],
+  ])('should return the initials', (input, expected) => {
+    expect(getInitials(input)).toBe(expected);
   });
 });
 
