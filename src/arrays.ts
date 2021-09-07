@@ -1,6 +1,13 @@
 import { AnyObject, NarrowPlainObject, SortFunction } from './types';
 
 /**
+ * Get a random item from an array
+ */
+export function getRandomItem(input: any[]) {
+  return input[Math.floor(Math.random() * input.length)];
+}
+
+/**
  * Sort an array of numbers using a quick sort algorithm
  */
 export function quickSort<T extends string | number>(input: T[], comparator = sortComparator): T[] {
@@ -17,18 +24,18 @@ export function quickSort<T extends string | number>(input: T[], comparator = so
     const pivotValue = output[end];
     let splitIndex = start;
 
-    for (let i = start; i < end; i++) {
-      const sort = comparator(output[i], pivotValue);
+    for (let index = start; index < end; index++) {
+      const sort = comparator(output[index], pivotValue);
 
       // This value is less than the pivot value.
       if (sort === -1) {
         // If the element just to the right of the split index,
         //   isn't this element, swap them.
-        if (splitIndex !== i) {
+        if (splitIndex !== index) {
           const temp = output[splitIndex];
 
-          output[splitIndex] = output[i];
-          output[i] = temp;
+          output[splitIndex] = output[index];
+          output[index] = temp;
         }
 
         // Move the split index to the right by one,
