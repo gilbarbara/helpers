@@ -21,6 +21,9 @@ console.log(password); // g9HBfQeeOgrP.V1?JhETxn9P
 
 ### Arrays
 
+**getRandomItem(input: any[]): any**  
+Get a random item from an array.
+
 **quickSort<T extends string | number>(input: T[]): T[]**  
 Sort an array of numbers using a quick sort algorithm.
 

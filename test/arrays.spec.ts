@@ -1,4 +1,20 @@
-import { quickSort, sortByLocaleCompare, sortByPrimitive, sortComparator } from '../src';
+import {
+  getRandomItem,
+  quickSort,
+  sortByLocaleCompare,
+  sortByPrimitive,
+  sortComparator,
+} from '../src';
+
+describe('getRandomItem', () => {
+  it.each([
+    [['alpha', 'beta', 'gamma', 'delta', 'epsilon'], String],
+    [[1, 2, 3, 4, 5], Number],
+    [[{ a: 1 }, { b: 2 }, { c: 3 }], Object],
+  ])('should return a  single item', (input, expected) => {
+    expect(getRandomItem(input)).toEqual(expect.any(expected));
+  });
+});
 
 describe('quickSort', () => {
   it('should sort numbers properly', () => {
