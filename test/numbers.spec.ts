@@ -48,10 +48,11 @@ describe('randomInt', () => {
 
 describe('rangeLimit', () => {
   it.each([
-    [120, 100, undefined, undefined],
+    [120, 100, 0, 100],
+    [70, 70, 0, 100],
     [12, 10, 1, 10],
     [-7, 1, 1, 10],
-  ])('should limit %s to %s', (value, expected, min, max) => {
+  ])('should limit %s to %s between %p and %p', (value, expected, min, max) => {
     expect(rangeLimit(value, min, max)).toBe(expected);
   });
 });

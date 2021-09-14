@@ -38,7 +38,7 @@ export function randomInt(min = 0, max = 10) {
  * Limit number between range
  */
 export function rangeLimit(value: number, min = 0, max = 100) {
-  return Math.min(Math.max(value * 100, min), max);
+  return Math.min(Math.max(value, min), max);
 }
 
 /**
