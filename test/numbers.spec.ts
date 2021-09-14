@@ -1,4 +1,4 @@
-import { ceil, floor, pad, randomInt, round } from '../src';
+import { ceil, floor, pad, randomInt, rangeLimit, round } from '../src';
 
 describe('ceil', () => {
   it.each([
@@ -43,6 +43,16 @@ describe('randomInt', () => {
 
   it('should return a number without parameters', () => {
     expect(randomInt()).toBeGreaterThanOrEqual(0).toBeLessThan(11);
+  });
+});
+
+describe('rangeLimit', () => {
+  it.each([
+    [120, 100, undefined, undefined],
+    [12, 10, 1, 10],
+    [-7, 1, 1, 10],
+  ])('should limit %s to %s', (value, expected, min, max) => {
+    expect(rangeLimit(value, min, max)).toBe(expected);
   });
 });
 
