@@ -118,6 +118,36 @@ export function omit<T extends AnyObject, K extends keyof T>(
 }
 
 /**
+ * Select properties from an object
+ */
+export function pick<T extends AnyObject, K extends keyof T>(
+  input: T & NarrowPlainObject<T>,
+  ...filter: K[]
+) {
+  if (!is.plainObject(input)) {
+    throw new TypeError('Expected an object');
+  }
+
+  if (!filter.length) {
+    return input;
+  }
+
+  const output: any = {};
+
+  // eslint-disable-next-line no-restricted-syntax
+  for (const key in input) {
+    /* istanbul ignore else */
+    if ({}.hasOwnProperty.call(input, key)) {
+      if (filter.includes(key as unknown as K)) {
+        output[key] = input[key];
+      }
+    }
+  }
+
+  return output as Pick<T, K>;
+}
+
+/**
  * Stringify a shallow object into a query string
  */
 export function queryStringFormat<T extends AnyObject>(

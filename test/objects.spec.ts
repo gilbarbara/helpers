@@ -4,11 +4,13 @@ import {
   keyMirror,
   objectToArray,
   omit,
+  pick,
   queryStringFormat,
   queryStringParse,
   sortObjectKeys,
 } from '../src';
 
+const baseObject = { a: 1, b: '', c: [1], d: { a: null }, e: undefined };
 
 describe('getNestedProperty', () => {
   it('should return the proper value if it exists', () => {
@@ -57,6 +59,7 @@ describe('invertKeys', () => {
 describe('keyMirror', () => {
   it('should return properly', () => {
     expect(keyMirror({ NAME: 'John Doe' })).toEqual({ NAME: 'NAME' });
+    expect(keyMirror({ TYPE: undefined })).toEqual({ TYPE: 'TYPE' });
   });
 
   it('should throw for bad inputs', () => {
@@ -102,6 +105,23 @@ describe('omit', () => {
   it('should throw for bad inputs', () => {
     // @ts-ignore
     expect(() => omit(['a'])).toThrow('Expected an object');
+  });
+});
+
+describe('pick', () => {
+  it.each([
+    [pick(baseObject, 'c'), { c: [1] }],
+    [pick(baseObject, 'a', 'd'), { a: 1, d: { a: null } }],
+    // @ts-ignore
+    [pick(baseObject, 'x'), {}],
+    [pick(baseObject), baseObject],
+  ])('should be %p', (result, expected) => {
+    expect(result).toEqual(expected);
+  });
+
+  it('should throw for bad inputs', () => {
+    // @ts-ignore
+    expect(() => pick(['a'])).toThrow('Expected an object');
   });
 });
 

@@ -340,6 +340,9 @@ Convert an object to an array of objects.
 **omit\<T extends PlainObject, K extends keyof T>(input: T, ...filter: K[])**  
 Remove properties from an object.
 
+**pick\<T extends PlainObject, K extends keyof T>(input: T, ...filter: K[])**  
+Select properties from an object.
+
 **queryStringFormat(input: PlainObject, options?: QueryStringFormatOptions)**  
 Stringify a shallow object into a query string.
 
