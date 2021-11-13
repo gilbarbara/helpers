@@ -295,7 +295,7 @@ Pad a number with zeros.
 **randomInt(min?: number = 0, max?: number = 10): number**  
 Returns a random integer.
 
-**rangeLimit(value: number, min?: number = 0, max?: number = 100)**  
+**rangeLimit(value: number, min?: number = 0, max?: number = 100): number**  
 Limit number between range.
 
 **round(input: number, digits?: number = 2): number**  
@@ -303,10 +303,10 @@ Round decimal numbers.
 
 ### Objects
 
-**cleanUpObject(input: PlainObject)**  
+**cleanUpObject(input: PlainObject): PlainObject**  
 Remove properties with undefined or empty string value from an object
 
-**getNestedProperty(input: PlainObject | any[], path: string)**  
+**getNestedProperty(input: PlainObject | any[], path: string): any**  
 Get a nested property inside an object or array.
 
 <details>
@@ -331,22 +331,22 @@ getNestedProperty({ children: [{ a: 5 }, { a: 7 }, { a: 10 }] }, 'children.+.a')
   ```
 </details>
 
-**invertKeys(input: PlainObject)**  
+**invertKeys(input: PlainObject): PlainObject**  
 Invert object key and value.
 
-**keyMirror(input: PlainObject)**  
+**keyMirror(input: PlainObject): PlainObject**  
 Set the key as the value.
 
 **objectToArray(input: PlainObject, includeOnly?: string): PlainObject[]**  
 Convert an object to an array of objects.
 
-**omit\<T extends PlainObject, K extends keyof T>(input: T, ...filter: K[])**  
+**omit\<T extends PlainObject, K extends keyof T>(input: T, ...filter: K[]): PlainObject**  
 Remove properties from an object.
 
-**pick\<T extends PlainObject, K extends keyof T>(input: T, ...filter: K[])**  
+**pick\<T extends PlainObject, K extends keyof T>(input: T, ...filter: K[]): PlainObject**  
 Select properties from an object.
 
-**queryStringFormat(input: PlainObject, options?: QueryStringFormatOptions)**  
+**queryStringFormat(input: PlainObject, options?: QueryStringFormatOptions): string**  
 Stringify a shallow object into a query string.
 
 <details>
@@ -361,10 +361,10 @@ interface QueryStringFormatOptions {
   ```
 </details>
 
-**queryStringParse(input: string)**  
+**queryStringParse(input: string): PlainObject**  
 Parse a query string.
 
-**sortObjectKeys(input: PlainObject)**   
+**sortObjectKeys(input: PlainObject): PlainObject**   
 Sort object keys
 
 ### Strings
@@ -381,7 +381,7 @@ Cleanup URI characters.
 **getInitials(input: string): string**  
 Get initials from name
 
-**pluralize(singular: string, plural: string | undefined, quantity: number)**  
+**pluralize(singular: string, plural: string | undefined, quantity: number): string**  
 Returns the singular or plural based on the quantity.  
 
 > If the plural form just adds an `s` to the end, you don't need to pass it. It will add it automatically. 
