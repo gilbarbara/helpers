@@ -140,7 +140,7 @@ interface PollOptions {
   ```
 </details>
 
-**request(url: string, options?: RequestOptions): Promise\<any>**  
+**request<D = any>(url: string, options?: RequestOptions): Promise\<D>**  
 Perform an async request.
 
 <details>

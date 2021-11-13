@@ -61,7 +61,7 @@ export async function poll(condition: () => boolean, options: PollOptions = {}):
 /**
  * Make async requests
  */
-export async function request(url: string, options: RequestOptions = {}): Promise<any> {
+export async function request<D = any>(url: string, options: RequestOptions = {}): Promise<D> {
   const { body, headers, method = 'GET' }: RequestOptions = options;
 
   if (!url) {
