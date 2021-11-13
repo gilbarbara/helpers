@@ -303,9 +303,6 @@ Round decimal numbers.
 
 ### Objects
 
-**blacklist\<T extends PlainObject, K extends keyof T>(input: T, ...filter: K[])**  
-Remove properties from an object.
-
 **getNestedProperty(input: PlainObject | any[], path: string)**  
 Get a nested property inside an object or array.
 
@@ -339,6 +336,9 @@ Set the key as the value.
 
 **objectToArray(input: PlainObject, includeOnly?: string): PlainObject[]**  
 Convert an object to an array of objects.
+
+**omit\<T extends PlainObject, K extends keyof T>(input: T, ...filter: K[])**  
+Remove properties from an object.
 
 **queryStringFormat(input: PlainObject, options?: QueryStringFormatOptions)**  
 Stringify a shallow object into a query string.

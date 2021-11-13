@@ -1,32 +1,14 @@
 import {
-  blacklist,
   getNestedProperty,
   invertKeys,
   keyMirror,
   objectToArray,
+  omit,
   queryStringFormat,
   queryStringParse,
   sortObjectKeys,
 } from '../src';
 
-describe('blacklist', () => {
-  const base = { a: 1, b: 2, c: [1], d: { a: null } };
-
-  it.each([
-    [blacklist(base, 'c'), { a: 1, b: 2, d: { a: null } }],
-    [blacklist(base, 'a', 'd'), { b: 2, c: [1] }],
-    // @ts-ignore
-    [blacklist(base, 'x'), base],
-    [blacklist(base), base],
-  ])('should be %p', (result, expected) => {
-    expect(result).toEqual(expected);
-  });
-
-  it('should throw for bad inputs', () => {
-    // @ts-ignore
-    expect(() => blacklist(['a'])).toThrow('Expected an object');
-  });
-});
 
 describe('getNestedProperty', () => {
   it('should return the proper value if it exists', () => {
@@ -103,6 +85,23 @@ describe('objectToArray', () => {
 
     expect(objectToArray({ foo: 'bar', dig: 2 }, 'string')).toEqual([{ foo: 'bar' }]);
     expect(objectToArray({ foo: 'bar', bar: fn }, 'string')).toEqual([{ foo: 'bar' }]);
+  });
+});
+
+describe('omit', () => {
+  it.each([
+    [omit(baseObject, 'c'), { a: 1, b: '', d: { a: null } }],
+    [omit(baseObject, 'a', 'd'), { b: '', c: [1] }],
+    // @ts-ignore
+    [omit(baseObject, 'x'), baseObject],
+    [omit(baseObject), baseObject],
+  ])('should be %p', (result, expected) => {
+    expect(result).toEqual(expected);
+  });
+
+  it('should throw for bad inputs', () => {
+    // @ts-ignore
+    expect(() => omit(['a'])).toThrow('Expected an object');
   });
 });
 

@@ -3,32 +3,6 @@ import is from 'is-lite';
 import { AnyObject, InvertKeyValue, NarrowPlainObject, QueryStringFormatOptions } from './types';
 
 /**
- * Remove properties from an object
- */
-export function blacklist<T extends AnyObject, K extends keyof T>(
-  input: T & NarrowPlainObject<T>,
-  ...filter: K[]
-) {
-  if (!is.plainObject(input)) {
-    throw new TypeError('Expected an object');
-  }
-
-  const output: any = {};
-
-  // eslint-disable-next-line no-restricted-syntax
-  for (const key in input) {
-    /* istanbul ignore else */
-    if ({}.hasOwnProperty.call(input, key)) {
-      if (!filter.includes(key as unknown as K)) {
-        output[key] = input[key];
-      }
-    }
-  }
-
-  return output as Omit<T, K>;
-}
-
-/**
  * Get a nested property inside an object or array
  */
 export function getNestedProperty<T extends AnyObject>(input: T, path: string): any {
@@ -115,6 +89,32 @@ export function objectToArray<T extends AnyObject>(
   return Object.entries(input)
     .filter(([, value]) => (includeOnly ? typeof value === `${includeOnly}` : true)) // eslint-disable-line valid-typeof
     .map(([key, value]) => ({ [key]: value }));
+}
+
+/**
+ * Remove properties from an object
+ */
+export function omit<T extends AnyObject, K extends keyof T>(
+  input: T & NarrowPlainObject<T>,
+  ...filter: K[]
+) {
+  if (!is.plainObject(input)) {
+    throw new TypeError('Expected an object');
+  }
+
+  const output: any = {};
+
+  // eslint-disable-next-line no-restricted-syntax
+  for (const key in input) {
+    /* istanbul ignore else */
+    if ({}.hasOwnProperty.call(input, key)) {
+      if (!filter.includes(key as unknown as K)) {
+        output[key] = input[key];
+      }
+    }
+  }
+
+  return output as Omit<T, K>;
 }
 
 /**
