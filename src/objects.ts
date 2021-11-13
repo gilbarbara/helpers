@@ -3,6 +3,13 @@ import is from 'is-lite';
 import { AnyObject, InvertKeyValue, NarrowPlainObject, QueryStringFormatOptions } from './types';
 
 /**
+ * Remove properties with undefined or empty string value from an object
+ */
+export function cleanUpObject<T = AnyObject>(input: T & NarrowPlainObject<T>) {
+  return Object.fromEntries(Object.entries(input).filter(([_, v]) => ![undefined, ''].includes(v)));
+}
+
+/**
  * Get a nested property inside an object or array
  */
 export function getNestedProperty<T extends AnyObject>(input: T, path: string): any {

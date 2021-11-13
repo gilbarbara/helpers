@@ -1,4 +1,5 @@
 import {
+  cleanUpObject,
   getNestedProperty,
   invertKeys,
   keyMirror,
@@ -11,6 +12,12 @@ import {
 } from '../src';
 
 const baseObject = { a: 1, b: '', c: [1], d: { a: null }, e: undefined };
+
+describe('cleanUpObject', () => {
+  it('should remove the empty properties', () => {
+    expect(cleanUpObject(baseObject)).toEqual(omit(baseObject, 'b', 'e'));
+  });
+});
 
 describe('getNestedProperty', () => {
   it('should return the proper value if it exists', () => {
