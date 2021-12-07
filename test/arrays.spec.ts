@@ -4,6 +4,7 @@ import {
   sortByLocaleCompare,
   sortByPrimitive,
   sortComparator,
+  splitIntoChunks,
 } from '../src';
 
 describe('getRandomItem', () => {
@@ -106,5 +107,19 @@ describe('sortComparator', () => {
       'xy',
       'zy',
     ]);
+  });
+});
+
+describe('splitIntoChunks', () => {
+  it('should split an array smaller than the limit into a single chunk', () => {
+    const array = Array.from({ length: 20 }, (_, index) => index + 1);
+
+    expect(splitIntoChunks(array)).toHaveLength(1);
+  });
+
+  it('should split a large array into multiple chunks', () => {
+    const array = Array.from({ length: 200 }, (_, index) => index + 1);
+
+    expect(splitIntoChunks(array)).toHaveLength(8);
   });
 });

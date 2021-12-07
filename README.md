@@ -100,6 +100,9 @@ objects.sort(sortByPrimitive('status', true));
 **sortComparator(left: string | number, right: string | number): number**  
 Basic sort comparator.
 
+**splitIntoChunks<T>(array: T[], chunkSize: number = 25): T[][]**  
+Split an array into chunks.
+
 ### Async
 
 **cors(data: any, statusCode = 200, options?: CorsOptions)**  

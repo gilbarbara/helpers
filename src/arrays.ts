@@ -139,3 +139,13 @@ export function sortComparator(left: string | number, right: string | number) {
 
   return 0;
 }
+
+export function splitIntoChunks<T>(array: T[], chunkSize: number = 25): T[][] {
+  const chunks: T[][] = [];
+
+  for (let index = 0; index < Math.ceil(array.length / chunkSize); index++) {
+    chunks.push(array.slice(index * chunkSize, (index + 1) * chunkSize));
+  }
+
+  return chunks;
+}
