@@ -102,8 +102,8 @@ Basic sort comparator.
 
 ### Async
 
-**cors(data: any, statusCode = 200, options?: CorsOptions): CorsOuput**  
-Returns a CORSresponse.
+**cors(data: any, statusCode = 200, options?: CorsOptions)**  
+Returns an object with `body`, `headers` and `statusCode`.
 
 <details>
   <summary>Type Definition</summary>
