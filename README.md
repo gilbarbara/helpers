@@ -1,6 +1,6 @@
 # @gilbarbara/helpers
 
-[![npm version](https://badge.fury.io/js/%40gilbarbara%2Fhelpers.svg)](https://badge.fury.io/js/%40gilbarbara%2Fhelpers) [![build status](https://app.travis-ci.com/gilbarbara/helpers.svg?branch=main)](https://app.travis-ci.com/gilbarbara/helpers) [![Maintainability](https://api.codeclimate.com/v1/badges/e6bfd2ed034503f16473/maintainability)](https://codeclimate.com/github/gilbarbara/helpers/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/e6bfd2ed034503f16473/test_coverage)](https://codeclimate.com/github/gilbarbara/helpers/test_coverage)
+[![npm version](https://badge.fury.io/js/%40gilbarbara%2Fhelpers.svg)](https://badge.fury.io/js/%40gilbarbara%2Fhelpers) [![CI](https://github.com/gilbarbara/helpers/actions/workflows/main.yml/badge.svg)](https://github.com/gilbarbara/helpers/actions/workflows/main.yml) [![Maintainability](https://api.codeclimate.com/v1/badges/e6bfd2ed034503f16473/maintainability)](https://codeclimate.com/github/gilbarbara/helpers/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/e6bfd2ed034503f16473/test_coverage)](https://codeclimate.com/github/gilbarbara/helpers/test_coverage)
 
 Collection of useful functions
 
