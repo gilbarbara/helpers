@@ -2,10 +2,35 @@ import { cors, poll, request, sleep } from '../src';
 
 describe('cors', () => {
   it.each([
-    [{}, undefined, undefined],
-    [[], 201, { methods: ['POST' as const], origin: 'https://example.com', headers: ['x-test'] }],
-  ])('%p should return properly', (data, statusCode, options) => {
-    expect(cors(data, statusCode, options)).toMatchSnapshot();
+    {
+      name: 'data',
+      data: { name: 'John Doe' },
+    },
+    {
+      name: 'methods, origin and allowedHeaders',
+      data: null,
+      options: {
+        allowedHeaders: ['x-test'],
+        methods: ['POST' as const],
+        origin: 'https://example.com',
+        statusCode: 201,
+      },
+    },
+    {
+      name: 'responseHeaders',
+      data: [{ name: 'John Doe' }],
+      options: {
+        responseHeaders: {
+          Link: '</?page=10>; rel="current", </?page=10>; rel="last", </?page=9>; rel="prev"',
+          'X-Items-Total': '938',
+          'X-Items-Per-Page': '100',
+          'X-Items-From': '901',
+          'X-Items-To': '938',
+        },
+      },
+    },
+  ])('with "$name" should return properly', ({ data, options }) => {
+    expect(cors(data, options)).toMatchSnapshot();
   });
 });
 

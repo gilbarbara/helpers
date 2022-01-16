@@ -1,13 +1,21 @@
 export type AnyObject<T = any> = Record<string, T>;
-export type NarrowPlainObject<T> = Exclude<T, any[] | ((...args: any[]) => any)>;
+export type NarrowPlainObject<T> = Exclude<T, any[] | ((...arguments_: any[]) => any)>;
 
 export type HttpMethods = 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE';
 export type Primitive = bigint | boolean | null | number | string | symbol | undefined;
 
 export interface CorsOptions {
-  headers?: string[];
+  /** @default true */
+  allowCredentials?: boolean;
+  /** @default [] */
+  allowedHeaders?: string[];
+  /** @default ['GET'] */
   methods?: HttpMethods[];
+  /** @default * */
   origin?: string;
+  responseHeaders?: AnyObject;
+  /** @default 200 */
+  statusCode?: number;
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-types

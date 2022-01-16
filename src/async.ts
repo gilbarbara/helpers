@@ -1,12 +1,22 @@
 import 'isomorphic-fetch';
 
+import is from 'is-lite';
+
 import { CorsOptions, PollOptions, RequestError, RequestOptions } from './types';
 
 /**
  * Format a CORS response
  */
-export function cors(data: any, statusCode = 200, options?: CorsOptions) {
-  const { methods = ['GET'], origin = '*', headers = [] } = options || {};
+export function cors(data: any, statusCodeOrOptions: number | CorsOptions = 200) {
+  const {
+    allowCredentials = true,
+    allowedHeaders = [],
+    methods = ['GET'],
+    origin = '*',
+    responseHeaders = undefined,
+    statusCode = 200,
+  } = is.number(statusCodeOrOptions) ? { statusCode: statusCodeOrOptions } : statusCodeOrOptions;
+
   const allowMethods = [...methods, 'OPTIONS'];
   const allowHeaders = [
     ...new Set([
@@ -22,17 +32,26 @@ export function cors(data: any, statusCode = 200, options?: CorsOptions) {
       'X-Api-Version',
       'X-CSRF-Token',
       'X-Requested-With',
-      ...headers,
+      ...allowedHeaders,
     ]),
   ];
+  let exposedHeaders;
+
+  if (responseHeaders) {
+    exposedHeaders = {
+      'Access-Control-Expose-Headers': Object.keys(responseHeaders).join(','),
+      ...responseHeaders,
+    };
+  }
 
   return {
     body: JSON.stringify(data),
     headers: {
       'Access-Control-Allow-Origin': origin,
-      'Access-Control-Allow-Credentials': true,
+      'Access-Control-Allow-Credentials': allowCredentials,
       'Access-Control-Allow-Methods': allowMethods.join(','),
       'Access-Control-Allow-Headers': allowHeaders.join(','),
+      ...exposedHeaders,
     },
     statusCode,
   };
@@ -108,5 +127,7 @@ export async function request<D = any>(url: string, options: RequestOptions = {}
  * Block execution
  */
 export function sleep(seconds = 1) {
-  return new Promise(resolve => setTimeout(resolve, seconds * 1000));
+  return new Promise(resolve => {
+    setTimeout(resolve, seconds * 1000);
+  });
 }

@@ -105,8 +105,8 @@ Split an array into chunks.
 
 ### Async
 
-**cors(data: any, statusCode = 200, options?: CorsOptions)**  
-Returns an object with `body`, `headers` and `statusCode`.
+**cors(data: any, statusCodeOrOptions: number | CorsOptions = 200): CorsResponse**  
+Returns a CORS response.
 
 <details>
   <summary>Type Definition</summary>
@@ -115,18 +115,25 @@ Returns an object with `body`, `headers` and `statusCode`.
 type HttpMethods = 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE';
 
 interface CorsOptions {
-  headers?: string[];
+  /** @default true */
+  allowCredentials?: boolean;
+  /** @default [] */
+  allowedHeaders?: string[];
+  /** @default ['GET'] */
   methods?: HttpMethods[];
+  /** @default * */
   origin?: string;
+  responseHeaders?: AnyObject;
+  /** @default 200 */
+  statusCode?: number;
 }
 
-interface CorsOuput {
+interface CorsResponse {
   body: string;
   headers: PlainObject;
   statusCode: number;
 }
   ```
-
 </details>
 
 **poll(condition: () => boolean, options?: PollOptions): Promise\<void>**  
