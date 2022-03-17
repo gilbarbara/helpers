@@ -1,6 +1,18 @@
 import { advanceTo, clear } from 'jest-date-mock';
 
-import { DAY, HOUR, isoDate, MINUTE, MONTH, now, timeSince, timestamp, WEEK, YEAR } from '../src';
+import {
+  DAY,
+  HOUR,
+  isIsoDate,
+  isoDate,
+  MINUTE,
+  MONTH,
+  now,
+  timeSince,
+  timestamp,
+  WEEK,
+  YEAR,
+} from '../src';
 
 describe('constants', () => {
   it.each([
@@ -24,11 +36,27 @@ describe('date', () => {
     clear();
   });
 
+  describe('isIsoDate', () => {
+    it.each([
+      ['2000-01-01T00:00:00.000Z', true],
+      ['2018-02-18T20:40:00.000Z', true],
+      ['2019-02-01T02:00:00.000Z', true],
+      [new Date().toISOString(), true],
+      [new Date().toUTCString(), false],
+      [new Date().toLocaleString(), false],
+      [new Date().toDateString(), false],
+    ])('should return properly for %p', (input, expected) => {
+      expect(isIsoDate(input)).toBe(expected);
+    });
+  });
+
   describe('isoDate', () => {
-    it('should return properly', () => {
-      expect(isoDate('2000-01-01')).toBe('2000-01-01T00:00:00.000Z');
-      expect(isoDate(1518986400000)).toBe('2018-02-18T20:40:00.000Z');
-      expect(isoDate()).toBe('2019-02-01T02:00:00.000Z');
+    it.each([
+      ['2000-01-01', '2000-01-01T00:00:00.000Z'],
+      [1518986400000, '2018-02-18T20:40:00.000Z'],
+      [undefined, '2019-02-01T02:00:00.000Z'],
+    ])('should return properly for %p', (input, expected) => {
+      expect(isoDate(input)).toBe(expected);
     });
   });
 

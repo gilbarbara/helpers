@@ -172,6 +172,9 @@ Block async execution for X seconds.
 
 ### Date
 
+**isIsoDate(input?: string): boolean**  
+Check if the input is an ISO date.
+
 **isoDate(input?: string | number): string**  
 Returns an ISO date.
 
@@ -416,3 +419,7 @@ Remove whitespace.
 
 **slugify(input: string): string**  
 Format string to slug.
+
+## License
+
+MIT

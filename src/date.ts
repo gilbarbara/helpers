@@ -8,6 +8,16 @@ export const WEEK = DAY * 7;
 export const MONTH = DAY * 30;
 export const YEAR = 365 * DAY;
 
+export function isIsoDate(input: string) {
+  if (!/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/.test(input)) {
+    return false;
+  }
+
+  const date = new Date(input);
+
+  return date.toISOString() === input;
+}
+
 export function isoDate(input?: string | number) {
   if (typeof input !== 'undefined') {
     return new Date(input).toISOString();
