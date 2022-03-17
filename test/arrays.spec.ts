@@ -111,6 +111,11 @@ describe('sortComparator', () => {
 });
 
 describe('splitIntoChunks', () => {
+  it('should throw if the input is not an array', () => {
+    // @ts-ignore
+    expect(() => splitIntoChunks({})).toThrow('expected an array for the first argument');
+  });
+
   it('should split an array smaller than the limit into a single chunk', () => {
     const array = Array.from({ length: 20 }, (_, index) => index + 1);
 

@@ -1,3 +1,5 @@
+import is from 'is-lite';
+
 import { AnyObject, NarrowPlainObject, SortFunction } from './types';
 
 /**
@@ -140,11 +142,15 @@ export function sortComparator(left: string | number, right: string | number) {
   return 0;
 }
 
-export function splitIntoChunks<T>(array: T[], chunkSize: number = 25): T[][] {
+export function splitIntoChunks<T>(input: T[], chunkSize: number = 25): T[][] {
+  if (!is.array(input)) {
+    throw new TypeError('expected an array for the first argument');
+  }
+
   const chunks: T[][] = [];
 
-  for (let index = 0; index < Math.ceil(array.length / chunkSize); index++) {
-    chunks.push(array.slice(index * chunkSize, (index + 1) * chunkSize));
+  for (let index = 0; index < Math.ceil(input.length / chunkSize); index++) {
+    chunks.push(input.slice(index * chunkSize, (index + 1) * chunkSize));
   }
 
   return chunks;
