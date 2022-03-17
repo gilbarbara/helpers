@@ -52,6 +52,7 @@ describe('rangeLimit', () => {
     [70, 70, 0, 100],
     [12, 10, 1, 10],
     [-7, 1, 1, 10],
+    [-1, 0, undefined, undefined],
   ])('should limit %s to %s between %p and %p', (value, expected, min, max) => {
     expect(rangeLimit(value, min, max)).toBe(expected);
   });

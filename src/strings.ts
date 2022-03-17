@@ -1,5 +1,3 @@
-import is from 'is-lite';
-
 /**
  * Capitalize the first letter
  */
@@ -173,7 +171,7 @@ export function removeEmptyTags(input: string) {
  * Remove non-printable ASCII characters
  */
 export function removeNonPrintableCharacters(input: string) {
-  return is.string(input) ? input.replace(/[^\x20-\x7E´\u00C0-\u00FFˆ˜]+/g, '') : input;
+  return input.replace(/[^\x20-\x7E´\u00C0-\u00FFˆ˜]+/g, '');
 }
 
 /**

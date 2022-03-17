@@ -122,19 +122,22 @@ describe('request', () => {
 describe('sleep', () => {
   const setTimeoutSpy = jest.spyOn(global, 'setTimeout');
 
-  afterAll(() => {
+  afterEach(() => {
     jest.restoreAllMocks();
   });
 
-  it('should halt the execution', async () => {
+  it.each([
+    [0.1, 100],
+    [undefined, 1000],
+  ])('should halt the execution for %p', async (input, timeout) => {
     // eslint-disable-next-line unicorn/consistent-function-scoping
     const fn = async () => {
-      await sleep(0.1);
+      await sleep(input);
 
       return 'finished';
     };
 
     expect(await fn()).toBe('finished');
-    expect(setTimeoutSpy).toHaveBeenCalledWith(expect.any(Function), 100);
+    expect(setTimeoutSpy).toHaveBeenCalledWith(expect.any(Function), timeout);
   });
 });

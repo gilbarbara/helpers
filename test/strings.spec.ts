@@ -40,7 +40,9 @@ describe('getInitials', () => {
     ['Test User', 'TU'],
     ['John Doe Smith', 'JS'],
     ['Willian', 'W'],
+    [undefined, ''],
   ])('should return the initials', (input, expected) => {
+    // @ts-ignore
     expect(getInitials(input)).toBe(expected);
   });
 });
