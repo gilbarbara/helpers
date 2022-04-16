@@ -18,7 +18,7 @@ module.exports = {
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx', 'json'],
   preset: 'ts-jest',
   setupFiles: ['<rootDir>/test/__setup__/setupFiles.ts'],
-  setupFilesAfterEnv: ['<rootDir>/test/__setup__/setupTests.ts'],
+  setupFilesAfterEnv: ['<rootDir>/test/__setup__/setupFilesAfterEnv.ts'],
   snapshotSerializers: ['jest-serializer-html'],
   testEnvironment: 'jsdom',
   testMatch: null,
