@@ -3,6 +3,7 @@ import { advanceTo } from 'jest-date-mock';
 
 import {
   copyToClipboard,
+  demethodize,
   isJSON,
   isRequired,
   logger,
@@ -45,6 +46,23 @@ describe('copyToClipboard', () => {
     const result = await copyToClipboard('Hello');
 
     expect(result).toBe(false);
+  });
+});
+
+describe('demethodize', () => {
+  it('should handle Array methods', () => {
+    const isVowel = (x: string) => ['a', 'e', 'i', 'o', 'u'].includes(x);
+    const every = demethodize(Array.prototype.every);
+
+    expect(every('abcd', isVowel)).toBeFalse();
+    expect(every('eieio', isVowel)).toBeTrue();
+  });
+
+  it('should handle Number methods', () => {
+    const toLocaleString = demethodize(Number.prototype.toLocaleString);
+    const numbers = [2209.6, 124.56, 1048576];
+
+    expect(numbers.map(toLocaleString)).toEqual(['2,209.6', '124.56', '1,048,576']);
   });
 });
 
