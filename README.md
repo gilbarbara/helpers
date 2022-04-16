@@ -231,6 +231,20 @@ Get the timestamp for a date
 **copyToClipboard(input: string): Promise\<boolean>**  
 Copy a string to the clipboard.
 
+**demethodize(fn: Function): Function**  
+Decouple methods from objects
+
+<details>
+  <summary>Example</summary>
+
+  ```typescript
+const toLocaleString = demethodize(Number.prototype.toLocaleString);
+const numbers = [2209.6, 124.56, 1048576];
+
+numbers.map(toLocaleString); // ['2,209.6', '124.56', '1,048,576']
+  ```
+</details>
+
 **isJSON(input: string): boolean**  
 Check if a string is a valid JSON.
 

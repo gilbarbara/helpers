@@ -15,6 +15,14 @@ export async function copyToClipboard(input: string) {
 }
 
 /**
+ * Decouple methods from objects
+ */
+// eslint-disable-next-line @typescript-eslint/ban-types
+export function demethodize(fn: Function) {
+  return (parameter: any, ...rest: any[]) => fn.apply(parameter, rest);
+}
+
+/**
  * Check if a string is a valid JSON
  */
 export function isJSON(input: string) {
