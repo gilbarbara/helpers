@@ -7,9 +7,11 @@ import {
   isJSON,
   isRequired,
   logger,
+  measureExecutionTime,
   noop,
   nullify,
   popupCenter,
+  sleep,
   unique,
   uuid,
 } from '../src';
@@ -157,6 +159,26 @@ describe('logger', () => {
     );
     expect(log).toHaveBeenLastCalledWith(null);
     expect(groupEnd).toHaveBeenCalledTimes(4);
+  });
+});
+
+describe('measureExecutionTime', () => {
+  beforeAll(() => {
+    jest.spyOn(console, 'log');
+  });
+
+  afterAll(() => {
+    jest.clearAllMocks();
+  });
+
+  it('should log the time it took to run', async () => {
+    await measureExecutionTime(async () => {
+      await sleep(1);
+    });
+
+    expect(console.log).toHaveBeenCalledWith(
+      expect.stringMatching(/Completed in 1\d+ milliseconds/),
+    );
   });
 });
 

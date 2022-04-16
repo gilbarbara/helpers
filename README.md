@@ -279,6 +279,9 @@ interface LoggerOptions {
   ```
 </details>
 
+**measureExecutionTime\<T = any>(callback: Function): Promise\<T>**  
+Measure function execution time
+
 **noop(): void**   
 An empty function that does nothing.
 
