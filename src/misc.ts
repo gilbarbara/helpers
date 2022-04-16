@@ -78,6 +78,24 @@ export function logger(type: string, title: string, data: any, options: LoggerOp
 }
 
 /**
+ * Measure function execution time
+ */
+// eslint-disable-next-line @typescript-eslint/ban-types
+export async function measureExecutionTime<T = any>(callback: Function): Promise<T> {
+  const start = performance.now();
+
+  const result = await callback();
+
+  const end = performance.now();
+  const total = end - start;
+
+  // eslint-disable-next-line no-console
+  console.log(`Completed in ${Math.ceil(total)} milliseconds`);
+
+  return result as T;
+}
+
+/**
  * A function that does nothing.
  */
 export function noop() {
