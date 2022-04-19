@@ -164,7 +164,7 @@ describe('logger', () => {
 
 describe('measureExecutionTime', () => {
   beforeAll(() => {
-    jest.spyOn(console, 'log');
+    jest.spyOn(console, 'log').mockImplementation();
   });
 
   afterAll(() => {

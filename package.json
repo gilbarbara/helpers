@@ -45,7 +45,6 @@
     "jest-fetch-mock": "^3.0.3",
     "jest-serializer-html": "^7.1.0",
     "jest-watch-typeahead": "^1.0.0",
-    "patch-package": "^6.4.7",
     "repo-tools": "^0.2.2",
     "size-limit": "^7.0.8",
     "ts-jest": "^27.1.4",
@@ -67,9 +66,8 @@
     "format": "prettier \"**/*.{css,graphql,js,json,jsx,less,md,mdx,scss,ts,tsx,yaml,yml}\" --write",
     "size": "size-limit",
     "validate": "npm run lint && npm run typecheck && npm run test:coverage && npm run build && npm run size",
-    "prepublishOnly": "npm run validate",
     "prepare": "husky install",
-    "postinstall": "patch-package"
+    "prepublishOnly": "npm run validate"
   },
   "eslintConfig": {
     "extends": [
