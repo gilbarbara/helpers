@@ -4,6 +4,13 @@ import is from 'is-lite';
 
 import { CorsOptions, PollOptions, RequestError, RequestOptions } from './types';
 
+export const ASYNC_STATUS = {
+  IDLE: 'IDLE',
+  PENDING: 'PENDING',
+  SUCCESS: 'SUCCESS',
+  ERROR: 'ERROR',
+};
+
 /**
  * Format a CORS response
  */

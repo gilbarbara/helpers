@@ -105,6 +105,9 @@ Split an array into chunks.
 
 ### Async
 
+**ASYNC_STATUS**  
+A constant with possible async statuses
+
 **cors(data: any, statusCodeOrOptions: number | CorsOptions = 200): CorsResponse**  
 Returns a CORS response.
 

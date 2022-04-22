@@ -1,5 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`ASYNC_STATUS should return the expected statuses 1`] = `
+Object {
+  "ERROR": "ERROR",
+  "IDLE": "IDLE",
+  "PENDING": "PENDING",
+  "SUCCESS": "SUCCESS",
+}
+`;
+
 exports[`cors with "data" should return properly 1`] = `
 Object {
   "body": "{\\"name\\":\\"John Doe\\"}",

@@ -1,4 +1,10 @@
-import { cors, poll, request, sleep } from '../src';
+import { ASYNC_STATUS, cors, poll, request, sleep } from '../src';
+
+describe('ASYNC_STATUS', () => {
+  it('should return the expected statuses', () => {
+    expect(ASYNC_STATUS).toMatchSnapshot();
+  });
+});
 
 describe('cors', () => {
   it.each([
