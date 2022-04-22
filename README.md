@@ -408,6 +408,9 @@ Capitalize the first letter.
 **cleanupHTML(input: string): string**  
 Cleanup HTML content.
 
+**cleanupNumericString(input: string): string**  
+Cleanup a numeric string.
+
 **cleanupURI(input: string): string**  
 Cleanup URI characters.
 

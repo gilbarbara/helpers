@@ -13,6 +13,13 @@ export function cleanupHTML(input: string) {
 }
 
 /**
+ * Cleanup a numeric string
+ */
+export function cleanupNumericString(value = '') {
+  return value.replace(/\D+/g, '');
+}
+
+/**
  * Cleanup URI characters
  */
 export function cleanupURI(input: string) {

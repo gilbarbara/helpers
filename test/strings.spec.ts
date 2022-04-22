@@ -1,6 +1,7 @@
 import {
   capitalize,
   cleanupHTML,
+  cleanupNumericString,
   cleanupURI,
   getInitials,
   pluralize,
@@ -26,6 +27,12 @@ describe('cleanupHTML', () => {
     expect(cleanupHTML('O <b>melhor</b> preço <i></i> que você    já viu.')).toBe(
       'O <b>melhor</b> preço que você já viu.',
     );
+  });
+});
+
+describe('cleanupNumericString', () => {
+  it('should return a clean string', () => {
+    expect(cleanupNumericString('$1,100')).toBe('1100');
   });
 });
 
