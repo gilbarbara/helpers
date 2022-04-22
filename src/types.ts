@@ -1,8 +1,4 @@
-export type AnyObject<T = any> = Record<string, T>;
-export type NarrowPlainObject<T> = Exclude<T, any[] | ((...arguments_: any[]) => any)>;
-
-export type HttpMethods = 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE';
-export type Primitive = bigint | boolean | null | number | string | symbol | undefined;
+import { AnyObject, HttpMethods, PlainObject } from '@gilbarbara/types';
 
 export interface CorsOptions {
   /** @default true */
@@ -65,7 +61,7 @@ export interface RequestError extends Error {
 }
 
 export interface SortFunction {
-  <T = AnyObject>(left: T & NarrowPlainObject<T>, right: T & NarrowPlainObject<T>): number;
+  <T = AnyObject>(left: PlainObject<T>, right: PlainObject<T>): number;
   <T = string>(left: T, right: T): number;
 }
 

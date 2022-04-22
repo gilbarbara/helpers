@@ -1,6 +1,7 @@
+import { AnyObject, PlainObject } from '@gilbarbara/types';
 import is from 'is-lite';
 
-import { AnyObject, NarrowPlainObject, SortFunction } from './types';
+import { SortFunction } from './types';
 
 /**
  * Get a random item from an array
@@ -75,14 +76,11 @@ export function sortByLocaleCompare(
 
   if (key) {
     if (descending) {
-      return <T extends AnyObject>(
-        left: T & NarrowPlainObject<T>,
-        right: T & NarrowPlainObject<T>,
-      ) =>
+      return <T extends AnyObject>(left: PlainObject<T>, right: PlainObject<T>) =>
         right[key].toLowerCase().localeCompare(left[key].toLowerCase(), undefined, compareOptions);
     }
 
-    return <T extends AnyObject>(left: T & NarrowPlainObject<T>, right: T & NarrowPlainObject<T>) =>
+    return <T extends AnyObject>(left: PlainObject<T>, right: PlainObject<T>) =>
       left[key].toLowerCase().localeCompare(right[key].toLowerCase(), undefined, compareOptions);
   }
 
@@ -106,10 +104,7 @@ export function sortByPrimitive<T extends number | boolean>(
   const secondComparator = descending ? -1 : 1;
 
   if (key) {
-    return <P extends AnyObject>(
-      left: P & NarrowPlainObject<P>,
-      right: P & NarrowPlainObject<P>,
-    ) => {
+    return <P extends AnyObject>(left: PlainObject<P>, right: PlainObject<P>) => {
       if (left[key] === right[key]) {
         return 0;
       }
