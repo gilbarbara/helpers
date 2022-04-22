@@ -18,6 +18,18 @@ export interface CorsOptions {
   statusCode?: number;
 }
 
+export interface FormatDateLocaleOptions {
+  locale?: string;
+  showTime?: boolean;
+}
+
+export interface FormatMoneyOptions {
+  decimalChar?: ',' | '.';
+  showCents?: boolean;
+  symbol?: string;
+  thousandsChar?: ',' | '.';
+}
+
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type InvertKeyValue<T extends Record<keyof T, keyof any>> = {} & {
   [K in T[keyof T]]: { [P in keyof T]: T[P] extends K ? P : never }[keyof T];

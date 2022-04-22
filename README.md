@@ -229,6 +229,51 @@ timeSince(twoWeeeksAgo, { suffix: 'atrás', week: 'semana' }) // 2 semanas atrá
 **timestamp(input?: Date | string): number**  
 Get the timestamp for a date
 
+
+### Formatters
+
+**formatBoolean(input: boolean): 'Yes' | 'No'**  
+Format boolean into Yes / No
+
+**formatCPF(input: string): string**  
+Format string into a CPF
+
+**formatDateLocale(input: string, options?: FormatDateLocaleOptions): string**  
+Format date ISO string using locale
+
+<details>
+  <summary>Type Definition</summary>
+
+  ```typescript
+interface FormatDateLocaleOptions {
+  locale?: string; // > 'en-GB'
+  showTime?: boolean; // > false
+}
+  ```
+</details>
+
+**formatMoney(input: number, options?: FormatMoneyOptions): string**  
+Format number into money string
+
+<details>
+  <summary>Type Definition</summary>
+
+  ```typescript
+interface FormatMoneyOptions {
+  decimalChar?: ',' | '.'; // > '.'
+  showCents?: boolean; // > false
+  symbol?: string; // > '$'
+  thousandsChar?: ',' | '.'; // > ','
+}
+  ```
+</details>
+
+**formatPhoneBR(input: string): string**  
+Format string into a brazilian phone
+
+**formatPostalCodeBR(value: string): string**  
+Format string into a brazilian zip code
+
 ### Misc
 
 **copyToClipboard(input: string): Promise\<boolean>**  
