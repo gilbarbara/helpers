@@ -7,4 +7,4 @@ export * from './numbers';
 export * from './objects';
 export * from './strings';
 
-export * from './types';
+export * as Types from './types';
