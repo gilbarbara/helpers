@@ -9,7 +9,7 @@ export const ASYNC_STATUS = {
   PENDING: 'PENDING',
   SUCCESS: 'SUCCESS',
   ERROR: 'ERROR',
-};
+} as const;
 
 /**
  * Format a CORS response
