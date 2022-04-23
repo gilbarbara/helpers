@@ -6,5 +6,6 @@ export * from './misc';
 export * from './numbers';
 export * from './objects';
 export * from './strings';
+export * from './validators';
 
 export * as Types from './types';

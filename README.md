@@ -488,6 +488,30 @@ Remove whitespace.
 **slugify(input: string): string**  
 Format string to slug.
 
+
+### Validators
+
+**isValidCPF(value: string): boolean**  
+Check if CPF is valid
+
+**isValidEmail(value: string): boolean**  
+Check if email is valid
+
+`@throws`  
+**validatePassword(password: string, options?: ValidatePasswordOptions): boolean**  
+Validate password length and required characters
+
+  ```typescript
+interface ValidatePasswordOptions {
+  maxLength?: string;
+  maxLengthMessage?: string;
+  minLength?: string;
+  minLengthMessage?: string;
+  regex?: RegExp;
+  requiredCharactersMessage?: string;
+}
+  ```
+
 ## License
 
 MIT

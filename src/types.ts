@@ -139,3 +139,12 @@ export interface UniqueOptions {
   includeSymbols?: boolean;
   includeUppercase?: boolean;
 }
+
+export interface ValidatePasswordOptions {
+  maxLength?: number;
+  maxLengthMessage?: string;
+  minLength?: number;
+  minLengthMessage?: string;
+  regex?: RegExp;
+  requiredCharactersMessage?: string;
+}
