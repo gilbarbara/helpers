@@ -61,7 +61,7 @@ export interface RequestError extends Error {
 }
 
 export interface SortFunction {
-  <T = AnyObject>(left: PlainObject<T>, right: PlainObject<T>): number;
+  <T extends AnyObject = AnyObject>(left: PlainObject<T>, right: PlainObject<T>): number;
   <T = string>(left: T, right: T): number;
 }
 

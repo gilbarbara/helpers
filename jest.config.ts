@@ -1,6 +1,6 @@
 module.exports = {
   collectCoverage: false,
-  collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}'],
+  collectCoverageFrom: ['src/**/*.{ts,tsx}'],
   coverageThreshold: {
     global: {
       branches: 80,
@@ -9,21 +9,31 @@ module.exports = {
       statements: 90,
     },
   },
-  globals: {
-    'ts-jest': {
-      tsconfig: 'test/tsconfig.json',
-    },
+  moduleDirectories: ['node_modules', 'src'],
+  moduleNameMapper: {
+    '^~/(.*)$': '<rootDir>/src/$1',
   },
-  moduleDirectories: ['node_modules', 'src', './'],
-  moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx', 'json'],
   preset: 'ts-jest',
   setupFiles: ['<rootDir>/test/__setup__/setupFiles.ts'],
   setupFilesAfterEnv: ['<rootDir>/test/__setup__/setupFilesAfterEnv.ts'],
   snapshotSerializers: ['jest-serializer-html'],
   testEnvironment: 'jsdom',
-  testMatch: null,
+  testEnvironmentOptions: {
+    resources: 'usable',
+    url: 'http://localhost:1337/',
+  },
   testRegex: '/test/.*?\\.(test|spec)\\.tsx?$',
-  testURL: 'http://localhost:1337/',
+  transform: {
+    '^.+\\.tsx?$': [
+      'ts-jest',
+      {
+        tsconfig: 'test/tsconfig.json',
+        diagnostics: {
+          ignoreCodes: ['TS151001'],
+        },
+      },
+    ],
+  },
   verbose: false,
   watchPlugins: ['jest-watch-typeahead/filename', 'jest-watch-typeahead/testname'],
 };

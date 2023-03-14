@@ -128,7 +128,7 @@ describe('request', () => {
 describe('sleep', () => {
   const setTimeoutSpy = jest.spyOn(global, 'setTimeout');
 
-  afterEach(() => {
+  afterAll(() => {
     jest.restoreAllMocks();
   });
 
@@ -144,6 +144,6 @@ describe('sleep', () => {
     };
 
     expect(await fn()).toBe('finished');
-    expect(setTimeoutSpy).toHaveBeenCalledWith(expect.any(Function), timeout);
+    expect(setTimeoutSpy).toHaveBeenLastCalledWith(expect.any(Function), timeout);
   });
 });

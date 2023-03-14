@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`sortByLocaleCompare should sort an array in english 1`] = `
-Array [
+[
   "port",
   "Payment",
   "Mars",
@@ -13,7 +13,7 @@ Array [
 `;
 
 exports[`sortByLocaleCompare should sort an array in french 1`] = `
-Array [
+[
   "Adieu",
   "café",
   "Cliché",
@@ -24,7 +24,7 @@ Array [
 `;
 
 exports[`sortByLocaleCompare should sort an array in numeric 1`] = `
-Array [
+[
   "2",
   "2",
   "4",
@@ -37,7 +37,7 @@ Array [
 `;
 
 exports[`sortByLocaleCompare should sort an array in portuguese 1`] = `
-Array [
+[
   "amô",
   "cachê",
   "côncavo",
@@ -48,41 +48,41 @@ Array [
 `;
 
 exports[`sortByLocaleCompare should sort an object ascending 1`] = `
-Array [
-  Object {
+[
+  {
     "key": "amber",
   },
-  Object {
+  {
     "key": "cyan",
   },
-  Object {
+  {
     "key": "green",
   },
-  Object {
+  {
     "key": "red",
   },
 ]
 `;
 
 exports[`sortByLocaleCompare should sort an object descending 1`] = `
-Array [
-  Object {
+[
+  {
     "key": "red",
   },
-  Object {
+  {
     "key": "green",
   },
-  Object {
+  {
     "key": "cyan",
   },
-  Object {
+  {
     "key": "amber",
   },
 ]
 `;
 
 exports[`sortByPrimitive should sort an array by -number-asc 1`] = `
-Array [
+[
   1,
   2,
   2,
@@ -92,7 +92,7 @@ Array [
 `;
 
 exports[`sortByPrimitive should sort an array by -number-desc 1`] = `
-Array [
+[
   4,
   3,
   2,
@@ -102,54 +102,54 @@ Array [
 `;
 
 exports[`sortByPrimitive should sort an array by cycle-number-asc 1`] = `
-Array [
-  Object {
+[
+  {
     "cycle": 1,
   },
-  Object {
+  {
     "cycle": 3,
   },
-  Object {
+  {
     "cycle": 3,
   },
-  Object {
+  {
     "cycle": 4,
   },
 ]
 `;
 
 exports[`sortByPrimitive should sort an array by cycle-number-desc 1`] = `
-Array [
-  Object {
+[
+  {
     "cycle": 4,
   },
-  Object {
+  {
     "cycle": 3,
   },
-  Object {
+  {
     "cycle": 3,
   },
-  Object {
+  {
     "cycle": 1,
   },
 ]
 `;
 
 exports[`sortByPrimitive should sort an array by status-boolean-asc 1`] = `
-Array [
-  Object {
+[
+  {
     "cycle": 1,
     "status": false,
   },
-  Object {
+  {
     "cycle": 4,
     "status": false,
   },
-  Object {
+  {
     "cycle": 3,
     "status": true,
   },
-  Object {
+  {
     "cycle": 3,
     "status": true,
   },
@@ -157,20 +157,20 @@ Array [
 `;
 
 exports[`sortByPrimitive should sort an array by status-boolean-desc 1`] = `
-Array [
-  Object {
+[
+  {
     "cycle": 3,
     "status": true,
   },
-  Object {
+  {
     "cycle": 3,
     "status": true,
   },
-  Object {
+  {
     "cycle": 1,
     "status": false,
   },
-  Object {
+  {
     "cycle": 4,
     "status": false,
   },

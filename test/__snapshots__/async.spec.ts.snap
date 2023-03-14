@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ASYNC_STATUS should return the expected statuses 1`] = `
-Object {
+{
   "ERROR": "ERROR",
   "IDLE": "IDLE",
   "PENDING": "PENDING",
@@ -10,9 +10,9 @@ Object {
 `;
 
 exports[`cors with "data" should return properly 1`] = `
-Object {
-  "body": "{\\"name\\":\\"John Doe\\"}",
-  "headers": Object {
+{
+  "body": "{"name":"John Doe"}",
+  "headers": {
     "Access-Control-Allow-Credentials": true,
     "Access-Control-Allow-Headers": "Accept-Version,Accept,Authorization,Content-Length,Content-MD5,Content-Type,Date,x-amz-date,x-amz-security-token,X-Api-Version,X-CSRF-Token,X-Requested-With",
     "Access-Control-Allow-Methods": "GET,OPTIONS",
@@ -23,9 +23,9 @@ Object {
 `;
 
 exports[`cors with "methods, origin and allowedHeaders" should return properly 1`] = `
-Object {
+{
   "body": "null",
-  "headers": Object {
+  "headers": {
     "Access-Control-Allow-Credentials": true,
     "Access-Control-Allow-Headers": "Accept-Version,Accept,Authorization,Content-Length,Content-MD5,Content-Type,Date,x-amz-date,x-amz-security-token,X-Api-Version,X-CSRF-Token,X-Requested-With,x-test",
     "Access-Control-Allow-Methods": "POST,OPTIONS",
@@ -36,15 +36,15 @@ Object {
 `;
 
 exports[`cors with "responseHeaders" should return properly 1`] = `
-Object {
-  "body": "[{\\"name\\":\\"John Doe\\"}]",
-  "headers": Object {
+{
+  "body": "[{"name":"John Doe"}]",
+  "headers": {
     "Access-Control-Allow-Credentials": true,
     "Access-Control-Allow-Headers": "Accept-Version,Accept,Authorization,Content-Length,Content-MD5,Content-Type,Date,x-amz-date,x-amz-security-token,X-Api-Version,X-CSRF-Token,X-Requested-With",
     "Access-Control-Allow-Methods": "GET,OPTIONS",
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Expose-Headers": "Link,X-Items-Total,X-Items-Per-Page,X-Items-From,X-Items-To",
-    "Link": "</?page=10>; rel=\\"current\\", </?page=10>; rel=\\"last\\", </?page=9>; rel=\\"prev\\"",
+    "Link": "</?page=10>; rel="current", </?page=10>; rel="last", </?page=9>; rel="prev"",
     "X-Items-From": "901",
     "X-Items-Per-Page": "100",
     "X-Items-To": "938",
@@ -55,7 +55,7 @@ Object {
 `;
 
 exports[`request should handle options 1`] = `
-Object {
+{
   "body": "bar",
   "id": 101,
   "title": "foo",
@@ -64,7 +64,7 @@ Object {
 `;
 
 exports[`request should handle success 1`] = `
-Object {
+{
   "body": "quia et suscipit recusandae consequuntur expedita et cum reprehenderit molestiae ut ut quas totam nostrum rerum est autem sunt rem eveniet architecto",
   "id": 1,
   "title": "Sunt aut facere repellat provident occaecati excepturi optio reprehenderit",

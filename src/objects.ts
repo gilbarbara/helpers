@@ -6,7 +6,7 @@ import { InvertKeyValue, QueryStringFormatOptions } from './types';
 /**
  * Remove properties with undefined or empty string value from an object
  */
-export function cleanUpObject<T = AnyObject>(input: PlainObject<T>) {
+export function cleanUpObject<T extends AnyObject = AnyObject>(input: PlainObject<T>) {
   return Object.fromEntries(Object.entries(input).filter(([_, v]) => ![undefined, ''].includes(v)));
 }
 
@@ -31,7 +31,7 @@ export function getNestedProperty<T extends AnyObject>(input: T, path: string): 
     }
 
     try {
-      output = output[currentSegment] as any;
+      output = output[currentSegment];
     } catch {
       // skip
     }
@@ -155,7 +155,7 @@ export function queryStringFormat<T extends AnyObject>(
   input: PlainObject<T>,
   options: QueryStringFormatOptions = {},
 ) {
-  const { addPrefix = false, encodeValuesOnly = true, encoder = encodeURIComponent } = options;
+  const { addPrefix = false, encoder = encodeURIComponent, encodeValuesOnly = true } = options;
 
   if (!is.plainObject(input)) {
     throw new TypeError("input type isn't supported");
