@@ -104,7 +104,7 @@ export async function request<D = any>(url: string, options: RequestOptions = {}
   };
 
   if (body) {
-    params.body = JSON.stringify(body);
+    params.body = is.plainObject(body) ? JSON.stringify(body) : body;
   }
 
   return fetch(url, params).then(async response => {
