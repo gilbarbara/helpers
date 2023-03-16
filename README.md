@@ -293,6 +293,9 @@ numbers.map(toLocaleString); // ['2,209.6', '124.56', '1,048,576']
   ```
 </details>
 
+**invariant(condition: any, message: string): asserts condition**  
+Check if the value is truthy. Otherwise, it will throw.
+
 **isJSON(input: string): boolean**  
 Check if a string is a valid JSON.
 

@@ -22,6 +22,16 @@ export function demethodize(fn: Function) {
   return (parameter: any, ...rest: any[]) => fn.apply(parameter, rest);
 }
 
+export function invariant(condition: any, message: string | (() => string)): asserts condition {
+  if (condition) {
+    return;
+  }
+
+  const value = typeof message === 'function' ? message() : message;
+
+  throw new Error(value);
+}
+
 /**
  * Check if a string is a valid JSON
  */
