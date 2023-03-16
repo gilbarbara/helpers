@@ -173,7 +173,6 @@ export function unique(length = 8, options: UniqueOptions = {}): string {
   const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   const numbers = '0123456789';
   const symbols = '!?@#$%^&*+_-=:.~';
-  // const similarCharacters = /[ilLI|`oO0]/g;
 
   let characters = '';
 

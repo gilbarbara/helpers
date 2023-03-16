@@ -1,5 +1,4 @@
 import { AnyObject, PlainObject } from '@gilbarbara/types';
-import is from 'is-lite';
 
 import { SortFunction } from './types';
 
@@ -138,7 +137,7 @@ export function sortComparator(left: string | number, right: string | number) {
 }
 
 export function splitIntoChunks<T>(input: T[], chunkSize: number = 25): T[][] {
-  if (!is.array(input)) {
+  if (!Array.isArray(input)) {
     throw new TypeError('expected an array for the first argument');
   }
 
