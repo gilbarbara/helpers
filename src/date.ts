@@ -26,6 +26,9 @@ export function isoDate(input?: string | number) {
   return new Date().toISOString();
 }
 
+/**
+ * Returns the unixtime (in seconds).
+ */
 export function now() {
   return Math.floor(Date.now() / 1000);
 }
@@ -57,8 +60,19 @@ export function timeSince(input: Date | string | number, options?: TimeSinceOpti
   const diff = now() - date;
   let quantity = Math.floor(diff / YEAR);
 
-  const output = (value: number, caption: string) =>
-    `${prefix ? `${prefix} ` : ''}${value} ${caption}${suffix ? ` ${suffix}` : ''}`;
+  const output = (value: number, caption: string) => {
+    let result = `${value} ${caption}`;
+
+    if (prefix) {
+      result = `${prefix} ${result}`;
+    }
+
+    if (suffix) {
+      result = `${result} ${suffix}`;
+    }
+
+    return result;
+  };
 
   if (quantity >= 1) {
     return output(quantity, pluralize(quantity, year, years));

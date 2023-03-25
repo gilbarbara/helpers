@@ -61,7 +61,11 @@ export function formatMoney(input: number, options: FormatMoneyOptions = {}) {
   const initial = amount.slice(0, padStart);
   const remain = amount.slice(padStart).replace(/(\d{3})(?=\d)/g, `$1${thousandsChar}`);
 
-  let formatted = `${initial ? `${initial}${thousandsChar}` : ''}${remain}`;
+  let formatted = `${remain}`;
+
+  if (initial) {
+    formatted = `${initial}${thousandsChar}${remain}`;
+  }
 
   if (cents !== '00' || showCents) {
     formatted += `${decimalChar}${cents}`;
