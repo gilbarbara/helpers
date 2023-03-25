@@ -11,14 +11,17 @@
     "url": "https://github.com/gilbarbara/helpers/issues"
   },
   "homepage": "https://github.com/gilbarbara/helpers#readme",
-  "main": "lib/index.js",
-  "module": "esm/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "exports": {
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.js"
+  },
   "files": [
-    "esm",
-    "lib",
+    "dist",
     "src"
   ],
-  "types": "lib",
+  "types": "dist/index.d.ts",
   "sideEffects": false,
   "license": "MIT",
   "keywords": [
@@ -29,6 +32,7 @@
     "is-lite": "^0.9.2"
   },
   "devDependencies": {
+    "@gilbarbara/esbuilder": "^0.2.0",
     "@gilbarbara/eslint-config": "^0.4.0",
     "@gilbarbara/prettier-config": "^0.1.0",
     "@gilbarbara/tsconfig": "^0.1.1",
@@ -53,17 +57,16 @@
     "typescript": "^4.9.5"
   },
   "scripts": {
-    "build": "npm run clean && npm run build:cjs && npm run build:esm",
-    "build:cjs": "tsc",
-    "build:esm": "tsc -m es6 --outDir esm",
-    "clean": "del lib/* && del esm/*",
-    "watch:cjs": "npm run build:cjs -- -w",
-    "watch:esm": "npm run build:esm -- -w",
+    "build": "npm run clean && npm run build:files && npm run build:types",
+    "build:files": "esbuilder --cjs --esm",
+    "build:types": "tsc",
+    "watch": "npm run build:files -- --watch",
+    "clean": "del dist/*",
     "test": "is-ci \"test:coverage\" \"test:watch\"",
     "test:coverage": "jest --coverage --bail",
     "test:watch": "jest --watchAll --verbose",
     "lint": "eslint --ext .ts,.tsx src test",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc",
     "format": "prettier \"**/*.{css,graphql,js,json,jsx,less,md,mdx,scss,ts,tsx,yaml,yml}\" --write",
     "size": "size-limit",
     "validate": "npm run lint && npm run typecheck && npm run test:coverage && npm run build && npm run size",
@@ -92,14 +95,14 @@
   "prettier": "@gilbarbara/prettier-config",
   "size-limit": [
     {
-      "name": "lib",
-      "path": "./lib/index.js",
-      "limit": "14 kB"
+      "name": "commonjs",
+      "path": "./dist/index.js",
+      "limit": "10 kB"
     },
     {
       "name": "esm",
-      "path": "./esm/index.js",
-      "limit": "14 kB"
+      "path": "./dist/index.mjs",
+      "limit": "10 kB"
     }
   ]
 }
