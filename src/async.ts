@@ -1,5 +1,3 @@
-import 'cross-fetch/polyfill';
-
 import is from 'is-lite';
 
 import { CorsOptions, PollOptions, RequestError, RequestOptions } from './types';

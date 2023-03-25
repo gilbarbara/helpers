@@ -170,6 +170,8 @@ interface RequestOptions {
   ```
 </details>
 
+> You will need a polyfill if your Node version does not support fetch.
+
 **sleep(seconds?: number = 1): Promise\<void>**  
 Block async execution for X seconds.
 
