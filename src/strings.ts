@@ -159,12 +159,17 @@ export function removeAccents(input: string) {
  * Remove emojis
  */
 export function removeEmojis(input: string) {
-  return input
-    .replace(
-      /(?:[\u2700-\u27bf]|(?:\ud83c[\udde6-\uddff]){2}|[\ud800-\udbff][\udc00-\udfff])[\ufe0e\ufe0f]?(?:[\u0300-\u036f\u20d0-\u20f0\ufe20-\ufe23]|\ud83c[\udffb-\udfff])?(?:\u200d(?:[^\ud800-\udfff]|(?:\ud83c[\udde6-\uddff]){2}|[\ud800-\udbff][\udc00-\udfff])[\ufe0e\ufe0f]?(?:[\u0300-\u036f\u20d0-\u20f0\ufe20-\ufe23]|\ud83c[\udffb-\udfff])?)*/g,
-      '',
-    )
-    .trim();
+  const baseEmojiRegex = /[\u2700-\u27bf]|\ud83c[\udde6-\uddff]{2}|[\ud800-\udbff][\udc00-\udfff]/;
+  const variationSelectorRegex = /[\ufe0e\ufe0f]?/;
+  const modifierRegex = /[\u0300-\u036f\u20d0-\u20f0\ufe20-\ufe23]|\ud83c[\udffb-\udfff]/;
+  const zeroWidthJoinerRegex =
+    /\u200d(?:[^\ud800-\udfff]|(?:\ud83c[\udde6-\uddff]){2}|[\ud800-\udbff][\udc00-\udfff])[\ufe0e\ufe0f]?(?:[\u0300-\u036f\u20d0-\u20f0\ufe20-\ufe23]|\ud83c[\udffb-\udfff])?/;
+  const emojiRegex = new RegExp(
+    `(?:${baseEmojiRegex.source})${variationSelectorRegex.source}(?:${modifierRegex.source})?(?:${zeroWidthJoinerRegex.source})*`,
+    'g',
+  );
+
+  return input.replace(emojiRegex, '').trim();
 }
 
 /**

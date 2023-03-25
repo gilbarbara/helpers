@@ -27,7 +27,7 @@ export interface FormatMoneyOptions {
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-export type InvertKeyValue<T extends Record<keyof T, keyof any>> = {} & {
+export type InvertKeyValue<T extends Record<keyof T, keyof any>> = {
   [K in T[keyof T]]: { [P in keyof T]: T[P] extends K ? P : never }[keyof T];
 };
 
