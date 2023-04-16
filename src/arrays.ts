@@ -5,7 +5,7 @@ import { SortFunction } from './types';
 /**
  * Get a random item from an array
  */
-export function getRandomItem(input: any[]) {
+export function getRandomItem<T>(input: T[]) {
   return input[Math.floor(Math.random() * input.length)];
 }
 

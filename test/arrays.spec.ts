@@ -12,7 +12,8 @@ describe('getRandomItem', () => {
     [['alpha', 'beta', 'gamma', 'delta', 'epsilon'], String],
     [[1, 2, 3, 4, 5], Number],
     [[{ a: 1 }, { b: 2 }, { c: 3 }], Object],
-  ])('should return a  single item', (input, expected) => {
+  ])('should return a single item', (input, expected) => {
+    // @ts-expect-error - The dynamic nature of the test makes it hard to type
     expect(getRandomItem(input)).toEqual(expect.any(expected));
   });
 });
