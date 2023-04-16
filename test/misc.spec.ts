@@ -4,6 +4,7 @@ import { advanceTo } from 'jest-date-mock';
 import {
   copyToClipboard,
   demethodize,
+  invariant,
   isJSON,
   isRequired,
   logger,
@@ -66,6 +67,19 @@ describe('demethodize', () => {
     const numbers = [2209.6, 124.56, 1048576];
 
     expect(numbers.map(toLocaleString)).toEqual(['2,209.6', '124.56', '1,048,576']);
+  });
+});
+
+describe('invariant', () => {
+  const message = 'value must be a string';
+
+  it('should NOT throw if the condition is truthy', () => {
+    expect(invariant('value', message)).toBeUndefined();
+  });
+
+  it('should throw if the condition is false', () => {
+    expect(() => invariant(typeof 12 === 'string', () => message)).toThrow(message);
+    expect(() => invariant(typeof 12 === 'string', message)).toThrow(message);
   });
 });
 
