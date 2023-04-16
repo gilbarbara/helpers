@@ -1,5 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`createArray should return an array with 4 items starting at 0 1`] = `
+[
+  0,
+  1,
+  2,
+  3,
+]
+`;
+
+exports[`createArray should return an array with 10 items starting at 1 1`] = `
+[
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+]
+`;
+
+exports[`createArray should return an array with 10 items starting at 5 1`] = `
+[
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+]
+`;
+
 exports[`sortByLocaleCompare should sort an array in english 1`] = `
 [
   "port",

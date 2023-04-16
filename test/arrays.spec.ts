@@ -1,4 +1,5 @@
 import {
+  createArray,
   getRandomItem,
   quickSort,
   sortByLocaleCompare,
@@ -6,6 +7,16 @@ import {
   sortComparator,
   splitIntoChunks,
 } from '../src';
+
+describe('createArray', () => {
+  it.each([
+    [4, 0],
+    [10, 1],
+    [10, 5],
+  ])('should return an array with %s items starting at %s', (input, start) => {
+    expect(createArray(input, start)).toMatchSnapshot();
+  });
+});
 
 describe('getRandomItem', () => {
   it.each([

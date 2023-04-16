@@ -3,6 +3,13 @@ import { AnyObject, PlainObject } from '@gilbarbara/types';
 import { SortFunction } from './types';
 
 /**
+ * Create a sequential array of numbers
+ */
+export function createArray(size: number, start = 1) {
+  return Array.from({ length: size }, (_, index) => index + start);
+}
+
+/**
  * Get a random item from an array
  */
 export function getRandomItem<T>(input: T[]) {
