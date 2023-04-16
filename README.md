@@ -347,6 +347,10 @@ Returns the value or null.
 **popupCenter(url: string, title: string, width: number, height: number): Window | null**  
 Open a centered popup window and returns it.
 
+**px(value: string | number | undefined): string | undefined**  
+Convert a number or numeric value to px.  
+Otherwise, return the value.
+
 **unique(length?: number = 8,  options?: UniqueOptions): string**  
 Returns a random string.
 

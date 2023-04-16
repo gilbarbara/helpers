@@ -1,3 +1,6 @@
+import { StringOrNumber } from '@gilbarbara/types';
+import is from 'is-lite';
+
 import { pad } from './numbers';
 import { LoggerOptions, UniqueOptions } from './types';
 
@@ -167,6 +170,19 @@ export function popupCenter(url: string, title: string, width: number, height: n
   }
 
   return popup;
+}
+
+export function px(value: undefined): undefined;
+export function px(value: StringOrNumber): string;
+export function px(value: StringOrNumber | undefined): string | undefined;
+
+/**
+ * Convert a number or numeric value to px
+ *
+ * Otherwise, return the value.
+ */
+export function px(value: StringOrNumber | undefined): string | undefined {
+  return is.number(value) || is.numericString(value) ? `${value}px` : value;
 }
 
 /**

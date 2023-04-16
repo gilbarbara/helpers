@@ -11,6 +11,7 @@ import {
   noop,
   nullify,
   popupCenter,
+  px,
   sleep,
   unique,
   uuid,
@@ -219,6 +220,18 @@ describe('popupCenter', () => {
     const popup = popupCenter('https://example.com', 'PopUp', 400, 400);
 
     expect(popup).toEqual(window);
+  });
+});
+
+describe('px', () => {
+  it.each([
+    { value: undefined, expected: undefined },
+    { value: '10', expected: '10px' },
+    { value: '15px', expected: '15px' },
+    { value: '20rem', expected: '20rem' },
+    { value: 30, expected: '30px' },
+  ])('should return $expected for $value', ({ expected, value }) => {
+    expect(px(value)).toBe(expected);
   });
 });
 
