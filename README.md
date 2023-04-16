@@ -24,10 +24,10 @@ console.log(password); // g9HBfQeeOgrP.V1?JhETxn9P
 **createArray(size: number, start: number = 1): number[]**  
 Create a sequential array of numbers.
 
-**getRandomItem<T = unknown>(input: T[]): T**  
+**getRandomItem\<T>(input: T[]): T**  
 Get a random item from an array.
 
-**quickSort<T extends string | number>(input: T[]): T[]**  
+**quickSort\<T extends string | number>(input: T[]): T[]**  
 Sort an array of numbers using a quick sort algorithm.
 
 **sortByLocaleCompare(key?: string, options?: Intl.CollatorOptions & { descending?: boolean }): SortFunction**  
@@ -69,7 +69,7 @@ objects.sort(sortByLocaleCompare('key', { descending: true }));
   ```
 </details>
 
-**sortByPrimitive<T extends number | boolean>(key?: string, descending?: boolean = false): SortFunction**   
+**sortByPrimitive\<T extends number | boolean>(key?: string, descending?: boolean = false): SortFunction**   
 Returns a sort function with primitive values comparison.
 
 <details>
@@ -103,7 +103,7 @@ objects.sort(sortByPrimitive('status', true));
 **sortComparator(left: string | number, right: string | number): number**  
 Basic sort comparator.
 
-**splitIntoChunks<T>(array: T[], chunkSize: number = 25): T[][]**  
+**splitIntoChunks\<T>(array: T[], chunkSize: number = 25): T\[][]**  
 Split an array into chunks.
 
 ### Async
