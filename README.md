@@ -30,6 +30,9 @@ Get a random item from an array.
 **quickSort\<T extends string | number>(input: T[]): T[]**  
 Sort an array of numbers using a quick sort algorithm.
 
+**shuffle\<T = unknown>(input: T[]): T[]**  
+Shuffle an array using the Fisher-Yates algorithm.
+
 **sortByLocaleCompare(key?: string, options?: Intl.CollatorOptions & { descending?: boolean }): SortFunction**  
 Returns a sort function with localeCompare comparison.
 

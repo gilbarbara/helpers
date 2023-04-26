@@ -2,6 +2,7 @@ import {
   createArray,
   getRandomItem,
   quickSort,
+  shuffle,
   sortByLocaleCompare,
   sortByPrimitive,
   sortComparator,
@@ -43,6 +44,14 @@ describe('quickSort', () => {
       'xy',
       'zy',
     ]);
+  });
+});
+
+describe('shuffle', () => {
+  it('should shuffle the array', () => {
+    const input = [1, 2, 3, 'a', 'b', 'c', [4, 5], { a: 6, b: 7 }];
+
+    expect(shuffle(input)).not.toEqual(input);
   });
 });
 
