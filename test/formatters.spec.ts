@@ -43,7 +43,7 @@ describe('formatDateLocale', () => {
     ['2020-03-01T10:03:00.000Z', '03/01/20', { locale: 'en-US', showTime: false }],
     ['2020-03-01T10:03:00.000Z', '03/01/20, 07:03 AM', { locale: 'en-US', showTime: true }],
     ['2017-12-25T01:59:59.000Z', '24/12/17', { locale: 'pt-BR', showTime: false }],
-    ['2017-12-25T01:59:59.000Z', '24/12/17 23:59', { locale: 'pt-BR', showTime: true }],
+    ['2017-12-25T01:59:59.000Z', '24/12/17, 23:59', { locale: 'pt-BR', showTime: true }],
   ])('%p should return %p', (value, expected, options) => {
     expect(formatDateLocale(value, options)).toBe(expected);
   });
