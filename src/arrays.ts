@@ -72,6 +72,25 @@ export function quickSort<T extends string | number>(input: T[], comparator = so
 }
 
 /**
+ * Shuffle an array using the Fisher-Yates algorithm
+ */
+export function shuffle<T = unknown>(input: T[]) {
+  let currentIndex = input.length;
+  let randomIndex;
+  let temporaryValue;
+  const output = [...input];
+
+  while (currentIndex) {
+    randomIndex = Math.floor(Math.random() * currentIndex--);
+    temporaryValue = output[currentIndex];
+    output[currentIndex] = output[randomIndex];
+    output[randomIndex] = temporaryValue;
+  }
+
+  return output;
+}
+
+/**
  * Sort an array with localeCompare
  */
 export function sortByLocaleCompare(
