@@ -1,4 +1,4 @@
-import { AnyObject, HttpMethods, PlainObject } from '@gilbarbara/types';
+import { HttpMethods, PlainObject } from '@gilbarbara/types';
 
 export interface CorsOptions {
   /** @default true */
@@ -9,7 +9,7 @@ export interface CorsOptions {
   methods?: HttpMethods[];
   /** @default * */
   origin?: string;
-  responseHeaders?: AnyObject;
+  responseHeaders?: PlainObject<string>;
   /** @default 200 */
   statusCode?: number;
 }
@@ -51,7 +51,7 @@ export interface QueryStringFormatOptions {
 
 export interface RequestOptions {
   body?: any;
-  headers?: AnyObject<string>;
+  headers?: PlainObject<string>;
   method?: HttpMethods;
 }
 
@@ -61,7 +61,7 @@ export interface RequestError extends Error {
 }
 
 export interface SortFunction {
-  <T extends AnyObject = AnyObject>(left: PlainObject<T>, right: PlainObject<T>): number;
+  <T extends PlainObject = PlainObject>(left: PlainObject<T>, right: PlainObject<T>): number;
   <T = string>(left: T, right: T): number;
 }
 
