@@ -1,4 +1,4 @@
-import { AnyObject, PlainObject } from '@gilbarbara/types';
+import { PlainObject } from '@gilbarbara/types';
 import is from 'is-lite';
 
 import { InvertKeyValue, QueryStringFormatOptions } from './types';
@@ -6,14 +6,14 @@ import { InvertKeyValue, QueryStringFormatOptions } from './types';
 /**
  * Remove properties with undefined or empty string value from an object
  */
-export function cleanUpObject<T extends AnyObject = AnyObject>(input: PlainObject<T>) {
+export function cleanUpObject<T extends PlainObject<any> = PlainObject>(input: T) {
   return Object.fromEntries(Object.entries(input).filter(([_, v]) => ![undefined, ''].includes(v)));
 }
 
 /**
  * Get a nested property inside an object or array
  */
-export function getNestedProperty<T extends AnyObject>(input: T, path: string): any {
+export function getNestedProperty<T extends PlainObject<any>>(input: T, path: string): any {
   if ((!is.plainObject(input) && !is.array(input)) || !path) {
     return input;
   }
@@ -43,32 +43,30 @@ export function getNestedProperty<T extends AnyObject>(input: T, path: string): 
 /**
  * Invert object key and value
  */
-export function invertKeys<T extends AnyObject>(input: PlainObject<T>): InvertKeyValue<T> {
+export function invertKeys<T extends PlainObject<PropertyKey>>(input: T) {
   if (!is.plainObject(input)) {
     throw new TypeError('Expected an object');
   }
 
-  const result: any = {};
+  const result: Record<PropertyKey, PropertyKey> = {};
 
-  // eslint-disable-next-line no-restricted-syntax
   for (const [key, value] of Object.entries(input)) {
     result[value] = key;
   }
 
-  return result;
+  return result as InvertKeyValue<T>;
 }
 
 /**
  * Set the key as the value
  */
-export function keyMirror<T extends AnyObject>(input: PlainObject<T>): { [K in keyof T]: K } {
+export function keyMirror<T extends PlainObject>(input: T): { [K in keyof T]: K } {
   if (!is.plainObject(input)) {
     throw new TypeError('Expected an object');
   }
 
   const output: any = {};
 
-  // eslint-disable-next-line no-restricted-syntax
   for (const key in input) {
     /* istanbul ignore else */
     if (!Object.prototype.hasOwnProperty.call(output, key)) {
@@ -82,7 +80,7 @@ export function keyMirror<T extends AnyObject>(input: PlainObject<T>): { [K in k
 /**
  * Convert an object to an array of objects
  */
-export function objectToArray<T extends AnyObject>(input: PlainObject<T>, includeOnly?: string) {
+export function objectToArray<T extends PlainObject>(input: T, includeOnly?: string) {
   if (!is.plainObject(input)) {
     throw new TypeError('Expected an object');
   }
@@ -95,17 +93,13 @@ export function objectToArray<T extends AnyObject>(input: PlainObject<T>, includ
 /**
  * Remove properties from an object
  */
-export function omit<T extends AnyObject, K extends keyof T>(
-  input: PlainObject<T>,
-  ...filter: K[]
-) {
+export function omit<T extends PlainObject, K extends keyof T>(input: T, ...filter: K[]) {
   if (!is.plainObject(input)) {
     throw new TypeError('Expected an object');
   }
 
   const output: any = {};
 
-  // eslint-disable-next-line no-restricted-syntax
   for (const key in input) {
     /* istanbul ignore else */
     if ({}.hasOwnProperty.call(input, key)) {
@@ -121,10 +115,7 @@ export function omit<T extends AnyObject, K extends keyof T>(
 /**
  * Select properties from an object
  */
-export function pick<T extends AnyObject, K extends keyof T>(
-  input: PlainObject<T>,
-  ...filter: K[]
-) {
+export function pick<T extends PlainObject, K extends keyof T>(input: T, ...filter: K[]) {
   if (!is.plainObject(input)) {
     throw new TypeError('Expected an object');
   }
@@ -135,7 +126,6 @@ export function pick<T extends AnyObject, K extends keyof T>(
 
   const output: any = {};
 
-  // eslint-disable-next-line no-restricted-syntax
   for (const key in input) {
     /* istanbul ignore else */
     if ({}.hasOwnProperty.call(input, key)) {
@@ -151,8 +141,8 @@ export function pick<T extends AnyObject, K extends keyof T>(
 /**
  * Stringify a shallow object into a query string
  */
-export function queryStringFormat<T extends AnyObject>(
-  input: PlainObject<T>,
+export function queryStringFormat<T extends PlainObject>(
+  input: T,
   options: QueryStringFormatOptions = {},
 ) {
   const { addPrefix = false, encoder = encodeURIComponent, encodeValuesOnly = true } = options;
@@ -188,14 +178,14 @@ export function queryStringFormat<T extends AnyObject>(
 /**
  * Parse a query string
  */
-export function queryStringParse(input: string): AnyObject<string> {
+export function queryStringParse(input: string): PlainObject<string> {
   let search = input;
 
   if (input.slice(0, 1) === '?') {
     search = input.slice(1);
   }
 
-  return search.split('&').reduce<AnyObject<string>>((acc, d) => {
+  return search.split('&').reduce<PlainObject<string>>((acc, d) => {
     const [key, value] = d.split('=');
 
     acc[decodeURIComponent(key)] = decodeURIComponent(value);
@@ -207,12 +197,12 @@ export function queryStringParse(input: string): AnyObject<string> {
 /**
  * Sort object keys
  */
-export function sortObjectKeys<T extends AnyObject>(input: PlainObject<T>) {
+export function sortObjectKeys<T extends PlainObject>(input: T) {
   return Object.keys(input)
     .sort()
     .reduce((acc, key) => {
       acc[key] = input[key];
 
       return acc;
-    }, {} as AnyObject);
+    }, {} as PlainObject);
 }

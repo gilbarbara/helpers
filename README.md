@@ -132,14 +132,14 @@ interface CorsOptions {
   methods?: HttpMethods[];
   /** @default * */
   origin?: string;
-  responseHeaders?: AnyObject;
+  responseHeaders?: Record<string, string>;
   /** @default 200 */
   statusCode?: number;
 }
 
 interface CorsResponse {
   body: string;
-  headers: PlainObject;
+  headers: Record<string, string>;
   statusCode: number;
 }
   ```
