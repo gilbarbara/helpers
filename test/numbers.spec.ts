@@ -1,4 +1,4 @@
-import { ceil, floor, pad, randomInt, rangeLimit, round } from '../src';
+import { ceil, clamp, floor, pad, randomInt, round } from '../src';
 
 describe('ceil', () => {
   it.each([
@@ -7,6 +7,18 @@ describe('ceil', () => {
     [129.017838992, 4, 129.0179],
   ])('should convert %p with %p digits to %p', (input, digits, expected) => {
     expect(ceil(input, digits)).toEqual(expected);
+  });
+});
+
+describe('clamp', () => {
+  it.each([
+    [120, 100, 0, 100],
+    [70, 70, 0, 100],
+    [12, 10, 1, 10],
+    [-7, 1, 1, 10],
+    [-1, 0, undefined, undefined],
+  ])('should limit %s to %s between %p and %p', (value, expected, min, max) => {
+    expect(clamp(value, min, max)).toBe(expected);
   });
 });
 
@@ -43,18 +55,6 @@ describe('randomInt', () => {
 
   it('should return a number without parameters', () => {
     expect(randomInt()).toBeGreaterThanOrEqual(0).toBeLessThan(11);
-  });
-});
-
-describe('rangeLimit', () => {
-  it.each([
-    [120, 100, 0, 100],
-    [70, 70, 0, 100],
-    [12, 10, 1, 10],
-    [-7, 1, 1, 10],
-    [-1, 0, undefined, undefined],
-  ])('should limit %s to %s between %p and %p', (value, expected, min, max) => {
-    expect(rangeLimit(value, min, max)).toBe(expected);
   });
 });
 

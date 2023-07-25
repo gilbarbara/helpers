@@ -8,6 +8,13 @@ export function ceil(input: number, digits = 2) {
 }
 
 /**
+ * Limit number between range
+ */
+export function clamp(value: number, min = 0, max = 100) {
+  return Math.min(Math.max(value, min), max);
+}
+
+/**
  * Floor decimal numbers
  */
 export function floor(input: number, digits = 2) {
@@ -32,13 +39,6 @@ export function randomInt(min = 0, max = 10) {
   }
 
   return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
-/**
- * Limit number between range
- */
-export function rangeLimit(value: number, min = 0, max = 100) {
-  return Math.min(Math.max(value, min), max);
 }
 
 /**
