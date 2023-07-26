@@ -63,6 +63,7 @@ describe('getNestedProperty', () => {
 describe('invertKeys', () => {
   it('should return properly', () => {
     expect(invertKeys({ name: 'John' })).toEqual({ John: 'name' });
+    expectTypeOf(invertKeys({ name: 'John' } as const)).toEqualTypeOf<{ John: 'name' }>();
   });
 
   it('should throw for bad inputs', () => {
@@ -75,8 +76,14 @@ describe('invertKeys', () => {
 
 describe('keyMirror', () => {
   it('should return properly', () => {
-    expect(keyMirror({ NAME: 'John Doe' })).toEqual({ NAME: 'NAME' });
-    expect(keyMirror({ TYPE: undefined })).toEqual({ TYPE: 'TYPE' });
+    expect(keyMirror(baseObject)).toEqual({ a: 'a', b: 'b', c: 'c', d: 'd', e: 'e' });
+    expectTypeOf(keyMirror(baseObject)).toEqualTypeOf<{
+      a: 'a';
+      b: 'b';
+      c: 'c';
+      d: 'd';
+      e: 'e';
+    }>();
   });
 
   it('should throw for bad inputs', () => {
@@ -129,10 +136,15 @@ describe('objectToArray', () => {
 });
 
 describe('omit', () => {
+  it('should return properly', () => {
+    expect(omit(baseObject, 'd', 'e')).toEqual({ a: 1, b: '', c: [1] });
+    expectTypeOf(omit(baseObject, 'd', 'e')).toEqualTypeOf<{ a: number; b: string; c: number[] }>();
+  });
+
   it.each([
     [omit(baseObject, 'c'), { a: 1, b: '', d: { a: null } }],
     [omit(baseObject, 'a', 'd'), { b: '', c: [1] }],
-    // @ts-ignore
+    // @ts-expect-error - using a non-existent key
     [omit(baseObject, 'x'), baseObject],
     [omit(baseObject), baseObject],
   ])('should be %p', (result, expected) => {
@@ -146,6 +158,11 @@ describe('omit', () => {
 });
 
 describe('pick', () => {
+  it('should return properly', () => {
+    expect(pick(baseObject, 'a')).toEqual({ a: 1 });
+    expectTypeOf(pick(baseObject, 'a')).toEqualTypeOf<{ a: number }>();
+  });
+
   it.each([
     [pick(baseObject, 'c'), { c: [1] }],
     [pick(baseObject, 'a', 'd'), { a: 1, d: { a: null } }],
@@ -214,13 +231,14 @@ describe('queryStringParse', () => {
 
 describe('sortObjectKeys', () => {
   it('should return properly', () => {
-    expect(
-      sortObjectKeys({
-        zar: 'raz',
-        foo: 'bar',
-        tar: 'foo',
-        arg: 'tar',
-      }),
-    ).toMatchSnapshot();
+    const value = sortObjectKeys({
+      zar: 'raz',
+      foo: 'bar',
+      tar: 'foo',
+      arg: 'tar',
+    });
+
+    expect(value).toMatchSnapshot();
+    expectTypeOf(value).toEqualTypeOf<{ arg: string; foo: string; tar: string; zar: string }>();
   });
 });
