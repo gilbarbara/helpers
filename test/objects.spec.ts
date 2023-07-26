@@ -18,8 +18,14 @@ import {
 const baseObject = { a: 1, b: '', c: [1], d: { a: null }, e: undefined };
 
 describe('cleanUpObject', () => {
-  it('should remove the empty properties', () => {
-    expect(cleanUpObject(baseObject)).toEqual(omit(baseObject, 'b', 'e'));
+  it('should remove the undefined properties', () => {
+    expect(cleanUpObject(baseObject)).toEqual(omit(baseObject, 'e'));
+    expectTypeOf(cleanUpObject(baseObject)).toEqualTypeOf<{
+      a: number;
+      b: string;
+      c: Array<number>;
+      d: { a: null };
+    }>();
   });
 });
 

@@ -397,7 +397,7 @@ Round decimal numbers.
 ### Objects
 
 **cleanUpObject(input: PlainObject): PlainObject**  
-Remove properties with undefined or empty string value from an object
+Remove properties with undefined value from an object.
 
 **getNestedProperty(input: PlainObject | any[], path: string): any**  
 Get a nested property inside an object or array.

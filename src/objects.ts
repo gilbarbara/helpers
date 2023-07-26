@@ -1,13 +1,21 @@
-import { PlainObject } from '@gilbarbara/types';
+import { PlainObject, RemoveType } from '@gilbarbara/types';
 import is from 'is-lite';
 
 import { InvertKeyValue, QueryStringFormatOptions } from './types';
 
 /**
- * Remove properties with undefined or empty string value from an object
+ * Remove properties with undefined value from an object
  */
-export function cleanUpObject<T extends PlainObject<any> = PlainObject>(input: T) {
-  return Object.fromEntries(Object.entries(input).filter(([_, v]) => ![undefined, ''].includes(v)));
+export function cleanUpObject<T extends PlainObject>(input: T) {
+  const output: Record<string, unknown> = {};
+
+  for (const key in input) {
+    if (input[key] !== undefined) {
+      output[key] = input[key];
+    }
+  }
+
+  return output as RemoveType<T>;
 }
 
 /**
