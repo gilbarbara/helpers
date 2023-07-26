@@ -78,6 +78,20 @@ export function keyMirror<T extends PlainObject>(input: T): { [K in keyof T]: K 
 }
 
 /**
+ * Type-safe Object.entries()
+ */
+export function objectEntries<T extends PlainObject>(input: T) {
+  return Object.entries(input) as { [K in keyof T]: [K, T[K]] }[keyof T][];
+}
+
+/**
+ * Type-safe Object.keys()
+ */
+export function objectKeys<T extends PlainObject>(input: T) {
+  return Object.keys(input) as (keyof T)[];
+}
+
+/**
  * Convert an object to an array of objects
  */
 export function objectToArray<T extends PlainObject>(input: T, includeOnly?: string) {

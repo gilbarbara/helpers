@@ -1,8 +1,12 @@
+import { expectTypeOf } from 'expect-type';
+
 import {
   cleanUpObject,
   getNestedProperty,
   invertKeys,
   keyMirror,
+  objectEntries,
+  objectKeys,
   objectToArray,
   omit,
   pick,
@@ -74,6 +78,26 @@ describe('keyMirror', () => {
     expect(() => keyMirror([])).toThrow('Expected an object');
     // @ts-ignore
     expect(() => keyMirror('a')).toThrow('Expected an object');
+  });
+});
+
+describe('objectEntries', () => {
+  it('should return properly', () => {
+    const entries = objectEntries(baseObject);
+
+    expect(entries).toEqual(Object.entries(baseObject));
+    expectTypeOf(entries).toEqualTypeOf<
+      Array<['c', number[]] | ['a', number] | ['b', string] | ['d', { a: null }] | ['e', undefined]>
+    >();
+  });
+});
+
+describe('objectKeys', () => {
+  it('should return properly', () => {
+    const entries = objectKeys(baseObject);
+
+    expect(entries).toEqual(Object.keys(baseObject));
+    expectTypeOf(entries).toEqualTypeOf<Array<'c' | 'a' | 'b' | 'd' | 'e'>>();
   });
 });
 

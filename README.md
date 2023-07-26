@@ -430,6 +430,12 @@ Invert object key and value.
 **keyMirror(input: PlainObject): PlainObject**  
 Set the key as the value.
 
+**objectEntries\<T extends PlainObject>(input: T): Array\<[K in keyof T, T[K]]>**  
+Type-safe Object.entries().
+
+**objectKeys\<T extends PlainObject>(input: T): Array\<keyof T>**  
+Type-safe Object.keys().
+
 **objectToArray(input: PlainObject, includeOnly?: string): PlainObject[]**  
 Convert an object to an array of objects.
 
