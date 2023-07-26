@@ -220,11 +220,11 @@ export function queryStringParse(input: string): PlainObject<string> {
  * Sort object keys
  */
 export function sortObjectKeys<T extends PlainObject>(input: T) {
-  return Object.keys(input)
+  return objectKeys(input)
     .sort()
     .reduce((acc, key) => {
       acc[key] = input[key];
 
       return acc;
-    }, {} as PlainObject);
+    }, {} as T);
 }
