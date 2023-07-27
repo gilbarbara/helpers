@@ -17,8 +17,8 @@ import {
 describe('capitalize', () => {
   it('should return a string capitalized', () => {
     expect(capitalize('acessórios')).toBe('Acessórios');
-    expect(capitalize('óculos')).toBe('Óculos');
-    expect(capitalize('lorem ipsum')).toBe('Lorem ipsum');
+    expect(capitalize('øłä')).toBe('Øłä');
+    expect(capitalize('LOREM IPSUM')).toBe('Lorem ipsum');
   });
 });
 

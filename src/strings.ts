@@ -2,7 +2,7 @@
  * Capitalize the first letter
  */
 export function capitalize(input: string) {
-  return input.charAt(0).toUpperCase() + input.slice(1);
+  return input.charAt(0).toLocaleUpperCase() + input.slice(1).toLocaleLowerCase();
 }
 
 /**
