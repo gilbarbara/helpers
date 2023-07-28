@@ -25,6 +25,20 @@ export function demethodize(fn: Function) {
   return (parameter: any, ...rest: any[]) => fn.apply(parameter, rest);
 }
 
+/**
+ * Get the data type of variable.
+ */
+export function getDataType(input: unknown, toLowerCase = false): string {
+  const dataTypeName = Object.prototype.toString.call(input).slice(8, -1);
+  let output = dataTypeName;
+
+  if (/HTML\w+Element/.test(dataTypeName)) {
+    output = 'HTMLElement';
+  }
+
+  return toLowerCase ? output.toLowerCase() : output;
+}
+
 export function invariant(condition: any, message: string | (() => string)): asserts condition {
   if (condition) {
     return;

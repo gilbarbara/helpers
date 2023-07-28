@@ -301,6 +301,19 @@ numbers.map(toLocaleString); // ['2,209.6', '124.56', '1,048,576']
   ```
 </details>
 
+**getDataType(input: unknown, toLowerCase = false): string**  
+Get the data type of variable.
+
+<details>
+  <summary>Example</summary>
+
+  ```typescript
+getDataType([1, 2, 3]); // Array
+getDataType(/\d+/); // RegExp
+getDataType(() => {}, true) // function
+  ```
+</details>
+
 **invariant(condition: any, message: string): asserts condition**  
 Check if the value is truthy. Otherwise, it will throw.
 
