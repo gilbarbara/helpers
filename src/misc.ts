@@ -137,23 +137,9 @@ export function nullify<T>(value: T) {
 }
 
 export function popupCenter(url: string, title: string, width: number, height: number) {
-  const { screen } = window;
-  let { screenLeft } = window;
-  let { screenTop } = window;
+  const { screen, screenLeft, screenTop } = window;
   let screenWidth = window.innerWidth;
   let screenHeight = window.innerHeight;
-
-  /* istanbul ignore next */
-  if (typeof screenLeft === 'undefined') {
-    // @ts-ignore
-    screenLeft = screen.left;
-  }
-
-  /* istanbul ignore next */
-  if (typeof screenTop === 'undefined') {
-    // @ts-ignore
-    screenTop = screen.top;
-  }
 
   /* istanbul ignore next */
   if (!screenWidth) {
