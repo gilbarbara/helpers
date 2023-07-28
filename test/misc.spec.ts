@@ -4,6 +4,7 @@ import { advanceTo } from 'jest-date-mock';
 import {
   copyToClipboard,
   demethodize,
+  getDataType,
   invariant,
   isJSON,
   isRequired,
@@ -67,6 +68,57 @@ describe('demethodize', () => {
     const numbers = [2209.6, 124.56, 1048576];
 
     expect(numbers.map(toLocaleString)).toEqual(['2,209.6', '124.56', '1,048,576']);
+  });
+});
+
+describe('getDataType', () => {
+  const string = 'Test';
+
+  function* mockGenerator() {
+    yield 1;
+  }
+
+  async function* mockGeneratorAsync() {
+    yield 1;
+  }
+
+  it.each([
+    { input: string, expected: 'String' },
+    { input: 12, expected: 'Number' },
+    { input: BigInt('0x1fffffffffffff'), expected: 'BigInt' },
+    { input: true, expected: 'Boolean' },
+    { input: null, expected: 'Null' },
+    { input: undefined, expected: 'Undefined' },
+    { input: {}, expected: 'Object' },
+    { input: [], expected: 'Array' },
+    { input: [].values(), expected: 'Array Iterator' },
+    { input: new ArrayBuffer(2), expected: 'ArrayBuffer' },
+    { input: Symbol(string), expected: 'Symbol' },
+    { input: () => {}, expected: 'Function' },
+    { input: async () => {}, expected: 'AsyncFunction' },
+    { input: mockGenerator, expected: 'GeneratorFunction' },
+    { input: mockGenerator(), expected: 'Generator' },
+    { input: mockGeneratorAsync, expected: 'AsyncGeneratorFunction' },
+    { input: mockGeneratorAsync(), expected: 'AsyncGenerator' },
+    { input: new Date(), expected: 'Date' },
+    { input: /Test/, expected: 'RegExp' },
+    { input: new Promise(() => {}), expected: 'Promise' },
+    { input: new Error(), expected: 'Error' },
+    { input: new Map(), expected: 'Map' },
+    { input: new Set(), expected: 'Set' },
+    { input: new WeakMap(), expected: 'WeakMap' },
+    { input: new WeakSet(), expected: 'WeakSet' },
+    { input: document.createElement('div'), expected: 'HTMLElement' },
+    { input: document.createElement('span'), expected: 'HTMLElement' },
+    { input: document.createTextNode(string), expected: 'Text' },
+    { input: document.createComment(string), expected: 'Comment' },
+    { input: document.createDocumentFragment(), expected: 'DocumentFragment' },
+  ])(`should return $expected`, ({ expected, input }) => {
+    expect(getDataType(input)).toBe(expected);
+  });
+
+  it('should return the type in lowercase', () => {
+    expect(getDataType([], true)).toBe('array');
   });
 });
 
