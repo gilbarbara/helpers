@@ -51,11 +51,11 @@ describe('getNestedProperty', () => {
   });
 
   it('should return the original value', () => {
-    // @ts-ignore
+    // @ts-expect-error - invalid value
     expect(getNestedProperty('0,2', 0)).toBe('0,2');
-    // @ts-ignore
+    // @ts-expect-error - invalid value
     expect(getNestedProperty(null, 0)).toBeNull();
-    // @ts-ignore
+    // @ts-expect-error - invalid value
     expect(getNestedProperty(undefined, 0)).toBeUndefined();
   });
 });
@@ -67,9 +67,9 @@ describe('invertKeys', () => {
   });
 
   it('should throw for bad inputs', () => {
-    // @ts-ignore
+    // @ts-expect-error - invalid value
     expect(() => invertKeys([])).toThrow('Expected an object');
-    // @ts-ignore
+    // @ts-expect-error - invalid value
     expect(() => invertKeys('a')).toThrow('Expected an object');
   });
 });
@@ -87,9 +87,9 @@ describe('keyMirror', () => {
   });
 
   it('should throw for bad inputs', () => {
-    // @ts-ignore
+    // @ts-expect-error - invalid value
     expect(() => keyMirror([])).toThrow('Expected an object');
-    // @ts-ignore
+    // @ts-expect-error - invalid value
     expect(() => keyMirror('a')).toThrow('Expected an object');
   });
 });
@@ -116,9 +116,9 @@ describe('objectKeys', () => {
 
 describe('objectToArray', () => {
   it('should throw with bad input', () => {
-    // @ts-ignore
+    // @ts-expect-error - invalid value
     expect(() => objectToArray(['a'])).toThrow('Expected an object');
-    // @ts-ignore
+    // @ts-expect-error - invalid value
     expect(() => objectToArray('a')).toThrow('Expected an object');
   });
 
@@ -152,7 +152,7 @@ describe('omit', () => {
   });
 
   it('should throw for bad inputs', () => {
-    // @ts-ignore
+    // @ts-expect-error - invalid value
     expect(() => omit(['a'])).toThrow('Expected an object');
   });
 });
@@ -166,7 +166,7 @@ describe('pick', () => {
   it.each([
     [pick(baseObject, 'c'), { c: [1] }],
     [pick(baseObject, 'a', 'd'), { a: 1, d: { a: null } }],
-    // @ts-ignore
+    // @ts-expect-error - invalid value
     [pick(baseObject, 'x'), {}],
     [pick(baseObject), baseObject],
   ])('should be %p', (result, expected) => {
@@ -174,7 +174,7 @@ describe('pick', () => {
   });
 
   it('should throw for bad inputs', () => {
-    // @ts-ignore
+    // @ts-expect-error - invalid value
     expect(() => pick(['a'])).toThrow('Expected an object');
   });
 });
@@ -189,7 +189,7 @@ describe('queryStringFormat', () => {
     ['an array', ['R$50 - R$100', 'R$100+'], "input type isn't supported"],
     ['a string', 'R$50 - R$100', "input type isn't supported"],
   ])('should throw with %s', (_, input, expected) => {
-    // @ts-ignore
+    // @ts-expect-error - invalid value
     expect(() => queryStringFormat(input)).toThrow(expected);
   });
 

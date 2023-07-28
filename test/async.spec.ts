@@ -69,12 +69,12 @@ describe('poll', () => {
 
 describe('request', () => {
   it('should throw without "url"', async () => {
-    // @ts-ignore
+    // @ts-expect-error - invalid value
     await expect(request()).rejects.toThrow('URL is required');
   });
 
   it('should handle errors', async () => {
-    // @ts-ignore
+    // @ts-expect-error - invalid value
     fetch.mockResponseOnce(() =>
       Promise.resolve({
         status: 404,
@@ -89,7 +89,7 @@ describe('request', () => {
   });
 
   it('should handle success', async () => {
-    // @ts-ignore
+    // @ts-expect-error - invalid value
     fetch.mockResponseOnce(
       JSON.stringify({
         body: 'quia et suscipit recusandae consequuntur expedita et cum reprehenderit molestiae ut ut quas totam nostrum rerum est autem sunt rem eveniet architecto',
@@ -102,7 +102,7 @@ describe('request', () => {
   });
 
   it('should handle options', async () => {
-    // @ts-ignore
+    // @ts-expect-error - invalid value
     fetch.mockResponseOnce(
       JSON.stringify({
         title: 'foo',

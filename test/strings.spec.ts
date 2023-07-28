@@ -49,7 +49,7 @@ describe('getInitials', () => {
     ['Willian', 'W'],
     [undefined, ''],
   ])('should return the initials', (input, expected) => {
-    // @ts-ignore
+    // @ts-expect-error - invalid value
     expect(getInitials(input)).toBe(expected);
   });
 });

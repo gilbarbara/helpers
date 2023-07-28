@@ -44,7 +44,7 @@ export function invariant(condition: any, message: string | (() => string)): ass
     return;
   }
 
-  const value = typeof message === 'function' ? message() : message;
+  const value = is.function(message) ? message() : message;
 
   throw new Error(value);
 }
