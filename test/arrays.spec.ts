@@ -133,7 +133,7 @@ describe('sortComparator', () => {
 
 describe('splitIntoChunks', () => {
   it('should throw if the input is not an array', () => {
-    // @ts-ignore
+    // @ts-expect-error - invalid value
     expect(() => splitIntoChunks({})).toThrow('expected an array for the first argument');
   });
 
