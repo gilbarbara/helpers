@@ -401,7 +401,7 @@ Floor decimal numbers.
 **pad(input: number, digits?: number = 2): string**  
 Pad a number with zeros.
 
-**randomInt(min?: number = 0, max?: number = 10): number**  
+**randomNumber(min?: number = 0, max?: number = 10): number**  
 Returns a random integer.
 
 **round(input: number, digits?: number = 2): number**  

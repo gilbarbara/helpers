@@ -1,4 +1,4 @@
-import { ceil, clamp, floor, pad, randomInt, round } from '../src';
+import { ceil, clamp, floor, pad, randomNumber, round } from '../src';
 
 describe('ceil', () => {
   it.each([
@@ -41,20 +41,20 @@ describe('pad', () => {
   });
 });
 
-describe('randomInt', () => {
+describe('randomNumber', () => {
   it.each([
     [0, 1],
     [1, 10],
     [100, 1000],
     [100, 100],
   ])('should return a number between %p and %p', (min, max) => {
-    expect(randomInt(min, max))
+    expect(randomNumber(min, max))
       .toBeGreaterThanOrEqual(min)
       .toBeLessThan(max + 1);
   });
 
   it('should return a number without parameters', () => {
-    expect(randomInt()).toBeGreaterThanOrEqual(0).toBeLessThan(11);
+    expect(randomNumber()).toBeGreaterThanOrEqual(0).toBeLessThan(11);
   });
 });
 

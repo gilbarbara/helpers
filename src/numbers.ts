@@ -31,9 +31,9 @@ export function pad(input: number, length = 2) {
 }
 
 /**
- * Returns a random integer
+ * Returns a random number
  */
-export function randomInt(min = 0, max = 10) {
+export function randomNumber(min = 0, max = 10) {
   if (min >= max) {
     return max;
   }
