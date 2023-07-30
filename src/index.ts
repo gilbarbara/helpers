@@ -6,6 +6,7 @@ export * from './formatters';
 export * from './misc';
 export * from './numbers';
 export * from './objects';
+export * from './statistics';
 export * from './strings';
 export * from './validators';
 
