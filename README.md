@@ -240,6 +240,17 @@ timeSince(twoWeeeksAgo, { suffix: 'atrás', week: 'semana' }) // 2 semanas atrá
 **timestamp(input?: Date | string): number**  
 Get the timestamp for a date
 
+### Devices
+
+**isDarkMode(): boolean**  
+Detect if the device is in dark mode.
+
+**isTouchDevice(): boolean**  
+Detect if the device supports touch events.
+
+**prefersReducedMotion(): boolean**  
+Detect if the user prefers reduced motion.
+
 
 ### Formatters
 
