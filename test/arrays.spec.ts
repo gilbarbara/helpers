@@ -1,7 +1,10 @@
+import { expectTypeOf } from 'expect-type';
+
 import {
   createArray,
   getRandomItem,
   quickSort,
+  removeDuplicates,
   shuffle,
   sortByLocaleCompare,
   sortByPrimitive,
@@ -44,6 +47,22 @@ describe('quickSort', () => {
       'xy',
       'zy',
     ]);
+  });
+});
+
+describe('removeDuplicates', () => {
+  it('should remove duplicates from an number array', () => {
+    const resultNumbers = removeDuplicates([1, 2, 3, 4, 5, 1, 2, 3, 4, 5]);
+
+    expect(resultNumbers).toEqual([1, 2, 3, 4, 5]);
+    expectTypeOf(resultNumbers).toEqualTypeOf<Array<number>>();
+  });
+
+  it('should remove duplicates from an string array', () => {
+    const resultStrings = removeDuplicates(['a', 'b', 'c', 'a', 'b', 'c']);
+
+    expect(resultStrings).toEqual(['a', 'b', 'c']);
+    expectTypeOf(resultStrings).toEqualTypeOf<Array<string>>();
   });
 });
 
