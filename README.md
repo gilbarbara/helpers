@@ -112,7 +112,7 @@ Split an array into chunks.
 ### Async
 
 **ASYNC_STATUS**  
-A constant with possible async statuses
+A constant with possible async statuses.
 
 **cors(data: any, statusCodeOrOptions: number | CorsOptions = 200): CorsResponse**  
 Returns a CORS response.
@@ -238,7 +238,7 @@ timeSince(twoWeeeksAgo, { suffix: 'atrás', week: 'semana' }) // 2 semanas atrá
 </details>
 
 **timestamp(input?: Date | string): number**  
-Get the timestamp for a date
+Get the timestamp for a date.
 
 ### Devices
 
@@ -255,13 +255,13 @@ Detect if the user prefers reduced motion.
 ### Formatters
 
 **formatBoolean(input: boolean): 'Yes' | 'No'**  
-Format boolean into Yes / No
+Format the boolean into Yes / No.
 
 **formatCPF(input: string): string**  
-Format string into a CPF
+Format the string into a CPF.
 
 **formatDateLocale(input: string, options?: FormatDateLocaleOptions): string**  
-Format date ISO string using locale
+Format the ISO date string using locale.
 
 <details>
   <summary>Type Definition</summary>
@@ -275,7 +275,7 @@ interface FormatDateLocaleOptions {
 </details>
 
 **formatMoney(input: number, options?: FormatMoneyOptions): string**  
-Format number into money string
+Format the number into a money string.
 
 <details>
   <summary>Type Definition</summary>
@@ -291,18 +291,18 @@ interface FormatMoneyOptions {
 </details>
 
 **formatPhoneBR(input: string): string**  
-Format string into a brazilian phone
+Format the string into a brazilian phone.
 
 **formatPostalCodeBR(value: string): string**  
-Format string into a brazilian zip code
+Format the string into a brazilian zip code.
 
 ### Misc
 
 **copyToClipboard(input: string): Promise\<boolean>**  
-Copy a string to the clipboard.
+Copy the string to the clipboard.
 
 **demethodize(fn: Function): Function**  
-Decouple methods from objects
+Decouple the method from the prototype.
 
 <details>
   <summary>Example</summary>
@@ -366,7 +366,7 @@ interface LoggerOptions {
 </details>
 
 **measureExecutionTime\<T = any>(callback: Function): Promise\<T>**  
-Measure function execution time
+Measure function execution time.
 
 **noop(): void**   
 An empty function that does nothing.
@@ -399,7 +399,7 @@ interface UniqueOptions {
 </details>
 
 **uuid(): string**  
-Returns an UUID v4 string.
+Returns a UUID v4 string.
 
 ### Numbers
 
@@ -407,7 +407,7 @@ Returns an UUID v4 string.
 Ceil decimal numbers.
 
 **clamp(value: number, min?: number = 0, max?: number = 100): number**  
-Limit number between range.
+Limit the number between ranges.
 
 **floor(input: number, digits?: number = 2): number**  
 Floor decimal numbers.
@@ -424,7 +424,7 @@ Round decimal numbers.
 ### Objects
 
 **cleanUpObject(input: PlainObject): PlainObject**  
-Remove properties with undefined value from an object.
+Remove properties with undefined values from an object.
 
 **getNestedProperty(input: PlainObject | any[], path: string): any**  
 Get a nested property inside an object or array.
@@ -491,7 +491,7 @@ interface QueryStringFormatOptions {
 Parse a query string.
 
 **sortObjectKeys(input: PlainObject): PlainObject**   
-Sort object keys
+Sort object keys.
 
 ### Statistics
 
@@ -510,16 +510,16 @@ Returns the mode of two or more numbers.
 Capitalize the first letter.
 
 **cleanupHTML(input: string): string**  
-Cleanup HTML content.
+Clean up HTML content.
 
 **cleanupNumericString(input: string): string**  
-Cleanup a numeric string.
+Clean up a numeric string.
 
 **cleanupURI(input: string): string**  
-Cleanup URI characters.
+Clean up URI characters.
 
 **getInitials(input: string): string**  
-Get initials from name
+Get initials from the name.
 
 **pluralize(singular: string, plural: string | undefined, quantity: number): string**  
 Returns the singular or plural based on the quantity.  
@@ -545,20 +545,20 @@ Remove HTML tags.
 Remove whitespace.
 
 **slugify(input: string): string**  
-Format string to slug.
+Format the string into a slug.
 
 
 ### Validators
 
 **isValidCPF(value: string): boolean**  
-Check if CPF is valid
+Check if the CPF is valid.
 
 **isValidEmail(value: string): boolean**  
-Check if email is valid
+Check if the email is valid.
 
 `@throws`  
 **validatePassword(password: string, options?: ValidatePasswordOptions): boolean**  
-Validate password length and required characters
+Validate password length and required characters.
 
   ```typescript
 interface ValidatePasswordOptions {
