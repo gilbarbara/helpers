@@ -72,6 +72,13 @@ export function quickSort<T extends string | number>(input: T[], comparator = so
 }
 
 /**
+ * Remove duplicates from the array
+ */
+export function removeDuplicates<T = unknown>(input: T[]): T[] {
+  return [...new Set(input)];
+}
+
+/**
  * Shuffle an array using the Fisher-Yates algorithm
  */
 export function shuffle<T = unknown>(input: T[]) {

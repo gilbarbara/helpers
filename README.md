@@ -30,6 +30,9 @@ Get a random item from an array.
 **quickSort\<T extends string | number>(input: T[]): T[]**  
 Sort an array of numbers using a quick sort algorithm.
 
+**removeDuplicates<T = unknown>(input: T[]): T[]**  
+Remove duplicates from the array.
+
 **shuffle\<T = unknown>(input: T[]): T[]**  
 Shuffle an array using the Fisher-Yates algorithm.
 
