@@ -493,6 +493,17 @@ Parse a query string.
 **sortObjectKeys(input: PlainObject): PlainObject**   
 Sort object keys
 
+### Statistics
+
+**mean(input: number[], precision?: number): number**  
+Returns the average of two or more numbers.
+
+**median(input: number[]): number**  
+Returns the median of two or more numbers.
+
+**mode(input: number[]): number**  
+Returns the mode of two or more numbers.
+
 ### Strings
 
 **capitalize(input: string): string**  
