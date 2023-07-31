@@ -30,9 +30,6 @@ Get a random item from an array.
 **quickSort\<T extends string | number>(input: T[]): T[]**  
 Sort an array of numbers using a quick sort algorithm.
 
-**removeDuplicates<T = unknown>(input: T[]): T[]**  
-Remove duplicates from the array.
-
 **shuffle\<T = unknown>(input: T[]): T[]**  
 Shuffle an array using the Fisher-Yates algorithm.
 
@@ -191,6 +188,9 @@ Check if the input is an ISO date.
 
 **isoDate(input?: string | number): string**  
 Returns an ISO date.
+
+**isValidDate(input: string | number | Date): boolean**  
+Check if the input is a valid date.
 
 **now(): number**  
 Returns a unix timestamp (seconds since 1970-01-01 00:00 UTC).
@@ -404,7 +404,7 @@ Floor decimal numbers.
 **pad(input: number, digits?: number = 2): string**  
 Pad a number with zeros.
 
-**randomNumber(min?: number = 0, max?: number = 10): number**  
+**randomInt(min?: number = 0, max?: number = 10): number**  
 Returns a random integer.
 
 **round(input: number, digits?: number = 2): number**  

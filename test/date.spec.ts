@@ -5,6 +5,7 @@ import {
   HOUR,
   isIsoDate,
   isoDate,
+  isValidDate,
   MINUTE,
   MONTH,
   now,
@@ -57,6 +58,24 @@ describe('date', () => {
       [undefined, '2019-02-01T02:00:00.000Z'],
     ])('should return properly for %p', (input, expected) => {
       expect(isoDate(input)).toBe(expected);
+    });
+  });
+
+  describe('isValidDate', () => {
+    it.each([
+      ['2000-01-01', true],
+      [1518986400000, true],
+      [new Date(), true],
+      ['abcd', false],
+    ])('%p should return %p', (input, expected) => {
+      expect(isValidDate(input)).toBe(expected);
+    });
+
+    it('should return false for invalid dates', () => {
+      // @ts-expect-error - Testing invalid input
+      expect(isValidDate(undefined)).toBe(false);
+      // @ts-expect-error - Testing invalid input
+      expect(isValidDate([])).toBe(false);
     });
   });
 
