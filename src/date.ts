@@ -1,3 +1,5 @@
+import is from 'is-lite';
+
 import { pluralize } from './strings';
 import { TimeSinceOptions } from './types';
 
@@ -18,12 +20,24 @@ export function isIsoDate(input: string) {
   return date.toISOString() === input;
 }
 
+/**
+ * Check if the input is a valid date.
+ */
 export function isoDate(input?: string | number) {
   if (typeof input !== 'undefined') {
     return new Date(input).toISOString();
   }
 
   return new Date().toISOString();
+}
+
+/**
+ * Check if the input is a valid date.
+ */
+export function isValidDate(input: string | number | Date) {
+  const date = is.date(input) ? input : new Date(input);
+
+  return !Number.isNaN(date.getTime());
 }
 
 /**
@@ -114,7 +128,7 @@ export function timeSince(input: Date | string | number, options?: TimeSinceOpti
 }
 
 /**
- * Get the timestamp for a date.
+ * Get the timestamp (in seconds) for a date.
  */
 export function timestamp(input?: Date | string) {
   if (!input) {
