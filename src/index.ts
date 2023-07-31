@@ -3,6 +3,7 @@ export * from './async';
 export * from './date';
 export * from './devices';
 export * from './formatters';
+export * from './functions';
 export * from './misc';
 export * from './numbers';
 export * from './objects';

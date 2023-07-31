@@ -296,13 +296,29 @@ Format the string into a brazilian phone.
 **formatPostalCodeBR(value: string): string**  
 Format the string into a brazilian zip code.
 
+### Functions
+
+**demethodize(fn: Function): Function**  
+Decouple the method from the prototype.
+
+**measureExecutionTime\<T = any>(callback: Function): Promise\<T>**  
+Measure function execution time.
+
+**noop(): void**   
+An empty function that does nothing.
+
+**once\<T extends (...arguments_: Array\<any>) => any>(fn: T): T**  
+Creates a function that will only be called once.  
+Repeat calls return the value of the first invocation.
+
+**pipe\<T>(...functions: Array<(argument: T) => T>)**  
+Combine multiple functions into one.  
+The output of each function is passed as the input to the next.
+
 ### Misc
 
 **copyToClipboard(input: string): Promise\<boolean>**  
 Copy the string to the clipboard.
-
-**demethodize(fn: Function): Function**  
-Decouple the method from the prototype.
 
 <details>
   <summary>Example</summary>
@@ -364,12 +380,6 @@ interface LoggerOptions {
 }
   ```
 </details>
-
-**measureExecutionTime\<T = any>(callback: Function): Promise\<T>**  
-Measure function execution time.
-
-**noop(): void**   
-An empty function that does nothing.
 
 **nullify\<T>(value: T): T | null**  
 Returns the value or null.
