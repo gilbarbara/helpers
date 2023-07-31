@@ -3,18 +3,15 @@ import { advanceTo } from 'jest-date-mock';
 
 import {
   copyToClipboard,
-  demethodize,
   getDataType,
   invariant,
   isJSON,
   isRequired,
   logger,
-  measureExecutionTime,
   noop,
   nullify,
   popupCenter,
   px,
-  sleep,
   unique,
   uuid,
 } from '../src';
@@ -51,23 +48,6 @@ describe('copyToClipboard', () => {
     const result = await copyToClipboard('Hello');
 
     expect(result).toBe(false);
-  });
-});
-
-describe('demethodize', () => {
-  it('should handle Array methods', () => {
-    const isVowel = (x: string) => ['a', 'e', 'i', 'o', 'u'].includes(x);
-    const every = demethodize(Array.prototype.every);
-
-    expect(every('abcd', isVowel)).toBeFalse();
-    expect(every('eieio', isVowel)).toBeTrue();
-  });
-
-  it('should handle Number methods', () => {
-    const toLocaleString = demethodize(Number.prototype.toLocaleString);
-    const numbers = [2209.6, 124.56, 1048576];
-
-    expect(numbers.map(toLocaleString)).toEqual(['2,209.6', '124.56', '1,048,576']);
   });
 });
 
@@ -226,32 +206,6 @@ describe('logger', () => {
     );
     expect(log).toHaveBeenLastCalledWith(null);
     expect(groupEnd).toHaveBeenCalledTimes(4);
-  });
-});
-
-describe('measureExecutionTime', () => {
-  beforeAll(() => {
-    jest.spyOn(console, 'log').mockImplementation();
-  });
-
-  afterAll(() => {
-    jest.clearAllMocks();
-  });
-
-  it('should log the time it took to run', async () => {
-    await measureExecutionTime(async () => {
-      await sleep(1);
-    });
-
-    expect(console.log).toHaveBeenCalledWith(
-      expect.stringMatching(/Completed in 1\d+ milliseconds/),
-    );
-  });
-});
-
-describe('noop', () => {
-  it('should return undefined', () => {
-    expect(noop()).toBeUndefined();
   });
 });
 
