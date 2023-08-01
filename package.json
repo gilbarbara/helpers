@@ -1,6 +1,6 @@
 {
   "name": "@gilbarbara/helpers",
-  "version": "0.7.2",
+  "version": "0.8.0",
   "description": "Collection of useful functions",
   "author": "Gil Barbara <gilbarbara@gmail.com>",
   "repository": {
@@ -84,7 +84,8 @@
         "warn",
         {
           "assertFunctionNames": [
-            "expect", "expectTypeOf"
+            "expect",
+            "expectTypeOf"
           ]
         }
       ]
