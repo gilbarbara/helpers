@@ -467,6 +467,10 @@ Invert object key and value.
 **keyMirror(input: PlainObject): PlainObject**  
 Set the key as the value.
 
+**mergeProps<TDefaultProps, TProps>(defaultProps: TDefaultProps, props: TProps): TProps**  
+Merges the defaultProps with literal values with the incoming props, removing undefined values from it that would override the defaultProps.  
+The result is a type-safe object with the defaultProps as required properties.
+
 **objectEntries\<T extends PlainObject>(input: T): Array\<[K in keyof T, T[K]]>**  
 Type-safe Object.entries().
 
