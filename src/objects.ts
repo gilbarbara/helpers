@@ -1,4 +1,4 @@
-import { PlainObject, RemoveType } from '@gilbarbara/types';
+import { PlainObject, RemoveType, Simplify } from '@gilbarbara/types';
 import is from 'is-lite';
 
 import { InvertKeyValue, QueryStringFormatOptions } from './types';
@@ -83,6 +83,21 @@ export function keyMirror<T extends PlainObject>(input: T): { [K in keyof T]: K 
   }
 
   return output;
+}
+
+/**
+ * Merges the defaultProps with literal values with the incoming props, removing undefined values from it that would override the defaultProps.
+ * The result is a type-safe object with the defaultProps as required properties.
+ */
+export function mergeProps<TDefaultProps extends PlainObject, TProps extends PlainObject>(
+  defaultProps: TDefaultProps,
+  props: TProps,
+) {
+  const cleanProps = cleanUpObject(props);
+
+  return { ...defaultProps, ...cleanProps } as unknown as Simplify<
+    TProps & Required<Pick<TProps, keyof TDefaultProps & string>>
+  >;
 }
 
 /**

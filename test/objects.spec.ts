@@ -5,6 +5,7 @@ import {
   getNestedProperty,
   invertKeys,
   keyMirror,
+  mergeProps,
   objectEntries,
   objectKeys,
   objectToArray,
@@ -91,6 +92,22 @@ describe('keyMirror', () => {
     expect(() => keyMirror([])).toThrow('Expected an object');
     // @ts-expect-error - invalid value
     expect(() => keyMirror('a')).toThrow('Expected an object');
+  });
+});
+
+describe('mergeProps', () => {
+  it('should return properly', () => {
+    type Props = { name: string; type?: 'org' | 'user'; url?: string };
+
+    const defaultProps = { type: 'user' } satisfies Omit<Props, 'name'>;
+    const props: Props = { name: 'John', url: undefined };
+
+    expect(mergeProps(defaultProps, props)).toEqual({ name: 'John', type: 'user' });
+    expectTypeOf(mergeProps(defaultProps, props)).toEqualTypeOf<{
+      name: string;
+      type: 'org' | 'user';
+      url?: string;
+    }>();
   });
 });
 
