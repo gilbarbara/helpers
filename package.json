@@ -34,7 +34,7 @@
     "helpers"
   ],
   "dependencies": {
-    "@gilbarbara/types": "^0.2.0",
+    "@gilbarbara/types": "^0.2.1",
     "is-lite": "^0.9.3"
   },
   "devDependencies": {
