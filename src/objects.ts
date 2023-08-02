@@ -1,4 +1,4 @@
-import { PlainObject, RemoveType, Simplify } from '@gilbarbara/types';
+import { NarrowPlainObject, PlainObject, RemoveType, Simplify } from '@gilbarbara/types';
 import is from 'is-lite';
 
 import { InvertKeyValue, QueryStringFormatOptions } from './types';
@@ -130,7 +130,10 @@ export function objectToArray<T extends PlainObject>(input: T, includeOnly?: str
 /**
  * Remove properties from an object
  */
-export function omit<T extends PlainObject, K extends keyof T>(input: T, ...filter: K[]) {
+export function omit<T extends Record<string, any>, K extends keyof T>(
+  input: NarrowPlainObject<T>,
+  ...filter: K[]
+) {
   if (!is.plainObject(input)) {
     throw new TypeError('Expected an object');
   }
@@ -152,7 +155,10 @@ export function omit<T extends PlainObject, K extends keyof T>(input: T, ...filt
 /**
  * Select properties from an object
  */
-export function pick<T extends PlainObject, K extends keyof T>(input: T, ...filter: K[]) {
+export function pick<T extends Record<string, any>, K extends keyof T>(
+  input: NarrowPlainObject<T>,
+  ...filter: K[]
+) {
   if (!is.plainObject(input)) {
     throw new TypeError('Expected an object');
   }

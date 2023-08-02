@@ -38,6 +38,7 @@ describe('getNestedProperty', () => {
     expect(
       getNestedProperty({ children: { letters: ['a', 'b', 'c'] } }, 'children.letters.1'),
     ).toBe('b');
+    expect(getNestedProperty(baseObject, 'a')).toBe(1);
     expect(getNestedProperty([{ children: ['a', 'b', 'c'] }], '0.children.1')).toBe('b');
     expect(
       getNestedProperty({ children: { letters: ['a', 'b', 'c'] } }, 'children.letters.5'),
@@ -63,6 +64,7 @@ describe('getNestedProperty', () => {
 
 describe('invertKeys', () => {
   it('should return properly', () => {
+    expect(invertKeys(pick(baseObject, 'a'))).toEqual({ '1': 'a' });
     expect(invertKeys({ name: 'John' })).toEqual({ John: 'name' });
     expectTypeOf(invertKeys({ name: 'John' } as const)).toEqualTypeOf<{ John: 'name' }>();
   });
@@ -154,8 +156,14 @@ describe('objectToArray', () => {
 
 describe('omit', () => {
   it('should return properly', () => {
-    expect(omit(baseObject, 'd', 'e')).toEqual({ a: 1, b: '', c: [1] });
-    expectTypeOf(omit(baseObject, 'd', 'e')).toEqualTypeOf<{ a: number; b: string; c: number[] }>();
+    interface Payload {
+      a: number;
+      b: string;
+    }
+    const payload: Payload = { a: 1, b: '' };
+
+    expect(omit(payload, 'b')).toEqual({ a: 1 });
+    expectTypeOf(omit(payload, 'b')).toEqualTypeOf<{ a: number }>();
   });
 
   it.each([
