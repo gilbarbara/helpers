@@ -34,17 +34,17 @@
     "helpers"
   ],
   "dependencies": {
-    "@gilbarbara/types": "^0.2.1",
+    "@gilbarbara/types": "^0.2.2",
     "is-lite": "^0.9.3"
   },
   "devDependencies": {
     "@gilbarbara/esbuilder": "^0.2.0",
-    "@gilbarbara/eslint-config": "^0.5.1",
+    "@gilbarbara/eslint-config": "^0.5.2",
     "@gilbarbara/prettier-config": "^1.0.0",
     "@gilbarbara/tsconfig": "^0.1.1",
     "@size-limit/preset-small-lib": "^8.2.6",
     "@types/jest": "^29.5.3",
-    "@types/node": "^20.4.5",
+    "@types/node": "^20.4.9",
     "del-cli": "^5.0.0",
     "expect-type": "^0.16.0",
     "husky": "^8.0.3",
@@ -53,7 +53,7 @@
     "jest-chain": "^1.1.6",
     "jest-date-mock": "^1.0.8",
     "jest-environment-jsdom": "^29.6.2",
-    "jest-extended": "^4.0.0",
+    "jest-extended": "^4.0.1",
     "jest-fetch-mock": "^3.0.3",
     "jest-serializer-html": "^7.1.0",
     "jest-watch-typeahead": "^2.2.2",
