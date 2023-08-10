@@ -51,7 +51,7 @@ export function getNestedProperty<T extends PlainObject<any>>(input: T, path: st
 /**
  * Invert object key and value
  */
-export function invertKeys<T extends PlainObject<PropertyKey>>(input: T) {
+export function invertKeys<const T extends PlainObject<PropertyKey>>(input: T) {
   if (!is.plainObject(input)) {
     throw new TypeError('Expected an object');
   }
