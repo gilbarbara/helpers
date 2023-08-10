@@ -14,13 +14,9 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "exports": {
-    "import": {
-      "default": "./dist/index.mjs",
-      "types": "./dist/index.d.ts"
-    },
-    "require": {
-      "default": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
     }
   },
   "files": [
@@ -38,7 +34,6 @@
     "is-lite": "^0.9.3"
   },
   "devDependencies": {
-    "@gilbarbara/esbuilder": "^0.2.0",
     "@gilbarbara/eslint-config": "^0.5.2",
     "@gilbarbara/prettier-config": "^1.0.0",
     "@gilbarbara/tsconfig": "^0.1.1",
@@ -61,13 +56,12 @@
     "size-limit": "^8.2.6",
     "ts-jest": "^29.1.1",
     "ts-node": "^10.9.1",
+    "tsup": "^7.2.0",
     "typescript": "^5.1.6"
   },
   "scripts": {
-    "build": "npm run clean && npm run build:files && npm run build:types",
-    "build:files": "esbuilder --cjs --esm",
-    "build:types": "tsc",
-    "watch": "npm run build:files -- --watch",
+    "build": "npm run clean && tsup",
+    "watch": "tsup --watch",
     "clean": "del dist/*",
     "test": "is-ci \"test:coverage\" \"test:watch\"",
     "test:coverage": "jest --coverage --bail",
@@ -79,6 +73,18 @@
     "validate": "npm run lint && npm run typecheck && npm run test:coverage && npm run build && npm run size",
     "prepare": "husky install",
     "prepublishOnly": "npm run validate"
+  },
+  "tsup": {
+    "dts": true,
+    "entry": [
+      "src/index.ts"
+    ],
+    "format": [
+      "cjs",
+      "esm"
+    ],
+    "sourcemap": true,
+    "splitting": false
   },
   "eslintConfig": {
     "extends": [
