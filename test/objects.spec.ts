@@ -66,7 +66,7 @@ describe('invertKeys', () => {
   it('should return properly', () => {
     expect(invertKeys(pick(baseObject, 'a'))).toEqual({ '1': 'a' });
     expect(invertKeys({ name: 'John' })).toEqual({ John: 'name' });
-    expectTypeOf(invertKeys({ name: 'John' } as const)).toEqualTypeOf<{ John: 'name' }>();
+    expectTypeOf(invertKeys({ name: 'John' })).toEqualTypeOf<{ John: 'name' }>();
   });
 
   it('should throw for bad inputs', () => {
