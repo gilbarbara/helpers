@@ -4,6 +4,21 @@ import is from 'is-lite';
 import { pad } from './numbers';
 import { LoggerOptions, UniqueOptions } from './types';
 
+type Case<T = void> = [boolean, () => T];
+
+export function conditional<TReturn = void>(
+  cases: Array<Case<TReturn>>,
+  defaultCase?: () => TReturn,
+) {
+  for (const [expression, callback] of cases) {
+    if (expression) {
+      return callback();
+    }
+  }
+
+  return defaultCase?.();
+}
+
 /**
  * Copy a string to the clipboard
  */

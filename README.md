@@ -317,6 +317,34 @@ The output of each function is passed as the input to the next.
 
 ### Misc
 
+ **conditional\<TReturn>(cases: Array\<Case\<TReturn>>, defaultCase?: () => TReturn): TReturn | undefined**  
+A replacement for switch statements with dynamic expressions cases.
+
+<details>
+  <summary>Type Definition</summary>
+
+  ```typescript
+type Case<T = void> = [boolean, () => T];
+  ```
+</details>
+
+<details>
+  <summary>Example</summary>
+
+  ```typescript
+let type: string = '';
+
+conditional(
+  [
+    [type === 'a', () => console.log('a')],
+    [[type].includes('b'), () => console.log('b')],
+    [type === 'c', () => console.log('c')],
+  ],
+  () => console.log('default'),
+);
+  ```
+</details>
+
 **copyToClipboard(input: string): Promise\<boolean>**  
 Copy the string to the clipboard.
 

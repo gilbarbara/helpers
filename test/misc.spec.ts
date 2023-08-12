@@ -2,6 +2,7 @@
 import { advanceTo } from 'jest-date-mock';
 
 import {
+  conditional,
   copyToClipboard,
   getDataType,
   invariant,
@@ -15,6 +16,26 @@ import {
   unique,
   uuid,
 } from '../src';
+
+describe('conditional', () => {
+  it.each([
+    { input: 'a', expected: 'a' },
+    { input: 'b', expected: 'b' },
+    { input: 'c', expected: 'c' },
+    { input: 'd', expected: 'default' },
+  ])('should return "$expected" for "$input"', ({ expected, input }) => {
+    const result = conditional(
+      [
+        [input === 'a', () => 'a'],
+        [[input].includes('b'), () => 'b'],
+        [input === 'c', () => 'c'],
+      ],
+      () => 'default',
+    );
+
+    expect(result).toBe(expected);
+  });
+});
 
 describe('copyToClipboard', () => {
   let mockWriteText: any = jest.fn();
@@ -74,15 +95,24 @@ describe('getDataType', () => {
     { input: [].values(), expected: 'Array Iterator' },
     { input: new ArrayBuffer(2), expected: 'ArrayBuffer' },
     { input: Symbol(string), expected: 'Symbol' },
-    { input: () => {}, expected: 'Function' },
-    { input: async () => {}, expected: 'AsyncFunction' },
+    {
+      input: () => {},
+      expected: 'Function',
+    },
+    {
+      input: async () => {},
+      expected: 'AsyncFunction',
+    },
     { input: mockGenerator, expected: 'GeneratorFunction' },
     { input: mockGenerator(), expected: 'Generator' },
     { input: mockGeneratorAsync, expected: 'AsyncGeneratorFunction' },
     { input: mockGeneratorAsync(), expected: 'AsyncGenerator' },
     { input: new Date(), expected: 'Date' },
     { input: /Test/, expected: 'RegExp' },
-    { input: new Promise(() => {}), expected: 'Promise' },
+    {
+      input: new Promise(() => {}),
+      expected: 'Promise',
+    },
     { input: new Error(), expected: 'Error' },
     { input: new Map(), expected: 'Map' },
     { input: new Set(), expected: 'Set' },
