@@ -103,14 +103,14 @@ export function mergeProps<TDefaultProps extends PlainObject, TProps extends Pla
 /**
  * Type-safe Object.entries()
  */
-export function objectEntries<T extends PlainObject>(input: T) {
+export function objectEntries<T extends PlainObject<any>>(input: T) {
   return Object.entries(input) as { [K in keyof T]: [K, T[K]] }[keyof T][];
 }
 
 /**
  * Type-safe Object.keys()
  */
-export function objectKeys<T extends PlainObject>(input: T) {
+export function objectKeys<T extends PlainObject<any>>(input: T) {
   return Object.keys(input) as (keyof T)[];
 }
 

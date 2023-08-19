@@ -122,6 +122,16 @@ describe('objectEntries', () => {
       Array<['c', number[]] | ['a', number] | ['b', string] | ['d', { a: null }] | ['e', undefined]>
     >();
   });
+
+  it('should return properly for a custom index signature', () => {
+    const props: {
+      debug: boolean;
+    } = { debug: true };
+    const entries = objectEntries(props);
+
+    expect(entries).toEqual(Object.entries(props));
+    expectTypeOf(entries).toEqualTypeOf<Array<['debug', boolean]>>();
+  });
 });
 
 describe('objectKeys', () => {
@@ -130,6 +140,16 @@ describe('objectKeys', () => {
 
     expect(entries).toEqual(Object.keys(baseObject));
     expectTypeOf(entries).toEqualTypeOf<Array<'c' | 'a' | 'b' | 'd' | 'e'>>();
+  });
+
+  it('should return properly for a custom index signature', () => {
+    const props: {
+      debug: boolean;
+    } = { debug: true };
+    const entries = objectKeys(props);
+
+    expect(entries).toEqual(Object.keys(props));
+    expectTypeOf(entries).toEqualTypeOf<Array<'debug'>>();
   });
 });
 
