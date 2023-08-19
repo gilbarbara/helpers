@@ -4,6 +4,7 @@ import {
   formatDateLocale,
   formatMoney,
   formatPhoneBR,
+  formatPhoneUS,
   formatPostalCodeBR,
 } from '../src';
 
@@ -72,6 +73,18 @@ describe('formatPhoneBR', () => {
     ['38221288776655', '38221288776655'],
   ])('%p should return %p', (value, expected) => {
     expect(formatPhoneBR(value)).toBe(expected);
+  });
+});
+
+describe('formatPhoneUS', () => {
+  it.each([
+    ['125551020', '125551020'],
+    ['2125551020', '(212) 555-1020'],
+    ['12125551020', '+1 (212) 555-1020'],
+    ['52125551020', '52125551020'],
+    ['121255510201', '121255510201'],
+  ])('%p should return %p', (value, expected) => {
+    expect(formatPhoneUS(value)).toBe(expected);
   });
 });
 

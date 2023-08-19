@@ -293,6 +293,9 @@ interface FormatMoneyOptions {
 **formatPhoneBR(input: string): string**  
 Format the string into a brazilian phone.
 
+**formatPhoneUS(input: string): string**  
+Format the string into a US phone.
+
 **formatPostalCodeBR(value: string): string**  
 Format the string into a brazilian zip code.
 

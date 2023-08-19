@@ -96,6 +96,23 @@ export function formatPhoneBR(input: string) {
 }
 
 /**
+ * Format string into a US phone
+ */
+export function formatPhoneUS(input: string) {
+  const phone = input.replace(/\D/g, '');
+
+  if (phone.length === 10) {
+    return phone.replace(/^(\d{3})(\d{3})(\d{4}).*/, '($1) $2-$3');
+  }
+
+  if (phone.length === 11 && phone.startsWith('1')) {
+    return phone.replace(/^1(\d{3})(\d{3})(\d{4}).*/, '+1 ($1) $2-$3');
+  }
+
+  return phone;
+}
+
+/**
  * Format string into a zip code
  */
 export function formatPostalCodeBR(value: string) {
