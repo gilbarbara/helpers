@@ -1,9 +1,11 @@
-module.exports = {
+import type { Config } from 'jest';
+
+const config: Config = {
   collectCoverage: false,
   collectCoverageFrom: ['src/**/*.{ts,tsx}'],
   coverageThreshold: {
     global: {
-      branches: 80,
+      branches: 90,
       functions: 90,
       lines: 90,
       statements: 90,
@@ -36,3 +38,5 @@ module.exports = {
   verbose: false,
   watchPlugins: ['jest-watch-typeahead/filename', 'jest-watch-typeahead/testname'],
 };
+
+export default config;
