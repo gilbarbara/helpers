@@ -502,13 +502,13 @@ Set the key as the value.
 Merges the defaultProps with literal values with the incoming props, removing undefined values from it that would override the defaultProps.  
 The result is a type-safe object with the defaultProps as required properties.
 
-**objectEntries\<T extends PlainObject\<any>>(input: T): Array\<[K in keyof T, T[K]]>**  
+**objectEntries\<T extends PlainObject\<any>>(input: T): Array<{ [K in keyof T]-?: [K, T[K]] }[keyof T]>**  
 Type-safe Object.entries().
 
 **objectKeys\<T extends PlainObject\<any>(input: T): Array\<keyof T>**  
 Type-safe Object.keys().
 
-**objectToArray(input: PlainObject, includeOnly?: string): PlainObject[]**  
+**objectToArray(input: PlainObject, includeOnly?: string): Array\<PlainObject>**  
 Convert an object to an array of objects.
 
 **omit\<T extends PlainObject, K extends keyof T>(input: T, ...filter: K[]): PlainObject**  
