@@ -125,12 +125,15 @@ describe('objectEntries', () => {
 
   it('should return properly for a custom index signature', () => {
     const props: {
-      debug: boolean;
-    } = { debug: true };
+      debug?: boolean;
+      name: string;
+    } = { debug: true, name: 'John' };
     const entries = objectEntries(props);
 
-    expect(entries).toEqual(Object.entries(props));
-    expectTypeOf(entries).toEqualTypeOf<Array<['debug', boolean]>>();
+    expect(entries.filter(([key]) => key !== 'debug')).toEqual(
+      Object.entries(props).filter(([key]) => key !== 'debug'),
+    );
+    expectTypeOf(entries).toEqualTypeOf<Array<['name', string] | ['debug', boolean | undefined]>>();
   });
 });
 
@@ -144,7 +147,7 @@ describe('objectKeys', () => {
 
   it('should return properly for a custom index signature', () => {
     const props: {
-      debug: boolean;
+      debug?: boolean;
     } = { debug: true };
     const entries = objectKeys(props);
 
