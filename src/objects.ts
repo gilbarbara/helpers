@@ -89,7 +89,7 @@ export function keyMirror<T extends PlainObject>(input: T): { [K in keyof T]: K 
  * Merges the defaultProps with literal values with the incoming props, removing undefined values from it that would override the defaultProps.
  * The result is a type-safe object with the defaultProps as required properties.
  */
-export function mergeProps<TDefaultProps extends PlainObject, TProps extends PlainObject>(
+export function mergeProps<TDefaultProps extends PlainObject<any>, TProps extends PlainObject<any>>(
   defaultProps: TDefaultProps,
   props: TProps,
 ) {

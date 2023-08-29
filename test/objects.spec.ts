@@ -18,6 +18,12 @@ import {
 
 const baseObject = { a: 1, b: '', c: [1], d: { a: null }, e: undefined };
 
+interface Props {
+  name: string;
+  type?: 'org' | 'user';
+  url?: string;
+}
+
 describe('cleanUpObject', () => {
   it('should remove the undefined properties', () => {
     expect(cleanUpObject(baseObject)).toEqual(omit(baseObject, 'e'));
@@ -99,8 +105,6 @@ describe('keyMirror', () => {
 
 describe('mergeProps', () => {
   it('should return properly', () => {
-    type Props = { name: string; type?: 'org' | 'user'; url?: string };
-
     const defaultProps = { type: 'user' } satisfies Omit<Props, 'name'>;
     const props: Props = { name: 'John', url: undefined };
 
@@ -124,16 +128,15 @@ describe('objectEntries', () => {
   });
 
   it('should return properly for a custom index signature', () => {
-    const props: {
-      debug?: boolean;
-      name: string;
-    } = { debug: true, name: 'John' };
+    const props: Props = { name: 'John', type: 'user' };
     const entries = objectEntries(props);
 
-    expect(entries.filter(([key]) => key !== 'debug')).toEqual(
-      Object.entries(props).filter(([key]) => key !== 'debug'),
+    expect(entries.filter(([key]) => key !== 'type')).toEqual(
+      Object.entries(props).filter(([key]) => key !== 'type'),
     );
-    expectTypeOf(entries).toEqualTypeOf<Array<['name', string] | ['debug', boolean | undefined]>>();
+    expectTypeOf(entries).toEqualTypeOf<
+      Array<['name', string] | ['type', 'org' | 'user' | undefined] | ['url', string | undefined]>
+    >();
   });
 });
 
@@ -146,13 +149,11 @@ describe('objectKeys', () => {
   });
 
   it('should return properly for a custom index signature', () => {
-    const props: {
-      debug?: boolean;
-    } = { debug: true };
+    const props: Props = { name: 'John' };
     const entries = objectKeys(props);
 
     expect(entries).toEqual(Object.keys(props));
-    expectTypeOf(entries).toEqualTypeOf<Array<'debug'>>();
+    expectTypeOf(entries).toEqualTypeOf<Array<'name' | 'type' | 'url'>>();
   });
 });
 
