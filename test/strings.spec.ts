@@ -44,11 +44,11 @@ describe('cleanupURI', () => {
 
 describe('getInitials', () => {
   it.each([
-    ['Test User', 'TU'],
-    ['John Doe Smith', 'JS'],
-    ['Willian', 'W'],
-    [undefined, ''],
-  ])('should return the initials', (input, expected) => {
+    { input: 'Test User', expected: 'TU' },
+    { input: 'John Doe Smith', expected: 'JS' },
+    { input: 'Willian', expected: 'W' },
+    { input: undefined, expected: '' },
+  ])('$input should return $expected', ({ expected, input }) => {
     // @ts-expect-error - invalid value
     expect(getInitials(input)).toBe(expected);
   });
@@ -56,14 +56,17 @@ describe('getInitials', () => {
 
 describe('pluralize', () => {
   it.each([
-    [0, 'day', undefined, 'days'],
-    [1, 'day', undefined, 'day'],
-    [4, 'day', undefined, 'days'],
-    [1, 'Tag', 'Tage', 'Tag'],
-    [4, 'Tag', 'Tage', 'Tage'],
-  ])('%s/%s with %p should return %p', (quantity, singular, plural, expected) => {
-    expect(pluralize(quantity, singular, plural)).toBe(expected);
-  });
+    { input: 0, singular: 'day', plural: undefined, expected: 'days' },
+    { input: 1, singular: 'day', plural: undefined, expected: 'day' },
+    { input: 4, singular: 'day', plural: undefined, expected: 'days' },
+    { input: 1, singular: 'Tag', plural: 'Tage', expected: 'Tag' },
+    { input: 4, singular: 'Tag', plural: 'Tage', expected: 'Tage' },
+  ])(
+    '$input/$singular with $plural should return $expected',
+    ({ expected, input, plural, singular }) => {
+      expect(pluralize(input, singular, plural)).toBe(expected);
+    },
+  );
 });
 
 describe('removeAccents', () => {

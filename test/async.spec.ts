@@ -9,11 +9,11 @@ describe('ASYNC_STATUS', () => {
 describe('cors', () => {
   it.each([
     {
-      name: 'data',
+      title: 'data',
       data: { name: 'John Doe' },
     },
     {
-      name: 'methods, origin and allowedHeaders',
+      title: 'methods, origin and allowedHeaders',
       data: null,
       options: {
         allowedHeaders: ['x-test'],
@@ -23,7 +23,7 @@ describe('cors', () => {
       },
     },
     {
-      name: 'responseHeaders',
+      title: 'responseHeaders',
       data: [{ name: 'John Doe' }],
       options: {
         responseHeaders: {
@@ -35,7 +35,7 @@ describe('cors', () => {
         },
       },
     },
-  ])('with "$name" should return properly', ({ data, options }) => {
+  ])('with $title should return properly', ({ data, options }) => {
     expect(cors(data, options)).toMatchSnapshot();
   });
 });
@@ -126,16 +126,16 @@ describe('request', () => {
 });
 
 describe('sleep', () => {
-  const setTimeoutSpy = jest.spyOn(global, 'setTimeout');
+  const setTimeoutSpy = vi.spyOn(global, 'setTimeout');
 
   afterAll(() => {
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 
   it.each([
-    [0.1, 100],
-    [undefined, 1000],
-  ])('should halt the execution for %p', async (input, timeout) => {
+    { input: 0.1, timeout: 100 },
+    { input: undefined, timeout: 1000 },
+  ])('should halt the execution for $input', async ({ input, timeout }) => {
     // eslint-disable-next-line unicorn/consistent-function-scoping
     const fn = async () => {
       await sleep(input);

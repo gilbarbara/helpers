@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`sortObjectKeys should return properly 1`] = `
+exports[`sortObjectKeys > should return properly 1`] = `
 {
   "arg": "tar",
   "foo": "bar",

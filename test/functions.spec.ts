@@ -1,5 +1,3 @@
-import { expectTypeOf } from 'expect-type';
-
 import { demethodize, measureExecutionTime, noop, once, pipe, sleep } from '../src';
 
 describe('demethodize', () => {
@@ -21,11 +19,11 @@ describe('demethodize', () => {
 
 describe('measureExecutionTime', () => {
   beforeAll(() => {
-    jest.spyOn(console, 'log').mockImplementation();
+    vi.spyOn(console, 'log').mockImplementation(() => {});
   });
 
   afterAll(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should log the time it took to run', async () => {
@@ -47,7 +45,7 @@ describe('noop', () => {
 
 describe('once', () => {
   it('should call the function just once', () => {
-    const fn = jest.fn((input: number) => input + 1);
+    const fn = vi.fn((input: number) => input + 1);
     const onceFn = once(fn);
 
     expect(onceFn(1)).toBe(2);
