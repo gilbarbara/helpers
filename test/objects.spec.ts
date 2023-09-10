@@ -1,5 +1,3 @@
-import { expectTypeOf } from 'expect-type';
-
 import {
   cleanUpObject,
   getNestedProperty,
@@ -191,12 +189,12 @@ describe('omit', () => {
   });
 
   it.each([
-    [omit(baseObject, 'c'), { a: 1, b: '', d: { a: null } }],
-    [omit(baseObject, 'a', 'd'), { b: '', c: [1] }],
+    { result: omit(baseObject, 'c'), expected: { a: 1, b: '', d: { a: null } } },
+    { result: omit(baseObject, 'a', 'd'), expected: { b: '', c: [1] } },
     // @ts-expect-error - using a non-existent key
-    [omit(baseObject, 'x'), baseObject],
-    [omit(baseObject), baseObject],
-  ])('should be %p', (result, expected) => {
+    { result: omit(baseObject, 'x'), expected: baseObject },
+    { result: omit(baseObject), expected: baseObject },
+  ])('should be $result', ({ expected, result }) => {
     expect(result).toEqual(expected);
   });
 
@@ -213,12 +211,12 @@ describe('pick', () => {
   });
 
   it.each([
-    [pick(baseObject, 'c'), { c: [1] }],
-    [pick(baseObject, 'a', 'd'), { a: 1, d: { a: null } }],
+    { result: pick(baseObject, 'c'), expected: { c: [1] } },
+    { result: pick(baseObject, 'a', 'd'), expected: { a: 1, d: { a: null } } },
     // @ts-expect-error - invalid value
-    [pick(baseObject, 'x'), {}],
-    [pick(baseObject), baseObject],
-  ])('should be %p', (result, expected) => {
+    { result: pick(baseObject, 'x'), expected: {} },
+    { result: pick(baseObject), expected: baseObject },
+  ])('should be $result', ({ expected, result }) => {
     expect(result).toEqual(expected);
   });
 
@@ -230,51 +228,66 @@ describe('pick', () => {
 
 describe('queryStringFormat', () => {
   it.each([
-    [
-      'a complex object',
-      { p: { BRL: ['R$50 - R$100', 'R$100+'] }, c: ['COSMIC', 'COPPER'] },
-      "input format isn't supported",
-    ],
-    ['an array', ['R$50 - R$100', 'R$100+'], "input type isn't supported"],
-    ['a string', 'R$50 - R$100', "input type isn't supported"],
-  ])('should throw with %s', (_, input, expected) => {
+    {
+      title: 'a complex object',
+      input: { p: { BRL: ['R$50 - R$100', 'R$100+'] }, c: ['COSMIC', 'COPPER'] },
+      expected: "input format isn't supported",
+    },
+    {
+      title: 'an array',
+      input: ['R$50 - R$100', 'R$100+'],
+      expected: "input type isn't supported",
+    },
+    { title: 'a string', input: 'R$50 - R$100', expected: "input type isn't supported" },
+  ])('should throw with $title', ({ expected, input }) => {
     // @ts-expect-error - invalid value
     expect(() => queryStringFormat(input)).toThrow(expected);
   });
 
   it.each([
-    [{ tipo: 'cão', raça: 'pastor alemão' }, 'tipo=c%C3%A3o&raça=pastor%20alem%C3%A3o', {}],
-    [
-      { tipo: 'cão', raça: 'pastor alemão' },
-      'tipo=c%C3%A3o&ra%C3%A7a=pastor%20alem%C3%A3o',
-      { encodeValuesOnly: false },
-    ],
-    [
-      { type: 'dog', breed: 'german shepperd' },
-      '?type=dog&breed=german%20shepperd',
-      { addPrefix: true },
-    ],
-    [
-      { p: ['R$50 - R$100', 'R$100+'], c: ['COSMIC', 'COPPER'] },
-      'p=R%2450%20-%20R%24100,R%24100%2B&c=COSMIC,COPPER',
-      {},
-    ],
-  ])('should stringify %s properly', (input, result, addPrefix: any = {}) => {
-    expect(queryStringFormat(input, addPrefix)).toEqual(result);
+    {
+      input: { tipo: 'cão', raça: 'pastor alemão' },
+      expected: 'tipo=c%C3%A3o&raça=pastor%20alem%C3%A3o',
+    },
+    {
+      input: { tipo: 'cão', raça: 'pastor alemão' },
+      expected: 'tipo=c%C3%A3o&ra%C3%A7a=pastor%20alem%C3%A3o',
+      options: { encodeValuesOnly: false },
+    },
+    {
+      input: { type: 'dog', breed: 'german shepperd' },
+      expected: '?type=dog&breed=german%20shepperd',
+      options: { addPrefix: true },
+    },
+    {
+      input: { p: ['R$50 - R$100', 'R$100+'], c: ['COSMIC', 'COPPER'] },
+      expected: 'p=R%2450%20-%20R%24100,R%24100%2B&c=COSMIC,COPPER',
+    },
+  ])('should stringify $input properly', ({ expected, input, options }) => {
+    expect(queryStringFormat(input, options)).toEqual(expected);
   });
 });
 
 describe('queryStringParse', () => {
   it.each([
-    ['?type=dog&breed=german%20shepperd', { type: 'dog', breed: 'german shepperd' }],
-    ['?type=cat&breed=wild%20african%20cat', { type: 'cat', breed: 'wild african cat' }],
-    [
-      '?p=R%2450%20-%20R%24100,R%24100+&c=COSMIC,COPPER',
-      { c: 'COSMIC,COPPER', p: 'R$50 - R$100,R$100+' },
-    ],
-    ['tipo=c%C3%A3o&ra%C3%A7a=pastor%20alem%C3%A3o', { tipo: 'cão', raça: 'pastor alemão' }],
-  ])('%p should parse properly', (input, result) => {
-    expect(queryStringParse(input)).toEqual(result);
+    {
+      input: '?type=dog&breed=german%20shepperd',
+      expected: { type: 'dog', breed: 'german shepperd' },
+    },
+    {
+      input: '?type=cat&breed=wild%20african%20cat',
+      expected: { type: 'cat', breed: 'wild african cat' },
+    },
+    {
+      input: '?p=R%2450%20-%20R%24100,R%24100+&c=COSMIC,COPPER',
+      expected: { c: 'COSMIC,COPPER', p: 'R$50 - R$100,R$100+' },
+    },
+    {
+      input: 'tipo=c%C3%A3o&ra%C3%A7a=pastor%20alem%C3%A3o',
+      expected: { tipo: 'cão', raça: 'pastor alemão' },
+    },
+  ])('$input should parse properly', ({ expected, input }) => {
+    expect(queryStringParse(input)).toEqual(expected);
   });
 });
 

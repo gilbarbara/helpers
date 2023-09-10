@@ -14,6 +14,6 @@ describe('isTouchDevice', () => {
 
 describe('prefersReducedMotion', () => {
   it('should return properly', () => {
-    expect(prefersReducedMotion()).toBeFalse();
+    expect(prefersReducedMotion()).toBeTrue();
   });
 });

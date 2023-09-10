@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`ASYNC_STATUS should return the expected statuses 1`] = `
+exports[`ASYNC_STATUS > should return the expected statuses 1`] = `
 {
   "ERROR": "ERROR",
   "IDLE": "IDLE",
@@ -9,9 +9,9 @@ exports[`ASYNC_STATUS should return the expected statuses 1`] = `
 }
 `;
 
-exports[`cors with "data" should return properly 1`] = `
+exports[`cors > with 'data' should return properly 1`] = `
 {
-  "body": "{"name":"John Doe"}",
+  "body": "{\\"name\\":\\"John Doe\\"}",
   "headers": {
     "Access-Control-Allow-Credentials": true,
     "Access-Control-Allow-Headers": "Accept-Version,Accept,Authorization,Content-Length,Content-MD5,Content-Type,Date,x-amz-date,x-amz-security-token,X-Api-Version,X-CSRF-Token,X-Requested-With",
@@ -22,7 +22,7 @@ exports[`cors with "data" should return properly 1`] = `
 }
 `;
 
-exports[`cors with "methods, origin and allowedHeaders" should return properly 1`] = `
+exports[`cors > with 'methods, origin and allowedHeaders' should return properly 1`] = `
 {
   "body": "null",
   "headers": {
@@ -35,16 +35,16 @@ exports[`cors with "methods, origin and allowedHeaders" should return properly 1
 }
 `;
 
-exports[`cors with "responseHeaders" should return properly 1`] = `
+exports[`cors > with 'responseHeaders' should return properly 1`] = `
 {
-  "body": "[{"name":"John Doe"}]",
+  "body": "[{\\"name\\":\\"John Doe\\"}]",
   "headers": {
     "Access-Control-Allow-Credentials": true,
     "Access-Control-Allow-Headers": "Accept-Version,Accept,Authorization,Content-Length,Content-MD5,Content-Type,Date,x-amz-date,x-amz-security-token,X-Api-Version,X-CSRF-Token,X-Requested-With",
     "Access-Control-Allow-Methods": "GET,OPTIONS",
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Expose-Headers": "Link,X-Items-Total,X-Items-Per-Page,X-Items-From,X-Items-To",
-    "Link": "</?page=10>; rel="current", </?page=10>; rel="last", </?page=9>; rel="prev"",
+    "Link": "</?page=10>; rel=\\"current\\", </?page=10>; rel=\\"last\\", </?page=9>; rel=\\"prev\\"",
     "X-Items-From": "901",
     "X-Items-Per-Page": "100",
     "X-Items-To": "938",
@@ -54,7 +54,7 @@ exports[`cors with "responseHeaders" should return properly 1`] = `
 }
 `;
 
-exports[`request should handle options 1`] = `
+exports[`request > should handle options 1`] = `
 {
   "body": "bar",
   "id": 101,
@@ -63,7 +63,7 @@ exports[`request should handle options 1`] = `
 }
 `;
 
-exports[`request should handle success 1`] = `
+exports[`request > should handle success 1`] = `
 {
   "body": "quia et suscipit recusandae consequuntur expedita et cum reprehenderit molestiae ut ut quas totam nostrum rerum est autem sunt rem eveniet architecto",
   "id": 1,

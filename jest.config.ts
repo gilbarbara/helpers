@@ -25,15 +25,7 @@ const config: Config = {
   },
   testRegex: '/test/.*?\\.(test|spec)\\.tsx?$',
   transform: {
-    '^.+\\.tsx?$': [
-      'ts-jest',
-      {
-        tsconfig: 'test/tsconfig.json',
-        diagnostics: {
-          ignoreCodes: ['TS151001'],
-        },
-      },
-    ],
+    '^.+\\.(t|j)sx?$': '@swc/jest',
   },
   verbose: false,
   watchPlugins: ['jest-watch-typeahead/filename', 'jest-watch-typeahead/testname'],

@@ -1,69 +1,78 @@
+import { expect } from 'vitest';
+
 import { ceil, clamp, floor, pad, randomNumber, round } from '../src';
 
 describe('ceil', () => {
   it.each([
-    [34.0293992838, undefined, 34.03],
-    [34.0293992838, 1, 34.1],
-    [129.017838992, 4, 129.0179],
-  ])('should convert %p with %p digits to %p', (input, digits, expected) => {
+    { input: 34.0293992838, digits: undefined, expected: 34.03 },
+    { input: 34.0293992838, digits: 1, expected: 34.1 },
+    { input: 129.017838992, digits: 4, expected: 129.0179 },
+  ])('$input with digits: $digits should return $expected', ({ digits, expected, input }) => {
     expect(ceil(input, digits)).toEqual(expected);
   });
 });
 
 describe('clamp', () => {
   it.each([
-    [120, 100, 0, 100],
-    [70, 70, 0, 100],
-    [12, 10, 1, 10],
-    [-7, 1, 1, 10],
-    [-1, 0, undefined, undefined],
-  ])('should limit %s to %s between %p and %p', (value, expected, min, max) => {
-    expect(clamp(value, min, max)).toBe(expected);
-  });
+    { input: 120, expected: 100, min: 0, max: 100 },
+    { input: 70, expected: 70, min: 0, max: 100 },
+    { input: 12, expected: 10, min: 1, max: 10 },
+    { input: -7, expected: 1, min: 1, max: 10 },
+    { input: -1, expected: 0 },
+  ])(
+    '$input with min: $min and max: $max should return $expected',
+    ({ expected, input, max, min }) => {
+      expect(clamp(input, min, max)).toBe(expected);
+    },
+  );
 });
 
 describe('floor', () => {
   it.each([
-    [34.0293992838, undefined, 34.02],
-    [34.0293992838, 1, 34],
-    [129.017838992, 4, 129.0178],
-  ])('should convert %p with %p digits to %p', (input, digits, expected) => {
+    { input: 34.0293992838, expected: 34.02 },
+    { input: 34.0293992838, digits: 1, expected: 34 },
+    { input: 129.017838992, digits: 4, expected: 129.0178 },
+  ])('$input with digits: $digits  should return $expected', ({ digits, expected, input }) => {
     expect(floor(input, digits)).toEqual(expected);
   });
 });
 
 describe('pad', () => {
   it.each([
-    [2, undefined, '02'],
-    [12, 4, '0012'],
-  ])('should convert %p with length %p to %p', (input, length, expected) => {
+    { input: 2, expected: '02' },
+    { input: 12, length: 4, expected: '0012' },
+  ])('$input with length $length should return $expected', ({ expected, input, length }) => {
     expect(pad(input, length)).toEqual(expected);
   });
 });
 
 describe('randomNumber', () => {
   it.each([
-    [0, 1],
-    [1, 10],
-    [100, 1000],
-    [100, 100],
-  ])('should return a number between %p and %p', (min, max) => {
-    expect(randomNumber(min, max))
-      .toBeGreaterThanOrEqual(min)
-      .toBeLessThan(max + 1);
+    { min: 0, max: 1 },
+    { min: 1, max: 10 },
+    { min: 100, max: 1000 },
+    { min: 100, max: 100 },
+  ])('should return a number between $min and $max', ({ max, min }) => {
+    const result = randomNumber(min, max);
+
+    expect(result).toBeGreaterThanOrEqual(min);
+    expect(result).toBeLessThan(max + 1);
   });
 
   it('should return a number without parameters', () => {
-    expect(randomNumber()).toBeGreaterThanOrEqual(0).toBeLessThan(11);
+    const result = randomNumber();
+
+    expect(result).toBeGreaterThanOrEqual(0);
+    expect(result).toBeLessThan(11);
   });
 });
 
 describe('round', () => {
   it.each([
-    [34.0293992838, undefined, 34.03],
-    [203.09273772, 1, 203.1],
-    [129.017898992, 4, 129.0179],
-  ])('should convert %p with %p digits to %p', (input, digits, expected) => {
+    { input: 34.0293992838, expected: 34.03 },
+    { input: 203.09273772, digits: 1, expected: 203.1 },
+    { input: 129.017898992, digits: 4, expected: 129.0179 },
+  ])('$input with digits: $digits should return $expected', ({ digits, expected, input }) => {
     expect(round(input, digits)).toEqual(expected);
   });
 });

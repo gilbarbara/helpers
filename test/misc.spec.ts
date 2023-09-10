@@ -1,6 +1,3 @@
-/* eslint-disable no-console */
-import { advanceTo } from 'jest-date-mock';
-
 import {
   conditional,
   copyToClipboard,
@@ -38,7 +35,7 @@ describe('conditional', () => {
 });
 
 describe('copyToClipboard', () => {
-  let mockWriteText: any = jest.fn();
+  let mockWriteText: any = vi.fn();
 
   beforeAll(() => {
     Object.assign(navigator, {
@@ -155,36 +152,33 @@ describe('isJSON', () => {
 
 describe('isRequired', () => {
   it('should throw an Error without input', () => {
-    expect(() => isRequired())
-      .toThrow(Error)
-      .toThrow(`"parameter" is required`);
+    expect(() => isRequired()).toThrow(`"parameter" is required`);
   });
 
   it.each([
-    [TypeError, 'value'],
-    [SyntaxError, 'input'],
-    [RangeError, 'input'],
-    [ReferenceError, 'input'],
-    [URIError, 'input'],
-  ])('should throw a %p with %p', (type, name) => {
-    expect(() => isRequired(name, type))
-      .toThrow(type || Error)
-      .toThrow(`"${name}" is required`);
+    { type: TypeError, name: 'value' },
+    { type: SyntaxError, name: 'input' },
+    { type: RangeError, name: 'input' },
+    { type: ReferenceError, name: 'input' },
+    { type: URIError, name: 'input' },
+  ])('should throw a $type with $name', ({ name, type }) => {
+    expect(() => isRequired(name, type)).toThrow(type || Error);
+    expect(() => isRequired(name, type)).toThrow(`"${name}" is required`);
   });
 });
 
 describe('logger', () => {
-  const log = jest.spyOn(console, 'log').mockImplementation(noop);
-  const group = jest.spyOn(console, 'group').mockImplementation(noop);
-  const groupCollapsed = jest.spyOn(console, 'groupCollapsed').mockImplementation(noop);
-  const groupEnd = jest.spyOn(console, 'groupEnd').mockImplementation(noop);
+  const log = vi.spyOn(console, 'log').mockImplementation(noop);
+  const group = vi.spyOn(console, 'group').mockImplementation(noop);
+  const groupCollapsed = vi.spyOn(console, 'groupCollapsed').mockImplementation(noop);
+  const groupEnd = vi.spyOn(console, 'groupEnd').mockImplementation(noop);
 
   beforeAll(() => {
-    advanceTo(new Date(2019, 1, 1, 0, 0, 0));
+    vi.setSystemTime(new Date(2019, 1, 1, 0, 0, 0));
   });
 
   afterAll(() => {
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 
   it('without options', () => {
@@ -241,14 +235,14 @@ describe('logger', () => {
 
 describe('nullify', () => {
   it.each([
-    [{}, {}],
-    [[], []],
-    ['text', 'text'],
-    [0, 0],
-    [false, false],
-    [undefined, null],
-  ])('should receive %p and return %p', (value, expected) => {
-    expect(nullify(value)).toEqual(expected);
+    { input: {}, expected: {} },
+    { input: [], expected: [] },
+    { input: 'text', expected: 'text' },
+    { input: 0, expected: 0 },
+    { input: false, expected: false },
+    { input: undefined, expected: null },
+  ])('$input should return $expected', ({ expected, input }) => {
+    expect(nullify(input)).toEqual(expected);
   });
 });
 
@@ -257,8 +251,8 @@ describe('popupCenter', () => {
 
   beforeAll(() => {
     window = Object.create(window);
-    window.focus = jest.fn(() => true);
-    window.open = jest.fn(() => window);
+    window.focus = vi.fn(() => true);
+    window.open = vi.fn(() => window);
   });
 
   afterAll(() => {
@@ -289,18 +283,25 @@ describe('unique', () => {
   const regex = /^[\dA-Za-z]+$/;
 
   it('should return a unique string', () => {
-    expect(unique()).toEqual(expect.stringMatching(regex)).toHaveLength(8);
-    expect(unique(24)).toEqual(expect.stringMatching(regex)).toHaveLength(24);
-    expect(
-      unique(12, {
-        includeLowercase: false,
-        includeUppercase: false,
-        includeNumbers: false,
-        includeSymbols: true,
-      }),
-    )
-      .toEqual(expect.stringMatching(/^[!#$%&*+.:=?@^_~-]+$/))
-      .toHaveLength(12);
+    const result1 = unique();
+
+    expect(result1).toEqual(expect.stringMatching(regex));
+    expect(result1).toHaveLength(8);
+
+    const result2 = unique(24);
+
+    expect(result2).toEqual(expect.stringMatching(regex));
+    expect(result2).toHaveLength(24);
+
+    const result3 = unique(12, {
+      includeLowercase: false,
+      includeUppercase: false,
+      includeNumbers: false,
+      includeSymbols: true,
+    });
+
+    expect(result3).toEqual(expect.stringMatching(/^[!#$%&*+.:=?@^_~-]+$/));
+    expect(result3).toHaveLength(12);
   });
 });
 

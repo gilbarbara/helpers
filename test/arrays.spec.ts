@@ -1,5 +1,3 @@
-import { expectTypeOf } from 'expect-type';
-
 import {
   createArray,
   getRandomItem,
@@ -14,20 +12,20 @@ import {
 
 describe('createArray', () => {
   it.each([
-    [4, 0],
-    [10, 1],
-    [10, 5],
-  ])('should return an array with %s items starting at %s', (input, start) => {
-    expect(createArray(input, start)).toMatchSnapshot();
+    { size: 4, start: 0 },
+    { size: 10, start: 1 },
+    { size: 10, start: 5 },
+  ])('should return an array with $size items starting at $start', ({ size, start }) => {
+    expect(createArray(size, start)).toMatchSnapshot();
   });
 });
 
 describe('getRandomItem', () => {
   it.each([
-    [['alpha', 'beta', 'gamma', 'delta', 'epsilon'], String],
-    [[1, 2, 3, 4, 5], Number],
-    [[{ a: 1 }, { b: 2 }, { c: 3 }], Object],
-  ])('should return a single item', (input, expected) => {
+    { input: ['alpha', 'beta', 'gamma', 'delta', 'epsilon'], expected: String },
+    { input: [1, 2, 3, 4, 5], expected: Number },
+    { input: [{ a: 1 }, { b: 2 }, { c: 3 }], expected: Object },
+  ])('should return a single item', ({ expected, input }) => {
     // @ts-expect-error - The dynamic nature of the test makes it hard to type
     expect(getRandomItem(input)).toEqual(expect.any(expected));
   });
@@ -76,59 +74,76 @@ describe('shuffle', () => {
 
 describe('sortByLocaleCompare', () => {
   it.each([
-    ['portuguese', ['Mãe', 'limão', 'cachê', 'tião', 'amô', 'côncavo'], undefined],
-    ['french', ['réservé', 'Premier', 'Cliché', 'communiqué', 'café', 'Adieu'], undefined],
-    [
-      'english',
-      ['port', 'Mars', 'Car', 'cart', 'Payment', 'asylum', 'Asian'],
-      { descending: true },
-    ],
-    ['numeric', ['32', '16', '24', '2', '8', '48', '4', '2'], { numeric: true }],
-  ])('should sort an array in %s', (_, input, options) => {
+    { title: 'portuguese', input: ['Mãe', 'limão', 'cachê', 'tião', 'amô', 'côncavo'] },
+    { title: 'french', input: ['réservé', 'Premier', 'Cliché', 'communiqué', 'café', 'Adieu'] },
+    {
+      title: 'english',
+      input: ['port', 'Mars', 'Car', 'cart', 'Payment', 'asylum', 'Asian'],
+      options: { descending: true },
+    },
+    {
+      title: 'numeric',
+      input: ['32', '16', '24', '2', '8', '48', '4', '2'],
+      options: { numeric: true },
+    },
+  ])('should sort an array in $title', ({ input, options }) => {
     expect(input.sort(sortByLocaleCompare(undefined, options))).toMatchSnapshot();
   });
 
   it.each([
-    ['ascending', [{ key: 'green' }, { key: 'amber' }, { key: 'red' }, { key: 'cyan' }], undefined],
-    [
-      'descending',
-      [{ key: 'green' }, { key: 'amber' }, { key: 'red' }, { key: 'cyan' }],
-      { descending: true },
-    ],
-  ])('should sort an object %s', (_, input, options) => {
+    {
+      title: 'ascending',
+      input: [{ key: 'green' }, { key: 'amber' }, { key: 'red' }, { key: 'cyan' }],
+    },
+    {
+      title: 'descending',
+      input: [{ key: 'green' }, { key: 'amber' }, { key: 'red' }, { key: 'cyan' }],
+      options: { descending: true },
+    },
+  ])('should sort an object $title', ({ input, options }) => {
     expect(input.sort(sortByLocaleCompare('key', options))).toMatchSnapshot();
   });
 });
 
 describe('sortByPrimitive', () => {
   it.each([
-    ['cycle-number-asc', 'cycle', [{ cycle: 1 }, { cycle: 4 }, { cycle: 3 }, { cycle: 3 }], false],
-    ['cycle-number-desc', 'cycle', [{ cycle: 1 }, { cycle: 4 }, { cycle: 3 }, { cycle: 3 }], true],
-    ['-number-asc', undefined, [2, 4, 1, 3, 2], false],
-    ['-number-desc', undefined, [2, 4, 1, 3, 2], true],
-    [
-      'status-boolean-asc',
-      'status',
-      [
+    {
+      title: 'cycle-number-asc',
+      key: 'cycle',
+      input: [{ cycle: 1 }, { cycle: 4 }, { cycle: 3 }, { cycle: 3 }],
+      descending: false,
+    },
+    {
+      title: 'cycle-number-desc',
+      key: 'cycle',
+      input: [{ cycle: 1 }, { cycle: 4 }, { cycle: 3 }, { cycle: 3 }],
+      descending: true,
+    },
+    { title: '-number-asc', key: undefined, input: [2, 4, 1, 3, 2], descending: false },
+    { title: '-number-desc', key: undefined, input: [2, 4, 1, 3, 2], descending: true },
+    {
+      title: 'status-boolean-asc',
+      key: 'status',
+      input: [
         { cycle: 3, status: true },
         { cycle: 1, status: false },
         { cycle: 3, status: true },
         { cycle: 4, status: false },
       ],
-      false,
-    ],
-    [
-      'status-boolean-desc',
-      'status',
-      [
+      descending: false,
+    },
+    {
+      title: 'status-boolean-desc',
+      key: 'status',
+      input: [
         { cycle: 3, status: true },
         { cycle: 1, status: false },
         { cycle: 3, status: true },
         { cycle: 4, status: false },
       ],
-      true,
-    ],
-  ])('should sort an array by %s', (_, key, input, descending) => {
+      descending: true,
+    },
+  ])('should sort an array by $title', ({ descending, input, key }) => {
     expect(input.sort(sortByPrimitive(key, descending))).toMatchSnapshot();
   });
 });

@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`createArray should return an array with 4 items starting at 0 1`] = `
+exports[`createArray > should return an array with 4 items starting at +0 1`] = `
 [
   0,
   1,
@@ -9,7 +9,7 @@ exports[`createArray should return an array with 4 items starting at 0 1`] = `
 ]
 `;
 
-exports[`createArray should return an array with 10 items starting at 1 1`] = `
+exports[`createArray > should return an array with 10 items starting at 1 1`] = `
 [
   1,
   2,
@@ -24,7 +24,7 @@ exports[`createArray should return an array with 10 items starting at 1 1`] = `
 ]
 `;
 
-exports[`createArray should return an array with 10 items starting at 5 1`] = `
+exports[`createArray > should return an array with 10 items starting at 5 1`] = `
 [
   5,
   6,
@@ -39,7 +39,7 @@ exports[`createArray should return an array with 10 items starting at 5 1`] = `
 ]
 `;
 
-exports[`sortByLocaleCompare should sort an array in english 1`] = `
+exports[`sortByLocaleCompare > should sort an array in 'english' 1`] = `
 [
   "port",
   "Payment",
@@ -51,7 +51,7 @@ exports[`sortByLocaleCompare should sort an array in english 1`] = `
 ]
 `;
 
-exports[`sortByLocaleCompare should sort an array in french 1`] = `
+exports[`sortByLocaleCompare > should sort an array in 'french' 1`] = `
 [
   "Adieu",
   "café",
@@ -62,7 +62,7 @@ exports[`sortByLocaleCompare should sort an array in french 1`] = `
 ]
 `;
 
-exports[`sortByLocaleCompare should sort an array in numeric 1`] = `
+exports[`sortByLocaleCompare > should sort an array in 'numeric' 1`] = `
 [
   "2",
   "2",
@@ -75,7 +75,7 @@ exports[`sortByLocaleCompare should sort an array in numeric 1`] = `
 ]
 `;
 
-exports[`sortByLocaleCompare should sort an array in portuguese 1`] = `
+exports[`sortByLocaleCompare > should sort an array in 'portuguese' 1`] = `
 [
   "amô",
   "cachê",
@@ -86,7 +86,7 @@ exports[`sortByLocaleCompare should sort an array in portuguese 1`] = `
 ]
 `;
 
-exports[`sortByLocaleCompare should sort an object ascending 1`] = `
+exports[`sortByLocaleCompare > should sort an object 'ascending' 1`] = `
 [
   {
     "key": "amber",
@@ -103,7 +103,7 @@ exports[`sortByLocaleCompare should sort an object ascending 1`] = `
 ]
 `;
 
-exports[`sortByLocaleCompare should sort an object descending 1`] = `
+exports[`sortByLocaleCompare > should sort an object 'descending' 1`] = `
 [
   {
     "key": "red",
@@ -120,7 +120,7 @@ exports[`sortByLocaleCompare should sort an object descending 1`] = `
 ]
 `;
 
-exports[`sortByPrimitive should sort an array by -number-asc 1`] = `
+exports[`sortByPrimitive > should sort an array by '-number-asc' 1`] = `
 [
   1,
   2,
@@ -130,7 +130,7 @@ exports[`sortByPrimitive should sort an array by -number-asc 1`] = `
 ]
 `;
 
-exports[`sortByPrimitive should sort an array by -number-desc 1`] = `
+exports[`sortByPrimitive > should sort an array by '-number-desc' 1`] = `
 [
   4,
   3,
@@ -140,7 +140,7 @@ exports[`sortByPrimitive should sort an array by -number-desc 1`] = `
 ]
 `;
 
-exports[`sortByPrimitive should sort an array by cycle-number-asc 1`] = `
+exports[`sortByPrimitive > should sort an array by 'cycle-number-asc' 1`] = `
 [
   {
     "cycle": 1,
@@ -157,7 +157,7 @@ exports[`sortByPrimitive should sort an array by cycle-number-asc 1`] = `
 ]
 `;
 
-exports[`sortByPrimitive should sort an array by cycle-number-desc 1`] = `
+exports[`sortByPrimitive > should sort an array by 'cycle-number-desc' 1`] = `
 [
   {
     "cycle": 4,
@@ -174,7 +174,7 @@ exports[`sortByPrimitive should sort an array by cycle-number-desc 1`] = `
 ]
 `;
 
-exports[`sortByPrimitive should sort an array by status-boolean-asc 1`] = `
+exports[`sortByPrimitive > should sort an array by 'status-boolean-asc' 1`] = `
 [
   {
     "cycle": 1,
@@ -195,7 +195,7 @@ exports[`sortByPrimitive should sort an array by status-boolean-asc 1`] = `
 ]
 `;
 
-exports[`sortByPrimitive should sort an array by status-boolean-desc 1`] = `
+exports[`sortByPrimitive > should sort an array by 'status-boolean-desc' 1`] = `
 [
   {
     "cycle": 3,
