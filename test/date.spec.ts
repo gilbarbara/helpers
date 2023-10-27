@@ -37,7 +37,7 @@ describe('date', () => {
   });
 
   describe('isIsoDate', () => {
-    test.each([
+    it.each([
       { input: '2000-01-01T00:00:00.000Z', expected: true },
       { input: '2018-02-18T20:40:00.000Z', expected: true },
       { input: '2019-02-01T02:00:00.000Z', expected: true },

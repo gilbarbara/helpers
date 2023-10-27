@@ -35,33 +35,23 @@ describe('conditional', () => {
 });
 
 describe('copyToClipboard', () => {
-  let mockWriteText: any = vi.fn();
-
-  beforeAll(() => {
-    Object.assign(navigator, {
-      clipboard: {
-        writeText: (input: string) => mockWriteText(input),
-      },
-    });
-  });
-
-  afterAll(() => {
-    Object.assign(navigator, {
-      clipboard: undefined,
-    });
-  });
-
   it('should copy to clipboard', async () => {
     const result = await copyToClipboard('Hello');
 
     expect(result).toBe(true);
-    expect(mockWriteText).toHaveBeenCalledWith('Hello');
+    const data = await window.navigator.clipboard.readText();
+
+    expect(data).toBe('Hello');
   });
 
   it('should handle errors', async () => {
-    mockWriteText = () => {
-      throw new Error();
-    };
+    const permissionStatus = await window.navigator.permissions.query({
+      // @ts-ignore
+      name: 'clipboard-write',
+    });
+
+    // @ts-ignore
+    permissionStatus.state = 'denied';
 
     const result = await copyToClipboard('Hello');
 
@@ -250,9 +240,8 @@ describe('popupCenter', () => {
   const { focus, open } = window;
 
   beforeAll(() => {
-    window = Object.create(window);
-    window.focus = vi.fn(() => true);
-    window.open = vi.fn(() => window);
+    vi.spyOn(window, 'focus').mockImplementation(() => true);
+    vi.spyOn(window, 'open').mockImplementation(() => window);
   });
 
   afterAll(() => {

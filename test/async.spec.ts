@@ -41,29 +41,31 @@ describe('cors', () => {
 });
 
 describe('poll', () => {
-  it('should resolve before the timeout', () => {
+  it('should resolve before the timeout', async () => {
     let isReady = false;
 
     setTimeout(() => {
       isReady = true;
     }, 300);
 
-    return poll(() => isReady).then(d => {
-      expect(d).toBeUndefined();
-    });
+    const d = await poll(() => isReady);
+
+    expect(d).toBeUndefined();
   });
 
-  it('should reject after max retries', () => {
+  it('should reject after max retries', async () => {
     let isReady = false;
 
     setTimeout(() => {
       isReady = true;
     }, 500);
 
-    return poll(() => isReady, { delay: 0.1 }).catch(error => {
-      // eslint-disable-next-line jest/no-conditional-expect
+    try {
+      await poll(() => isReady, { delay: 0.1 });
+    } catch (error: any) {
+      // eslint-disable-next-line vitest/no-conditional-expect
       expect(error.message).toBe('Timeout');
-    });
+    }
   });
 });
 
@@ -98,7 +100,9 @@ describe('request', () => {
         userId: 1,
       }),
     );
-    expect(await request('https://jsonplaceholder.typicode.com/posts/1')).toMatchSnapshot();
+    await expect(
+      request('https://jsonplaceholder.typicode.com/posts/1'),
+    ).resolves.toMatchSnapshot();
   });
 
   it('should handle options', async () => {
@@ -112,8 +116,8 @@ describe('request', () => {
       }),
     );
 
-    expect(
-      await request('https://jsonplaceholder.typicode.com/posts', {
+    await expect(
+      request('https://jsonplaceholder.typicode.com/posts', {
         method: 'POST',
         body: {
           title: 'foo',
@@ -121,7 +125,7 @@ describe('request', () => {
           userId: 1,
         },
       }),
-    ).toMatchSnapshot();
+    ).resolves.toMatchSnapshot();
   });
 });
 
@@ -136,14 +140,13 @@ describe('sleep', () => {
     { input: 0.1, timeout: 100 },
     { input: undefined, timeout: 1000 },
   ])('should halt the execution for $input', async ({ input, timeout }) => {
-    // eslint-disable-next-line unicorn/consistent-function-scoping
     const fn = async () => {
       await sleep(input);
 
       return 'finished';
     };
 
-    expect(await fn()).toBe('finished');
+    await expect(fn()).resolves.toBe('finished');
     expect(setTimeoutSpy).toHaveBeenLastCalledWith(expect.any(Function), timeout);
   });
 });
