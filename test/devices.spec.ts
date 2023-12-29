@@ -1,3 +1,7 @@
+/**
+ * @vitest-environment happy-dom
+ */
+
 import { isDarkMode, isTouchDevice, prefersReducedMotion } from '../src';
 
 describe('isDarkMode', () => {
