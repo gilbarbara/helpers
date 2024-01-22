@@ -3,6 +3,7 @@
  */
 
 import {
+  canUseDOM,
   conditional,
   copyToClipboard,
   getDataType,
@@ -17,6 +18,12 @@ import {
   unique,
   uuid,
 } from '../src';
+
+describe('canUseDOM', () => {
+  it('should return true', () => {
+    expect(canUseDOM()).toBeTrue();
+  });
+});
 
 describe('conditional', () => {
   it.each([
@@ -54,7 +61,7 @@ describe('copyToClipboard', () => {
       name: 'clipboard-write',
     });
 
-    // @ts-ignore
+    // @ts-expect-error PermissionStatus is readonly
     permissionStatus.state = 'denied';
 
     const result = await copyToClipboard('Hello');

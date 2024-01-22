@@ -6,6 +6,10 @@ import { LoggerOptions, UniqueOptions } from './types';
 
 type Case<T = void> = [boolean, () => T];
 
+export function canUseDOM() {
+  return !!(typeof window !== 'undefined' && window.document && window.document.createElement);
+}
+
 export function conditional<TReturn = void>(
   cases: Array<Case<TReturn>>,
   defaultCase?: () => TReturn,
