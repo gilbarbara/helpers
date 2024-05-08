@@ -121,6 +121,32 @@ export function nullify<T>(value: T) {
   return value ?? null;
 }
 
+/* eslint-disable @typescript-eslint/ban-types */
+/**
+ * Add the event listener to the target
+ */
+export function on<T extends Window | Document | HTMLElement | EventTarget>(
+  target: T | null,
+  ...rest: Parameters<T['addEventListener']> | [string, Function | null, ...any]
+): void {
+  if (target?.addEventListener) {
+    target.addEventListener(...(rest as Parameters<HTMLElement['addEventListener']>));
+  }
+}
+
+/**
+ * Remove the event listener from the target
+ */
+export function off<T extends Window | Document | HTMLElement | EventTarget>(
+  target: T | null,
+  ...rest: Parameters<T['removeEventListener']> | [string, Function | null, ...any]
+): void {
+  if (target?.removeEventListener) {
+    target.removeEventListener(...(rest as Parameters<HTMLElement['removeEventListener']>));
+  }
+}
+/* eslint-enable @typescript-eslint/ban-types */
+
 export function popupCenter(url: string, title: string, width: number, height: number) {
   const { screen, screenLeft, screenTop } = window;
   let screenWidth = window.innerWidth;
