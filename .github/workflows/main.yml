@@ -2,12 +2,11 @@ name: CI
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
     tags:
-      - 'v*'
+      - "v*"
   pull_request:
-    branches: ['*']
+    branches: ["*"]
 
   workflow_dispatch:
 
@@ -36,10 +35,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          registry-url: 'https://registry.npmjs.org'
+          registry-url: "https://registry.npmjs.org"
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v3
         with:
           version: 8
           run_install: false
