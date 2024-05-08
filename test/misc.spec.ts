@@ -13,6 +13,8 @@ import {
   logger,
   noop,
   nullify,
+  off,
+  on,
   popupCenter,
   px,
   unique,
@@ -244,6 +246,33 @@ describe('nullify', () => {
     { input: undefined, expected: null },
   ])('$input should return $expected', ({ expected, input }) => {
     expect(nullify(input)).toEqual(expected);
+  });
+});
+
+describe('off', () => {
+  it('should remove the event listener', () => {
+    const target = document.createElement('div');
+    const eventListener = vi.fn();
+
+    on(target, 'click', eventListener);
+    off(target, 'click', eventListener);
+
+    target.dispatchEvent(new Event('click'));
+
+    expect(eventListener).not.toHaveBeenCalled();
+  });
+});
+
+describe('on', () => {
+  it('should add an event listener', () => {
+    const target = document.createElement('div');
+    const eventListener = vi.fn();
+
+    on(target, 'click', eventListener);
+
+    target.dispatchEvent(new Event('click'));
+
+    expect(eventListener).toHaveBeenCalled();
   });
 });
 

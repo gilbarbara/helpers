@@ -412,6 +412,18 @@ interface LoggerOptions {
   ```
 </details>
 
+**on<T extends Window | Document | HTMLElement | EventTarget>(
+target: T | null,
+...rest: Parameters<T['addEventListener']> | [string, Function | null, ...any]
+): void**  
+Add the event listener to the target
+
+**off<T extends Window | Document | HTMLElement | EventTarget>(
+target: T | null,
+...rest: Parameters<T['removeEventListener']> | [string, Function | null, ...any]
+): void**  
+Remove the event listener from the target
+
 **nullify\<T>(value: T): T | null**  
 Returns the value or null.
 
