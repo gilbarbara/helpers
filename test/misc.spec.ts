@@ -134,7 +134,7 @@ describe('invariant', () => {
   const message = 'value must be a string';
 
   it('should NOT throw if the condition is truthy', () => {
-    expect(invariant('value', message)).toBeUndefined();
+    expect(() => invariant('value', message)).not.toThrow();
   });
 
   it('should throw if the condition is false', () => {

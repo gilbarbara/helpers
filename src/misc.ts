@@ -7,7 +7,7 @@ import { LoggerOptions, UniqueOptions } from './types';
 type Case<T = void> = [boolean, () => T];
 
 export function canUseDOM() {
-  return !!(typeof window !== 'undefined' && window.document && window.document.createElement);
+  return !!(typeof window !== 'undefined' && window.document?.createElement);
 }
 
 export function conditional<TReturn = void>(
@@ -106,7 +106,6 @@ export function logger(type: string, title: string, data: any, options: LoggerOp
     parts.push(`%c@ ${time}`);
   }
 
-  /* istanbul ignore else */
   if (!skip) {
     groupMethod(parts.join(' '), ...styles);
     console.log(data);
@@ -127,14 +126,14 @@ export function popupCenter(url: string, title: string, width: number, height: n
   let screenWidth = window.innerWidth;
   let screenHeight = window.innerHeight;
 
-  /* istanbul ignore next */
+  /* c8 ignore next 5 */
   if (!screenWidth) {
     screenWidth = document.documentElement.clientWidth
       ? document.documentElement.clientWidth
       : screen.width;
   }
 
-  /* istanbul ignore next */
+  /* c8 ignore next 5 */
   if (!screenHeight) {
     screenHeight = document.documentElement.clientHeight
       ? document.documentElement.clientHeight
@@ -150,7 +149,6 @@ export function popupCenter(url: string, title: string, width: number, height: n
     `menubar=no,location=no,resizable=no,scrollbars=yees,status=no,width=${width},height=${height},top=${top}, left=${left}`,
   );
 
-  /* istanbul ignore else */
   if (popup) {
     popup.focus();
   }
