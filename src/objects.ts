@@ -76,7 +76,6 @@ export function keyMirror<T extends PlainObject>(input: T): { [K in keyof T]: K 
   const output: any = {};
 
   for (const key in input) {
-    /* istanbul ignore else */
     if (!Object.prototype.hasOwnProperty.call(output, key)) {
       output[key] = key;
     }
@@ -141,7 +140,6 @@ export function omit<T extends Record<string, any>, K extends keyof T>(
   const output: any = {};
 
   for (const key in input) {
-    /* istanbul ignore else */
     if ({}.hasOwnProperty.call(input, key)) {
       if (!filter.includes(key as unknown as K)) {
         output[key] = input[key];
@@ -170,7 +168,6 @@ export function pick<T extends Record<string, any>, K extends keyof T>(
   const output: any = {};
 
   for (const key in input) {
-    /* istanbul ignore else */
     if ({}.hasOwnProperty.call(input, key)) {
       if (filter.includes(key as unknown as K)) {
         output[key] = input[key];
