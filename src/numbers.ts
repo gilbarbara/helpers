@@ -31,6 +31,15 @@ export function pad(input: number, length = 2) {
 }
 
 /**
+ * Calculate the percentage of a number in relation to the total
+ */
+export function percentage(input: number, total: number, digits: number = 2) {
+  const result = (input / total) * 100;
+
+  return Number.isFinite(result) ? round(result, digits) : 0;
+}
+
+/**
  * Returns a random number
  */
 export function randomNumber(min = 0, max = 10) {

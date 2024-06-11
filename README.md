@@ -468,6 +468,9 @@ Floor decimal numbers.
 **pad(input: number, digits?: number = 2): string**  
 Pad a number with zeros.
 
+**percentage(input: number, total: number, digits?: number = 2): number**  
+Calculate the percentage of a number in relation to the total.
+
 **randomInt(min?: number = 0, max?: number = 10): number**  
 Returns a random integer.
 

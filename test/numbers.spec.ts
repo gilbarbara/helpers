@@ -1,6 +1,6 @@
 import { expect } from 'vitest';
 
-import { ceil, clamp, floor, pad, randomNumber, round } from '../src';
+import { ceil, clamp, floor, pad, percentage, randomNumber, round } from '../src';
 
 describe('ceil', () => {
   it.each([
@@ -43,6 +43,29 @@ describe('pad', () => {
     { input: 12, length: 4, expected: '0012' },
   ])('$input with length $length should return $expected', ({ expected, input, length }) => {
     expect(pad(input, length)).toEqual(expected);
+  });
+});
+
+describe('percentage', () => {
+  it('should calculate the correct percentage', () => {
+    expect(percentage(20, 72)).toBe(27.78);
+  });
+
+  it('should calculate the correct percentage for very large numbers', () => {
+    expect(percentage(1e11, 1e12)).toBe(10);
+  });
+
+  it('should limit the result to 4 digits', () => {
+    expect(percentage(50, 74, 4)).toBe(67.5676);
+  });
+
+  it('should return 0 when the result is not finite', () => {
+    expect(percentage(50, 0)).toBe(0);
+  });
+
+  it('should return 0 with missing or wrong type inputs', () => {
+    // @ts-expect-error testing wrong types and missing parameters
+    expect(percentage('a')).toBe(0);
   });
 });
 
