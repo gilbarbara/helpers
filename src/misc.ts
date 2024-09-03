@@ -121,7 +121,7 @@ export function nullify<T>(value: T) {
   return value ?? null;
 }
 
-/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable @typescript-eslint/no-unsafe-function-type */
 /**
  * Add the event listener to the target
  */
@@ -145,7 +145,7 @@ export function off<T extends Window | Document | HTMLElement | EventTarget>(
     target.removeEventListener(...(rest as Parameters<HTMLElement['removeEventListener']>));
   }
 }
-/* eslint-enable @typescript-eslint/ban-types */
+/* eslint-enable @typescript-eslint/no-unsafe-function-type */
 
 export function popupCenter(url: string, title: string, width: number, height: number) {
   const { screen, screenLeft, screenTop } = window;

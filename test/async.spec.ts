@@ -63,7 +63,7 @@ describe('poll', () => {
     try {
       await poll(() => isReady, { delay: 0.1 });
     } catch (error: any) {
-      // eslint-disable-next-line vitest/no-conditional-expect
+      // eslint-disable-next-line @vitest/no-conditional-expect
       expect(error.message).toBe('Timeout');
     }
   });

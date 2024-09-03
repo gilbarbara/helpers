@@ -1,7 +1,7 @@
 /**
  * Decouple methods from objects
  */
-// eslint-disable-next-line @typescript-eslint/ban-types
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 export function demethodize(fn: Function) {
   return (parameter: any, ...rest: any[]) => fn.apply(parameter, rest);
 }
@@ -9,7 +9,7 @@ export function demethodize(fn: Function) {
 /**
  * Measure function execution time
  */
-// eslint-disable-next-line @typescript-eslint/ban-types
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 export async function measureExecutionTime<T = any>(callback: Function): Promise<T> {
   const start = performance.now();
 
