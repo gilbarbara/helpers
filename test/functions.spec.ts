@@ -1,4 +1,56 @@
-import { demethodize, measureExecutionTime, noop, once, pipe, sleep } from '../src';
+import { debounce, demethodize, measureExecutionTime, noop, once, pipe, sleep } from '../src';
+
+describe('debounce', () => {
+  beforeEach(() => {
+    vi.useFakeTimers(); // Use fake timers to control setTimeout
+  });
+
+  afterEach(() => {
+    vi.clearAllMocks();
+    vi.useRealTimers(); // Reset to real timers
+  });
+
+  it('should execute the callback after the delay', () => {
+    const callback = vi.fn();
+    const debounced = debounce(callback, 200);
+
+    debounced('arg1', 'arg2');
+
+    // Fast forward time and ensure callback was called
+    expect(callback).not.toHaveBeenCalled();
+    vi.advanceTimersByTime(200);
+    expect(callback).toHaveBeenCalledTimes(1);
+    expect(callback).toHaveBeenCalledWith('arg1', 'arg2');
+  });
+
+  it('should only execute the callback once for multiple rapid calls', () => {
+    const callback = vi.fn();
+    const debounced = debounce(callback, 200);
+
+    debounced();
+    debounced();
+    debounced();
+
+    // Only one call should occur after 200ms
+    expect(callback).not.toHaveBeenCalled();
+    vi.advanceTimersByTime(200);
+    expect(callback).toHaveBeenCalledTimes(1);
+  });
+
+  it('should reset the delay if called again within the wait time', () => {
+    const callback = vi.fn();
+    const debounced = debounce(callback, 200);
+
+    debounced();
+    vi.advanceTimersByTime(100); // 100ms passed, but not enough to trigger the callback
+    debounced(); // Reset the timer
+    vi.advanceTimersByTime(100); // Another 100ms passed, still not enough
+    expect(callback).not.toHaveBeenCalled();
+
+    vi.advanceTimersByTime(100); // Now enough time has passed
+    expect(callback).toHaveBeenCalledTimes(1);
+  });
+});
 
 describe('demethodize', () => {
   it('should handle Array methods', () => {
