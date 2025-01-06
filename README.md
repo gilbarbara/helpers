@@ -301,6 +301,9 @@ Format the string into a brazilian zip code.
 
 ### Functions
 
+**debounce(callback: (...parameters: any[]) => void, delay: number): Function**  
+Creates a debounced version of a callback function.
+
 **demethodize(fn: Function): Function**  
 Decouple the method from the prototype.
 

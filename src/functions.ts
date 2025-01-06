@@ -1,4 +1,23 @@
 /**
+ * Creates a debounced version of a callback function.
+ *
+ * The debounced function delays the execution of the callback until after the specified delay
+ * has passed since the last time the debounced function was called. If the debounced function
+ * is called again before the delay has passed, the timer resets.
+ */
+export function debounce(callback: (...parameters: any[]) => void, delay: number) {
+  let timeout: ReturnType<typeof setTimeout>;
+
+  return (...parameters: any[]) => {
+    // Clear any existing timer to reset the debounce delay
+    clearTimeout(timeout);
+
+    // Start a new timer to call the callback after the specified delay
+    timeout = setTimeout(() => callback(...parameters), delay);
+  };
+}
+
+/**
  * Decouple methods from objects
  */
 // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
