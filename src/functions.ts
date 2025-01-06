@@ -64,7 +64,7 @@ export function once<T extends (...arguments_: Array<any>) => any>(fn: T): T {
       result = fn(...arguments_);
     }
 
-    return result as ReturnType<T>;
+    return result;
   } as T;
 }
 
